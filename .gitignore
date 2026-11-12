@@ -1,0 +1,7 @@
+# Build hygiene — standard tooling artifacts. The .dojo/ footprint is tracked (track-all posture).
+target/
+node_modules/
+dist/
+.env
+.env.*
+*.log.lck
