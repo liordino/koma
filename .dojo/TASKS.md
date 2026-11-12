@@ -4,7 +4,7 @@ Plan: plan/koma-slice-0 (Slice 0 / M0 — mandatory decision pass). Sources: BRI
 Every merged wave carries committed harness output (decision 16 evidence gate).
 
 ## Wave 1 — Repo birth
-status: pending
+status: done
 - Outcome: git repo initialized; MIT LICENSE file; README stating single-operator positioning,
   two-tier source reality (tier A MangaDex only; tier B default-off, private-adapters note,
   no MANGA Plus), DMCA response posture, decision-24 supersession edit applied to the BRIEF's
