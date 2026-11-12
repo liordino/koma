@@ -1,0 +1,8 @@
+PASS: repo has at least one commit
+PASS: LICENSE exists and is MIT
+PASS: README states single-operator position
+PASS: README states two-tier source reality
+PASS: README contains DMCA response posture
+PASS: README documents in-app bearer-token auth
+PASS: CONTEXT.md carries decision-24 supersession
+PASS: all commits are conventional

@@ -25,7 +25,7 @@ if [ -z "$subjects" ]; then
   echo "FAIL: repo has no commits"
   fail=1
 else
-  nonconv="$(printf '%s\n' "$subjects" | grep -cvE '^(feat|fix|docs|chore|refactor|test|perf|build|ci|style)(\(.+\))!: ' || true)"
+  nonconv="$(printf '%s\n' "$subjects" | grep -cvE '^(feat|fix|docs|chore|refactor|test|perf|build|ci|style)(\(.+\))?: ' || true)"
   if [ "$nonconv" -eq 0 ]; then
     echo "PASS: all commits are conventional"
   else
