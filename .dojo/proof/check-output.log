@@ -1,0 +1,10 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.37s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.62s
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.39s
+────────────
+ Nextest run ID 3962277b-8131-498b-ab92-0e90713ee6f3 with nextest profile: default
+    Starting 2 tests across 3 binaries
+        PASS [   0.041s] (1/2) koma-server log::tests::writes_valid_jsonl_lines
+        PASS [   0.088s] (2/2) koma-server::sqlite_baseline baseline_pragmas_and_fk_enforcement
+────────────
+     Summary [   0.089s] 2 tests run: 2 passed, 0 skipped
