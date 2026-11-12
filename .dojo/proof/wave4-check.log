@@ -1,0 +1,5 @@
+PASS: fts migration exists with trigram tokenizer
+PASS: fts table is external-content
+PASS: fts search test exists
+PASS: fts test asserts piece matches One Piece
+PASS: fts test passes on linked sqlite

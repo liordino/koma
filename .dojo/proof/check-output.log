@@ -1,15 +1,19 @@
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.67s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.75s
    Compiling koma-server v0.1.0 (C:\Users\liord\src\koma\server)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.88s
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.58s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.68s
+   Compiling koma-server v0.1.0 (C:\Users\liord\src\koma\server)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.13s
 ────────────
- Nextest run ID a351b441-9994-4dc2-812e-7eb2f3069fb8 with nextest profile: default
-    Starting 6 tests across 4 binaries
-        PASS [   0.066s] (1/6) koma-server log::tests::writes_valid_jsonl_lines
-        PASS [   0.076s] (2/6) koma-server::auth_transport wrong_token_is_401
-        PASS [   0.111s] (3/6) koma-server::auth_transport rpc_with_valid_token_answers_unary_grpc_web
-        PASS [   0.128s] (4/6) koma-server::auth_transport cors_preflight_from_allowed_origin_passes
-        PASS [   0.148s] (5/6) koma-server::auth_transport rpc_without_token_is_401
-        PASS [   0.167s] (6/6) koma-server::sqlite_baseline baseline_pragmas_and_fk_enforcement
+ Nextest run ID 311c5241-b3fd-4082-a677-c5d0c0b1905c with nextest profile: default
+    Starting 9 tests across 5 binaries
+        PASS [   0.045s] (1/9) koma-server log::tests::writes_valid_jsonl_lines
+        PASS [   0.097s] (2/9) koma-server::sqlite_baseline baseline_pragmas_and_fk_enforcement
+        PASS [   0.113s] (3/9) koma-server::auth_transport cors_preflight_from_allowed_origin_passes
+        PASS [   0.136s] (4/9) koma-server::fts_search no_false_match_on_unrelated_title
+        PASS [   0.161s] (5/9) koma-server::auth_transport wrong_token_is_401
+        PASS [   0.178s] (6/9) koma-server::fts_search substring_query_matches_title_via_trigram
+        PASS [   0.202s] (7/9) koma-server::fts_search title_update_stays_in_sync
+        PASS [   0.217s] (8/9) koma-server::auth_transport rpc_without_token_is_401
+        PASS [   0.231s] (9/9) koma-server::auth_transport rpc_with_valid_token_answers_unary_grpc_web
 ────────────
-     Summary [   0.168s] 6 tests run: 6 passed, 0 skipped
+     Summary [   0.232s] 9 tests run: 9 passed, 0 skipped
