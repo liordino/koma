@@ -27,7 +27,7 @@ status: done
 - Check: integration test — RPC without token → 401; with token → unary response over gRPC-Web.
 
 ## Wave 4 — FTS5 trigram search verification
-status: pending
+status: done
 - Outcome: trigram tokenizer on external-content FTS5 table, verified against the sqlx-linked build.
 - Check: test — substring query "piece" matches "One Piece" on the linked SQLite.
 

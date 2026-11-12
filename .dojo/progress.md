@@ -30,3 +30,9 @@
 - proto/koma/v1/koma.proto = single cross-repo proto source of truth (Ping spike RPC).
 - Tests 6/6 (nextest): 401 without/with-wrong token; 200 unary grpc-web with valid token;
   CORS preflight echo for allowed origin. clippy -D warnings clean. dojo-check proof 479e734b…
+
+## Wave 4 — FTS5 trigram search — DONE (2025-11-12)
+- RED first: 5/5 failing. Green fixes: stale migrate! embedding (touch lib.rs to re-embed migrations);
+  wave check pattern over-strict on `content =`. Probe deleted after diagnosis (SQLite 3.46, FTS5 on).
+- Tests 3/3: substring 'piece'→'One Piece'; no false match; update-trigger sync. 9 total nextest green.
+- Evidence: wave4-check.log + dojo-check proof committed.
