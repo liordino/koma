@@ -14,7 +14,7 @@ status: done
   conventional commits.
 
 ## Wave 2 — SQLite operational baseline
-status: pending
+status: done
 - Outcome: cargo workspace; connection-init module (WAL, synchronous=NORMAL, foreign_keys=ON,
   busy_timeout); numbered sqlx migrations; draft schema WITH foreign keys (manga, chapter, category,
   source, user, page-progress tables); LogSink interface (decision 23, text-file JSONL impl).

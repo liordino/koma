@@ -1,0 +1,7 @@
+PASS: cargo workspace exists with sqlite feature
+PASS: connection-init module exists
+PASS: init sets WAL, synchronous NORMAL, FK ON, busy_timeout
+PASS: numbered migrations exist
+PASS: schema declares foreign keys
+PASS: integration test proves WAL + FK + orphan rejection
+PASS: integration test passes
