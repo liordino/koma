@@ -21,3 +21,12 @@
 - Tests: sqlite_baseline (pragmas WAL/NORMAL/FK/busy_timeout + orphan rejection + valid insert)
   and log::writes_valid_jsonl_lines — 2/2 pass; clippy -D warnings clean.
 - Evidence: .dojo/proof/check-proof (sha 76d260df…), .dojo/proof/wave2-check.log committed.
+
+## Wave 3 — Bearer-token auth + transport spike — DONE (2025-11-12)
+- RED first: 6/6 failing. protoc installed via scoop (36.2).
+- Green fixes: tonic-build as build-dependency; DbPool alias moved to db module; state wiring;
+  Request bodies as axum Body; per-test temp DBs (atomic serial) — concurrent tests raced migrations;
+  clippy: manual_async_fn + unused import.
+- proto/koma/v1/koma.proto = single cross-repo proto source of truth (Ping spike RPC).
+- Tests 6/6 (nextest): 401 without/with-wrong token; 200 unary grpc-web with valid token;
+  CORS preflight echo for allowed origin. clippy -D warnings clean. dojo-check proof 479e734b…

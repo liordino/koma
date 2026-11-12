@@ -21,7 +21,7 @@ status: done
 - Check: integration test proves WAL on, FK enforcement on, orphan insert rejected.
 
 ## Wave 3 — Bearer-token auth + transport spike
-status: pending
+status: done
 - Outcome: Axum server with bearer-token middleware (users table, one seeded user) + tonic/tonic-web
   unary gRPC-Web route; CORS restricted to deployed UI origins.
 - Check: integration test — RPC without token → 401; with token → unary response over gRPC-Web.

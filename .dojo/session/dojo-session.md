@@ -2,12 +2,12 @@
 mode: autonomous
 rigor: real
 type: feature
-wave: 3
+wave: 4
 step: RED
 gate_density: standard
 wave_ceiling: 4
 intent: Give the owner a self-hosted manga server/reader (Koma) by executing the mandatory Slice 0 decision pass, starting with a licensed, positioned repo.
-goal: Axum server with bearer-token middleware (users table, one seeded user) + tonic/tonic-web unary gRPC-Web route; CORS restricted to deployed UI origins. Integration test: RPC without token → 401; with token → unary response over gRPC-Web.
+goal: Trigram FTS5 external-content table verified against the sqlx-linked build; test: substring query "piece" matches "One Piece".
 commit_style: conventional
 test_written:
 test_status:
