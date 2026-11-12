@@ -1,0 +1,6 @@
+PASS: axum and tonic-web are dependencies
+PASS: bearer middleware module exists
+PASS: gRPC-Web route mounted
+PASS: CORS restricted to configured origins
+PASS: auth integration test exists
+PASS: auth integration test passes

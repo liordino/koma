@@ -5,6 +5,8 @@
 
 use std::time::Duration;
 
+pub type DbPool = sqlx::Pool<Sqlite>;
+
 use sqlx::{
     sqlite::{SqliteConnectOptions, SqliteJournalMode, SqliteSynchronous},
     Pool, Sqlite,

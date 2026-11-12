@@ -1,10 +1,15 @@
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.37s
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.62s
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.39s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.67s
+   Compiling koma-server v0.1.0 (C:\Users\liord\src\koma\server)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.88s
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.58s
 ────────────
- Nextest run ID 3962277b-8131-498b-ab92-0e90713ee6f3 with nextest profile: default
-    Starting 2 tests across 3 binaries
-        PASS [   0.041s] (1/2) koma-server log::tests::writes_valid_jsonl_lines
-        PASS [   0.088s] (2/2) koma-server::sqlite_baseline baseline_pragmas_and_fk_enforcement
+ Nextest run ID a351b441-9994-4dc2-812e-7eb2f3069fb8 with nextest profile: default
+    Starting 6 tests across 4 binaries
+        PASS [   0.066s] (1/6) koma-server log::tests::writes_valid_jsonl_lines
+        PASS [   0.076s] (2/6) koma-server::auth_transport wrong_token_is_401
+        PASS [   0.111s] (3/6) koma-server::auth_transport rpc_with_valid_token_answers_unary_grpc_web
+        PASS [   0.128s] (4/6) koma-server::auth_transport cors_preflight_from_allowed_origin_passes
+        PASS [   0.148s] (5/6) koma-server::auth_transport rpc_without_token_is_401
+        PASS [   0.167s] (6/6) koma-server::sqlite_baseline baseline_pragmas_and_fk_enforcement
 ────────────
-     Summary [   0.089s] 2 tests run: 2 passed, 0 skipped
+     Summary [   0.168s] 6 tests run: 6 passed, 0 skipped
