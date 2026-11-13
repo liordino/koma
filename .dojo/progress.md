@@ -46,3 +46,12 @@
   koma_service_server and test route /koma.v1.KomaService/Ping.
 - Smoke web/src/index.ts builds the connect transport + typed client; tsc --noEmit clean.
 - Tests 9/9 nextest; clippy clean; dojo-check proof committed.
+
+## Wave 6 — CI & dependency hygiene — DONE (2026-11-13)
+- RED first: 8/10 failing (lockfile + dojo-check already green carry-over).
+- Green: .github/workflows/ci.yml (build/clippy -D warnings/nextest; hygiene: gitleaks, cargo-deny,
+  cargo-audit; buf lint job; sqlx prepare --check gated on .sqlx presence until first query! macro).
+- deny.toml: license allowlist with notice-preservation note, yanked=deny, unknown-source deny.
+- Known-accepted Semgrep advisories: mutable action tags, missing top-level permissions (default
+  restricted now applies), artipacked shallow checkout — backlog candidate, not wave blockers.
+- Evidence: wave6-check.log + dojo-check proof committed.

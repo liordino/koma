@@ -37,7 +37,7 @@ status: done
 - Check: generated TS compiles in the web workspace.
 
 ## Wave 6 — CI & dependency hygiene
-status: pending
+status: done
 - Outcome: CI config (cargo-audit, cargo-deny, gitleaks, `sqlx prepare --check`, nextest) + Cargo.lock + version pins.
 - Check: dojo-check green locally; CI config committed.
 
