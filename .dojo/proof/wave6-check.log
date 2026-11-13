@@ -1,0 +1,10 @@
+PASS: CI workflow exists
+PASS: CI runs tests (nextest)
+PASS: CI runs clippy with -D warnings
+PASS: CI runs cargo-deny
+PASS: CI runs cargo-audit
+PASS: CI runs gitleaks
+PASS: sqlx prepare check gated on prepared data
+PASS: cargo-deny config exists
+PASS: Cargo.lock pinned and committed
+PASS: workspace still green (dojo-check)

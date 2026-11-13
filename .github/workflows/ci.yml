@@ -1,0 +1,63 @@
+---
+name: ci
+on:
+  push:
+    branches: [main, "plan/**"]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: "-D warnings"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-nextest
+      - name: Build
+        run: cargo build --workspace
+      - name: Clippy
+        run: cargo clippy --all-targets -- -D warnings
+      - name: Tests
+        run: cargo nextest run --workspace
+      # Compile-time query verification (decision 17). Prepared data lives in .sqlx/
+      # once the first sqlx query! macro is used; gated so CI stays
+      # green until then.
+      - name: sqlx prepare check
+        if: hashFiles('.sqlx/query-*.json') != ''
+        run: |
+          cargo install sqlx-cli --no-default-features --features sqlite
+          cargo sqlx prepare --check --workspace
+
+  hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: dtolnay/rust-toolchain@stable
+      - name: cargo-deny
+        uses: EmbarkStudios/cargo-deny-action@v2
+      - name: cargo-audit
+        uses: rustsec/audit-check@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  proto:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: bufbuild/buf-action@v1
+        with:
+          input: proto
+          lint: true
+          format: false
+          breaking: false
