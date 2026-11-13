@@ -55,3 +55,14 @@
 - Known-accepted Semgrep advisories: mutable action tags, missing top-level permissions (default
   restricted now applies), artipacked shallow checkout — backlog candidate, not wave blockers.
 - Evidence: wave6-check.log + dojo-check proof committed.
+
+## Wave 7 — Path-safe /pages pre-proto — DONE (2026-11-13)
+- RED first: 6/6 failing (one check-pattern bug fixed: 'from .+chapter' demanded chars between
+  FROM and chapter; rewritten 'from.*chapter').
+- Green fixes: std::path Path collision with axum Path extractor; PagesState Clone for with_state;
+  probe isolated 400 → GrpcWebLayer rejects plain GETs — layer now wraps only grpc routes, not
+  the whole app; missing seed_owner in the /pages fixture (auth middleware correctly 401'd).
+- Migration 0003: chapter.storage_dir. Handler: DB-keyed resolution, page_n ≤ 2000 bound,
+  canonicalize + prefix check, 64 MB cap.
+- Tests 14/14 nextest; traversal tests prove: traversal storage_dir rejected, page bounds enforced,
+  unknown chapter 404, valid request serves bytes. Evidence committed (proof 7 committed).

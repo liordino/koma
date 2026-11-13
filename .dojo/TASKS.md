@@ -42,7 +42,7 @@ status: done
 - Check: dojo-check green locally; CI config committed.
 
 ## Wave 7 — Path-safe page serving pre-proto
-status: pending
+status: done
 - Outcome: `/pages` HTTP route resolving chapter_id via DB lookup, bounded page_n, canonicalize +
   prefix check; fetch-to-blob auth (decision 26).
 - Check: traversal regression test (e.g. `../../etc/passwd`, encoded traversal) rejected — fails now, passes after.
