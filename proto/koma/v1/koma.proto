@@ -4,7 +4,7 @@ package koma.v1;
 
 // Koma's single cross-repo source of truth (decision: separate origins — buf keeps this file
 // authoritative for both the Rust server and the TypeScript clients).
-service Koma {
+service KomaService {
   // Unary transport-spike RPC; real domain RPCs arrive with M1 slices.
   rpc Ping(PingRequest) returns (PingResponse);
 }

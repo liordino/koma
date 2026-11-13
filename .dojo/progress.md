@@ -36,3 +36,13 @@
   wave check pattern over-strict on `content =`. Probe deleted after diagnosis (SQLite 3.46, FTS5 on).
 - Tests 3/3: substring 'piece'→'One Piece'; no false match; update-trigger sync. 9 total nextest green.
 - Evidence: wave4-check.log + dojo-check proof committed.
+
+## Wave 5 — buf + connect-es codegen contract — DONE (2026-11-13)
+- RED first: 5/5 failing (also fixed a contract bug in the check script: { } | tee swallowed
+  the fail flag into a subshell; replaced with exec tee).
+- buf installed via npm @bufbuild/buf (scoop release URL broken). Remote plugin switched to
+  buf.build/bufbuild/es (connect-es v2 world); stale koma_connect.ts from the v1-lineage plugin removed.
+- buf lint forced service rename Koma → KomaService; propagated to tonic module
+  koma_service_server and test route /koma.v1.KomaService/Ping.
+- Smoke web/src/index.ts builds the connect transport + typed client; tsc --noEmit clean.
+- Tests 9/9 nextest; clippy clean; dojo-check proof committed.

@@ -32,7 +32,7 @@ status: done
 - Check: test — substring query "piece" matches "One Piece" on the linked SQLite.
 
 ## Wave 5 — Codegen contract (buf + connect-es)
-status: pending
+status: done
 - Outcome: buf + `@connectrpc/connect-web` generating TypeScript from the repo's `.proto`.
 - Check: generated TS compiles in the web workspace.
 
