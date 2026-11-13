@@ -1,0 +1,6 @@
+PASS: pages route module exists
+PASS: route resolves chapter via DB not path
+PASS: page_n is bounded
+PASS: canonicalize + prefix check in code
+PASS: traversal regression test exists
+PASS: traversal regression test fails now
