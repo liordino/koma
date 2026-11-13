@@ -1,0 +1,5 @@
+PASS: buf module config exists at repo root
+PASS: buf image generation config exists
+PASS: generated TS from repo proto exists
+PASS: web workspace declares connect deps
+PASS: generated TS compiles (tsc --noEmit)

@@ -20,7 +20,7 @@ use axum::{middleware, Router};
 pub struct KomaTransport;
 
 #[tonic::async_trait]
-impl pb::koma_server::Koma for KomaTransport {
+impl pb::koma_service_server::KomaService for KomaTransport {
     async fn ping(
         &self,
         _request: tonic::Request<pb::PingRequest>,
@@ -45,7 +45,7 @@ pub fn build_router(pool: DbPool, allowed_origins: &[&str]) -> Router {
         .allow_methods([Method::GET, Method::POST, Method::OPTIONS])
         .allow_headers([header::AUTHORIZATION, header::CONTENT_TYPE]);
 
-    let grpc_router = tonic::service::Routes::new(pb::koma_server::KomaServer::new(KomaTransport))
+    let grpc_router = tonic::service::Routes::new(pb::koma_service_server::KomaServiceServer::new(KomaTransport))
         .into_axum_router();
 
     Router::new()

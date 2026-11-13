@@ -1,0 +1,9 @@
+---
+version: v2
+plugins:
+  # connect-es v2 codegen: the bufbuild/es plugin emits *_pb.ts (protobuf v2 core +
+  # connectrpc service entries) from the repo's single proto source of truth.
+  # Remote plugin = no local node toolchain needed for generation.
+  - remote: buf.build/bufbuild/es
+    out: web/src/gen
+    opt: target=ts

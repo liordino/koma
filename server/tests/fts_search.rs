@@ -47,7 +47,11 @@ async fn substring_query_matches_title_via_trigram() {
     let pool = seed_pool().await;
     let id = add_manga(&pool, "One Piece", "one-piece-k").await;
     let hits = search(&pool, "piece").await;
-    assert_eq!(hits, vec![id], "'piece' must match 'One Piece' via trigram FTS");
+    assert_eq!(
+        hits,
+        vec![id],
+        "'piece' must match 'One Piece' via trigram FTS"
+    );
 }
 
 #[tokio::test]

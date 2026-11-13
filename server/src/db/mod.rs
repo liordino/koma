@@ -16,7 +16,10 @@ use sqlx::{
 pub async fn connect(url: &str) -> Result<Pool<Sqlite>, sqlx::Error> {
     let options = baseline_options(url)?;
     // Single-writer discipline (decision 8): one connection front line.
-    sqlx::pool::PoolOptions::new().max_connections(1).connect_with(options).await
+    sqlx::pool::PoolOptions::new()
+        .max_connections(1)
+        .connect_with(options)
+        .await
 }
 
 /// The baseline connection options, split out so tests and the pool share one definition.

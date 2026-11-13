@@ -1,0 +1,17 @@
+{
+  "name": "koma-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "gen": "buf generate"
+  },
+  "dependencies": {
+    "@bufbuild/protobuf": "^2.0.0",
+    "@connectrpc/connect": "^2.0.0",
+    "@connectrpc/connect-web": "^2.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}

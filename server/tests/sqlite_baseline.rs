@@ -34,16 +34,33 @@ async fn baseline_pragmas_and_fk_enforcement() {
     db::migrate(&pool).await.expect("migrate");
 
     // Baseline pragmas: journal_mode returns TEXT; synchronous NORMAL = 1, FK ON = 1, busy_timeout ms.
-    assert_eq!(pragma_str(&pool, "journal_mode").await, "wal", "journal_mode must be WAL");
-    assert_eq!(pragma_i32(&pool, "synchronous").await, 1, "synchronous must be NORMAL");
-    assert_eq!(pragma_i32(&pool, "foreign_keys").await, 1, "foreign_keys must be ON");
-    assert_eq!(pragma_i32(&pool, "busy_timeout").await, 5_000, "busy_timeout must be set");
+    assert_eq!(
+        pragma_str(&pool, "journal_mode").await,
+        "wal",
+        "journal_mode must be WAL"
+    );
+    assert_eq!(
+        pragma_i32(&pool, "synchronous").await,
+        1,
+        "synchronous must be NORMAL"
+    );
+    assert_eq!(
+        pragma_i32(&pool, "foreign_keys").await,
+        1,
+        "foreign_keys must be ON"
+    );
+    assert_eq!(
+        pragma_i32(&pool, "busy_timeout").await,
+        5_000,
+        "busy_timeout must be set"
+    );
 
     // Orphan rejection — the corruption class this baseline exists to prevent:
     // a chapter referencing a nonexistent manga must fail.
-    let orphan = sqlx::query("INSERT INTO chapter (manga_id, source_key, number) VALUES (99999, 'k', 'c1')")
-        .execute(&pool)
-        .await;
+    let orphan =
+        sqlx::query("INSERT INTO chapter (manga_id, source_key, number) VALUES (99999, 'k', 'c1')")
+            .execute(&pool)
+            .await;
     let err = orphan.expect_err("orphan insert must be rejected by FK enforcement");
     assert!(
         err.to_string().to_lowercase().contains("foreign key"),
@@ -65,7 +82,6 @@ async fn baseline_pragmas_and_fk_enforcement() {
         .expect("valid chapter insert must pass");
 
     let _ = std::fs::remove_file(
-        std::env::temp_dir()
-            .join(format!("koma-wave2-{}.db", std::process::id())),
+        std::env::temp_dir().join(format!("koma-wave2-{}.db", std::process::id())),
     );
 }
