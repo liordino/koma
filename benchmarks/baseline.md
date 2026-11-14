@@ -30,9 +30,9 @@ Harness: `benchmarks/run-benchmarks.sh` (JSONL results)
 ```bash
 rustup target add aarch64-unknown-linux-musl
 # cc/ar via zig (see proven working command shape in .dojo/progress.md — ccz wrapper):
-CC_aarch64_unknown_linux_musl="<zig-cc-wrapper>" AR_aarch64_unknown_linux_musl="zig ar" \
+CC_aarch64_unknown_linux_musl="ZIG_CC_WRAPPER_PATH" AR_aarch64_unknown_linux_musl="zig ar" \
 CCZ_TARGET=aarch64-linux-musl cargo build --release --target aarch64-unknown-linux-musl -p koma-server
-scp target/aarch64-unknown-linux-musl/release/koma-server pi@<zero2w>:
+scp target/aarch64-unknown-linux-musl/release/koma-server user_at_zero2w:
 ```
 
 Windows note (found in the spike): cc-rs emits a rust-flavored `--target=` that zig 0.14 cannot
