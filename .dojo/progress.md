@@ -66,3 +66,13 @@
   canonicalize + prefix check, 64 MB cap.
 - Tests 14/14 nextest; traversal tests prove: traversal storage_dir rejected, page bounds enforced,
   unknown chapter 404, valid request serves bytes. Evidence committed (proof 7 committed).
+
+## Wave 8a — ARM musl cross-build spike + benchmark harness — DONE (2026-11-13)
+- Device confirmed by owner: Pi Zero 2 W (aarch64); co-tenants FreeLLMApi, MicroBin, Miniflux declared (decision 28).
+- RED 5/7 → green: rustup musl targets; zig journey (0.17 parse fail → 0.14.1 pinned from
+  ziglang.org; musl.cc rejected as Linux-ELF-only on Windows; ccz.cmd wrapper filters cc-rs's
+  rust-flavored --target, found batch `for` splits on `=` and cc quotes args);
+  AR_<target>=zig.exe ar completes the C toolchain. Both targets cargo check green (7/7).
+- Harness run-benchmarks.sh (cold start, idle RSS, page p95; JSONL; co-tenants declared) +
+  baseline.md scaffold with PENDING placeholders and Suwayomi capture procedure committed.
+- Wave 8b (on-device numbers) remains blocked on owner: needs device access + KOMA_BENCH_TOKEN.
