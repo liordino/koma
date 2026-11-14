@@ -1,0 +1,7 @@
+PASS: aarch64-unknown-linux-musl cargo check passes (no link needed)
+PASS: armv7musl fallback target installed
+PASS: armv7musl cargo check passes
+PASS: sqlite-linked build supports musl targets (bundled feature)
+PASS: benchmark harness exists
+PASS: baseline scaffold documents co-tenants
+PASS: runbook present for 8b on-device capture

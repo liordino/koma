@@ -47,8 +47,12 @@ status: done
   prefix check; fetch-to-blob auth (decision 26).
 - Check: traversal regression test (e.g. `../../etc/passwd`, encoded traversal) rejected — fails now, passes after.
 
-## Wave 8 — Benchmarks on pinned device (needs owner hardware)
-status: pending-blocked
-- Outcome: pinned device chosen, ARM/Tonic/TLS build spike, Suwayomi baseline in benchmarks/baseline.md,
-  BLOB-vs-fs storage decision measured (decision 12).
-- Check: baseline.md committed with real numbers on the pinned device.
+## Wave 8 — Benchmarks on pinned device (Pi Zero 2 W)
+status: pending
+- Wave 8a (local, agent-executable): ARM cross-build spike (cargo check for aarch64/armv7 musl),
+  benchmark harness script + runbook committed, benchmarks/baseline.md scaffold with co-tenant
+  declaration (FreeLLMApi, MicroBin, Miniflux) and Suwayomi baseline capture steps.
+- Check: cargo check passes for both musl targets; runbook + harness committed.
+- Wave 8b (on-device, owner-run): capture idle RSS, cold start, page p95, Suwayomi baseline;
+  real numbers fill baseline.md; BLOB-vs-fs decision (decision 12) measured from the results.
+- Check 8b: baseline.md contains real measured numbers from the device.
