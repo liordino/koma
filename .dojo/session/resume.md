@@ -1,13 +1,8 @@
-# Resume checkpoint — wave ceiling (4) reached at a clean point (2026-11-12)
+# Resume checkpoint — 8a done, 8b blocked on owner (2026-11-13)
 
-- Branch: `plan/koma-slice-0` · 12 commits · working tree clean.
-- Session state: `.dojo/session/dojo-session.md` → wave 5, step RED: *buf + connect-es codegen
-  contract; generated TS compiles in the web workspace*.
-- Waves done: 1 repo birth · 2 SQLite baseline · 3 bearer auth + gRPC-Web spike · 4 trigram FTS5.
-  All with committed harness evidence (.dojo/proof/).
-- Remaining slice-0 waves in `.dojo/TASKS.md`: 5 codegen contract · 6 CI & pins · 7 path-safe /pages
-  pre-proto · 8 benchmarks (needs owner hardware choice: Pi 2 vs Pi Zero W).
-- Tool notes: protoc 36.2 via scoop; cargo-nextest 0.9.151 installed; sqlx migrations are
-  compile-time embedded — touch server/src/lib.rs after adding a migration file if the build
-  cache is stale.
-- Owner asks pending: none blocking waves 5–7.
+- Branch plan/koma-slice-0, clean tree. Session: wave 8, step HALT.
+- 8b needs owner: on the Pi Zero 2 W (co-tenants running), build the release binary per
+  benchmarks/baseline.md §Cross-build, set KOMA_BENCH_TOKEN, run benchmarks/run-benchmarks.sh,
+  paste JSONL into baseline.md. Then: BLOB-vs-fs decision (12) + Suwayomi baseline capture.
+- After 8b: slice-0 complete → merge decision for plan branch.
+- Toolchain: zig 0.14.1 at C:/tools/zig; wrapper ccz.cmd; recipe in .dojo/findings.md.
