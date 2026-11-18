@@ -76,3 +76,14 @@
 - Harness run-benchmarks.sh (cold start, idle RSS, page p95; JSONL; co-tenants declared) +
   baseline.md scaffold with PENDING placeholders and Suwayomi capture procedure committed.
 - Wave 8b (on-device numbers) remains blocked on owner: needs device access + KOMA_BENCH_TOKEN.
+
+## Wave 8b — On-device benchmarks — DONE (2026-11-18, agent-run over owner-granted SSH)
+- main.rs made serveable (env-configured boot: DB, migrate, seed, router); bench-seed bin added.
+- zig-cross-built static aarch64 release (5.1 MB) via link-self-contained=no (zig owns CRT/libc).
+- On-device findings: harness cold-start loop bug (until-loop spun on 401), port collisions with
+  co-tenants, sudo env drop (-E), harness must be the solo server orchestrator — all fixed.
+- Results (co-tenants live): idle RSS 4.3 MB (target <100MB), genuine cold start 768 ms
+  (root drop_caches; warm 451/612), page p95 62–65 ms (envelope 50–200). Raw JSONL in benchmarks/raw/.
+- Decision 29 recorded: fs storage stands, BLOBs rejected on measurement (decision 12 satisfied).
+- Suwayomi comparative baseline deferred: no JVM on device; JVM+Suwayomi on ~190MB free RAM
+  alongside co-tenants risks OOM-skewing the comparison (reason recorded in baseline.md).

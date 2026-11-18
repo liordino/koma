@@ -48,7 +48,7 @@ status: done
 - Check: traversal regression test (e.g. `../../etc/passwd`, encoded traversal) rejected — fails now, passes after.
 
 ## Wave 8 — Benchmarks on pinned device (Pi Zero 2 W)
-status: pending
+status: done
 - Wave 8a (local, agent-executable): ARM cross-build spike (cargo check for aarch64/armv7 musl),
   benchmark harness script + runbook committed, benchmarks/baseline.md scaffold with co-tenant
   declaration (FreeLLMApi, MicroBin, Miniflux) and Suwayomi baseline capture steps.
