@@ -1,22 +1,22 @@
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.58s
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.02s
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.82s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.71s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.78s
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.56s
 ────────────
- Nextest run ID 843babca-00d0-41aa-93bc-7eab55964603 with nextest profile: default
-    Starting 14 tests across 6 binaries
-        PASS [   0.088s] ( 1/14) koma-server::auth_transport rpc_with_valid_token_answers_unary_grpc_web
-        PASS [   0.111s] ( 2/14) koma-server::path_safety page_bound_constant_is_reasonable
-        PASS [   0.115s] ( 3/14) koma-server::fts_search no_false_match_on_unrelated_title
-        PASS [   0.173s] ( 4/14) koma-server::path_safety unknown_chapter_is_404_not_probe
-        PASS [   0.198s] ( 5/14) koma-server log::tests::writes_valid_jsonl_lines
-        PASS [   0.204s] ( 6/14) koma-server::auth_transport rpc_without_token_is_401
-        PASS [   0.257s] ( 7/14) koma-server::path_safety traversal_in_page_number_is_bounded
-        PASS [   0.283s] ( 8/14) koma-server::fts_search substring_query_matches_title_via_trigram
-        PASS [   0.319s] ( 9/14) koma-server::fts_search title_update_stays_in_sync
-        PASS [   0.346s] (10/14) koma-server::auth_transport cors_preflight_from_allowed_origin_passes
-        PASS [   0.394s] (11/14) koma-server::path_safety traversal_storage_dir_is_rejected
-        PASS [   0.412s] (12/14) koma-server::auth_transport wrong_token_is_401
-        PASS [   0.354s] (13/14) koma-server::path_safety valid_page_request_serves_bytes
-        PASS [   0.351s] (14/14) koma-server::sqlite_baseline baseline_pragmas_and_fk_enforcement
+ Nextest run ID ecb2def7-5a10-4060-81bb-f5a08404d1fd with nextest profile: default
+    Starting 14 tests across 7 binaries
+        PASS [   0.069s] ( 1/14) koma-server log::tests::writes_valid_jsonl_lines
+        PASS [   0.092s] ( 2/14) koma-server::path_safety traversal_storage_dir_is_rejected
+        PASS [   0.116s] ( 3/14) koma-server::fts_search substring_query_matches_title_via_trigram
+        PASS [   0.137s] ( 4/14) koma-server::fts_search no_false_match_on_unrelated_title
+        PASS [   0.162s] ( 5/14) koma-server::path_safety unknown_chapter_is_404_not_probe
+        PASS [   0.180s] ( 6/14) koma-server::auth_transport rpc_without_token_is_401
+        PASS [   0.196s] ( 7/14) koma-server::path_safety page_bound_constant_is_reasonable
+        PASS [   0.203s] ( 8/14) koma-server::fts_search title_update_stays_in_sync
+        PASS [   0.241s] ( 9/14) koma-server::auth_transport cors_preflight_from_allowed_origin_passes
+        PASS [   0.260s] (10/14) koma-server::auth_transport rpc_with_valid_token_answers_unary_grpc_web
+        PASS [   0.291s] (11/14) koma-server::path_safety traversal_in_page_number_is_bounded
+        PASS [   0.307s] (12/14) koma-server::auth_transport wrong_token_is_401
+        PASS [   0.262s] (13/14) koma-server::path_safety valid_page_request_serves_bytes
+        PASS [   0.257s] (14/14) koma-server::sqlite_baseline baseline_pragmas_and_fk_enforcement
 ────────────
-     Summary [   0.464s] 14 tests run: 14 passed, 0 skipped
+     Summary [   0.349s] 14 tests run: 14 passed, 0 skipped

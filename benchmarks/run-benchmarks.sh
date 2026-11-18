@@ -10,6 +10,7 @@ SERVER_BIN="${1:-./koma-server}"
 BASE_URL="${2:-http://127.0.0.1:8080}"
 STORAGE_ROOT="${3:-./storage}"
 TOKEN="${KOMA_BENCH_TOKEN:?set KOMA_BENCH_TOKEN}"
+mkdir -p benchmarks
 OUT="benchmarks/results-$(date -u +%Y%m%dT%H%M%SZ)-$(hostname).jsonl"
 
 # rec <event> <json-object>: append one JSONL record.
@@ -32,7 +33,10 @@ echo 3 > /proc/sys/vm/drop_caches 2>/dev/null || rec "cold_cache_drop" '{"ok":fa
 T0=$(date +%s.%N)
 "$SERVER_BIN" --storage "$STORAGE_ROOT" &
 SERVER_PID=$!
-until curl -sf -o /dev/null -H "Authorization: Bearer $TOKEN" "$BASE_URL/koma.v1.KomaService/Ping"; do
+# Warm-up probe: an authed /pages GET (chapter 1 is seeded by bench-seed, wave 8b).
+# gRPC-Web Ping needs a framed POST body — plain curl here would spin forever on 401.
+CH_PROBE="${KOMA_BENCH_CHAPTER:-1}"
+until curl -sf -o /dev/null -H "Authorization: Bearer $TOKEN" "$BASE_URL/pages/$CH_PROBE/0"; do
   sleep 0.05
 done
 T1=$(date +%s.%N)

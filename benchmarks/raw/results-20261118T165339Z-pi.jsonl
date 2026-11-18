@@ -1,0 +1,6 @@
+{"ts":"2026-11-18T16:53:39Z","event":"device_context","data":{"model":"Raspberry Pi Zero 2 W","cotenants":["FreeLLMApi","MicroBin","Miniflux"]}}
+{"ts":"2026-11-18T16:53:39Z","event":"kernel","data":{"uname":"Linux pi 6.18.39+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.18.39-1+rpt1 (2026-07-29) aarch64 GNU/Linux"}}
+{"ts":"2026-11-18T16:53:39Z","event":"cpu_load_before","data":{"loadavg":"0.04 0.16 0.20","mem_available_kb":194576}}
+{"ts":"2026-11-18T16:53:40Z","event":"cold_start_ms","data":{"ms":768}}
+{"ts":"2026-11-18T16:53:45Z","event":"idle_rss_kb","data":{"rss_kb":4308}}
+{"ts":"2026-11-18T16:53:46Z","event":"page_p95_ms","data":{"p95_ms":62,"samples":20}}

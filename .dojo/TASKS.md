@@ -56,3 +56,7 @@ status: pending
 - Wave 8b (on-device, owner-run): capture idle RSS, cold start, page p95, Suwayomi baseline;
   real numbers fill baseline.md; BLOB-vs-fs decision (decision 12) measured from the results.
 - Check 8b: baseline.md contains real measured numbers from the device.
+
+## Notes (post-execution)
+- Wave 8b executed by the agent over SSH (owner granted device access mid-session).
+- Suwayomi comparative baseline deferred with reason recorded in benchmarks/baseline.md — owner pace.

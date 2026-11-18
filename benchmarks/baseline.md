@@ -1,50 +1,37 @@
 # Benchmarks — Koma vs Suwayomi baseline on the pinned device
 
-Device: **Raspberry Pi Zero 2 W** (quad-core Cortex-A53, 512 MB)
-Co-tenants during *every* measurement (decision 28): **FreeLLMApi, MicroBin, Miniflux**
-Build target: `aarch64-unknown-linux-musl` (fully static; `armv7-unknown-linux-musleabihf` fallback)
-Harness: `benchmarks/run-benchmarks.sh` (JSONL results)
+Device: **Raspberry Pi Zero 2 W** (quad-core Cortex-A53, 512 MB) — `pi` SSH host
+Co-tenants during *every* measurement (decision 28): **FreeLLMApi, MicroBin, Miniflux** (as running)
+Build target: `aarch64-unknown-linux-musl` — fully static, stripped, 5.1 MB binary
+Harness: `benchmarks/run-benchmarks.sh` (JSONL); raw runs in `benchmarks/raw/`
 
-> Wave 8b: the numbers below are placeholders until run on the device. A metric with
-> `PENDING` is not measured; do not treat this file as evidence until 8b is real
-> (decision 16: committed harness output does not count until the device ran it).
+## Measured (wave 8b, 2026-11-18 — 3 runs, medians)
 
-## Metrics
-
-| Metric | Koma | Suwayomi baseline | Target / gate |
+| Metric | Koma (median; runs) | Target / gate | Verdict |
 |---|---|---|---|
-| Idle RSS | PENDING | PENDING | < 100 MB |
-| Cold start (drop caches → first 200) | PENDING | PENDING | < 2 s |
-| Page p95 (localhost, 20 pulls) | PENDING | PENDING | < 50–200 ms LAN |
-| Core loop: cold→find→add→read 10 pages→close→resume | PENDING | — | ≤ 90 s |
+| Idle RSS | **4.3 MB** (4304 / 4308 / 4324 KB) | < 100 MB | PASS — 23× headroom |
+| Cold start | **768 ms** genuine cold (root `drop_caches`; warm-restart runs 451 / 612 ms) | < 2 s | PASS |
+| Page p95 (localhost, 20 pulls) | **63 ms** (62 / 63 / 65) | < 50–200 ms | PASS (within envelope; LAN adds RTT only) |
 
-## Procedure
+Cold-start caveats kept honest: runs 1–2 restarted without cache drop (no root); run 3 held root
+for a true drop. The 768 ms is the number to quote.
 
-1. On the device, with all co-tenants running as usual: capture Suwayomi baseline first
-   (see below), then build `./koma-server` for aarch64 (see §Cross-build) and run the harness.
-2. Run the harness **3 times**, record the median.
-3. Paste each harness JSONL (verbatim) into §Raw results and transcribe medians into the table.
+## Suwayomi comparative baseline — deferred, reason recorded
 
-## Cross-build (from any machine)
+No JVM on the device; a JVM plus Suwayomi-Server alongside the three co-tenants on 190 MB
+available RAM risks OOM-skewing the comparisons it exists to make. Recorded as deferred for a
+calmer moment or a RAM-headroom plan, owner's pace. The Koma absolute gates above are met
+without it; the *comparative* claim stays unproven until this exists.
 
-```bash
-rustup target add aarch64-unknown-linux-musl
-# cc/ar via zig (see proven working command shape in .dojo/progress.md — ccz wrapper):
-CC_aarch64_unknown_linux_musl="ZIG_CC_WRAPPER_PATH" AR_aarch64_unknown_linux_musl="zig ar" \
-CCZ_TARGET=aarch64-linux-musl cargo build --release --target aarch64-unknown-linux-musl -p koma-server
-scp target/aarch64-unknown-linux-musl/release/koma-server user_at_zero2w:
-```
+## Storage decision from this measurement (decision 12, .dojo/CONTEXT.md)
 
-Windows note (found in the spike): cc-rs emits a rust-flavored `--target=` that zig 0.14 cannot
-parse; the wrapper filters it (kept in tools, not the repo — see .dojo/findings.md).
-
-## Suwayomi baseline capture
-
-Run Suwayomi-Server (current release) on the same device with the same co-tenants; record
-idle RSS (VmRSS), cold start (drop caches → first successful web call), and page p95 with
-`hyperfine`-style repetition. Record below before any Koma run — the baseline is what makes
-the Koma numbers meaningful (BRIEF.md success criteria are comparative).
+Filesystem-served pages measure 62–65 ms p95 on the pinned device — comfortably inside the
+50–200 ms envelope. Decision 12's condition ("BLOBs only on a measured win") is therefore NOT
+met: filesystem bytes + DB-as-index stand, and compressed page BLOBs are rejected as unneeded
+complexity. Revisit only if a measured regression appears.
 
 ## Raw results
 
-(appended verbatim JSONL from each harness run; wave 8b)
+Verbatim JSONL from each of the three 2026-11-18 runs lives in `benchmarks/raw/`
+(results-20261118T164816Z / T165000Z / T165339Z). Cross-build recipe: `.dojo/findings.md`
+(zig 0.14.1 + ccz.cmd filter + zig ar; `link-self-contained=no` so zig owns CRT/libc).
