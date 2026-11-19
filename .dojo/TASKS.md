@@ -130,7 +130,5 @@ status: pending
   per-category, user-confirmed action; never a seeded default on the primary category.
 - Check: tests — cleanup blocked without fresh backup; runs after backup; purge is opt-in only.
 
-## Open owner decision (parked, recorded in CONTEXT Decisions on answer)
-- Reader mode: webtoon-strip-only (state it in UI) vs budget shared rendering primitives.
-  Agent recommendation: webtoon-strip-only v1 — matches leanest-device goal; long-strips already
-  render acceptably as single tall pages; revisit only if reading UX suffers.
+## Decisions
+- Reader mode: webtoon-strip-only v1 — decision 30 recorded (owner phone, alternates orientation freely; spreads degrade gracefully).
