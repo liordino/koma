@@ -1,0 +1,6 @@
+FAIL: backup export module exists
+FAIL: cleanup refuses without fresh backup (code path)
+FAIL: purge is explicit user-confirmed RPC
+FAIL: safety tests exist
+FAIL: safety tests pass
+PASS: full suite green
