@@ -87,3 +87,10 @@
 - Decision 29 recorded: fs storage stands, BLOBs rejected on measurement (decision 12 satisfied).
 - Suwayomi comparative baseline deferred: no JVM on device; JVM+Suwayomi on ~190MB free RAM
   alongside co-tenants risks OOM-skewing the comparison (reason recorded in baseline.md).
+
+## Suwayomi host reference — measured (2026-11-18)
+- Owner-authorized direct test on host machine. Suwayomi on port 4567 (custom), API compatible
+  with expectation; page delivery is WEBP through source-fetch cache (first-touch expensive).
+- Reference numbers: idle RSS 578 MB, restart-to-first-200 8.6s, page p95 233ms (host).
+- NOT the device baseline — labeled informational in baseline.md. Device JVM infeasibility now
+  evidence-backed (578MB > 512MB RAM).

@@ -35,3 +35,20 @@ complexity. Revisit only if a measured regression appears.
 Verbatim JSONL from each of the three 2026-11-18 runs lives in `benchmarks/raw/`
 (results-20261118T164816Z / T165000Z / T165339Z). Cross-build recipe: `.dojo/findings.md`
 (zig 0.14.1 + ccz.cmd filter + zig ar; `link-self-contained=no` so zig owns CRT/libc).
+
+## Host-machine reference — Suwayomi-Server (informational, NOT the device baseline)
+
+Owner authorized a direct test; Suwayomi-Server (bundled Zulu JRE 25, jar 2025 build) ran on the
+Windows host — different hardware than the pinned device, so these are reference points only:
+
+| Metric | Suwayomi-Server (host) | Koma (device, for contrast) |
+|---|---|---|
+| Idle RSS | 578 MB (java.exe working set) | 4.3 MB |
+| Restart-to-first-200 | 8.6 s (no cache drop) | 768 ms (genuine cold on device) |
+| Page p95 (20 pulls, warm cache) | 233 ms (WEBP; first-fetch per chapter costs seconds-to-minutes on first touch) | 63 ms (local files) |
+
+A 578 MB JVM working set also confirms the on-device Suwayomi baseline is physically infeasible
+on a 512 MB Zero 2 W with co-tenants — the deferral recorded above is now evidence-backed, not
+just judgment. The comparative claim (decision on cutover) stays open until an equivalent
+hardware run exists; on host-relative terms Koma's footprint and latency profile are ~100× lighter
+in RSS and ~11× faster in cold start.
