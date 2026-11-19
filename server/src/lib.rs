@@ -3,6 +3,7 @@
 pub mod auth;
 pub mod db;
 pub mod log;
+pub mod source;
 pub mod fetch;
 pub mod pages;
 
