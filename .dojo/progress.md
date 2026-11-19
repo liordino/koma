@@ -175,3 +175,10 @@
   (MangaDexAdapter implements; mock-able), run_update_pass scoped per source_key, INSERT OR IGNORE
   + rows_affected novelty counting — idempotency contract proven (2 add, re-runs 0; incremental
   adds only new; other-source manga untouched). 37/37 nextest; clippy clean; proof signed.
+
+## Wave 17 — Mark-read + trash window — DONE (2026-11-19)
+- MarkRead RPC (proto+TS synced); trash.rs: explicit read predicate, delete_after_read-only file
+  relocation to a trash SIBLING dir (leaves /pages prefix naturally), retention 7d recorded, chapter
+  reset to pending (re-download possible); non-delete categories keep files. temp_test_dir got a
+  counter+pid component (Windows 15ms timer granularity); rename now moves file-by-file into a
+  created trash dir. 39/39 nextest; clippy clean after fixture fix; proof signed.

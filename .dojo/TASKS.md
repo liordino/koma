@@ -117,7 +117,7 @@ status: done
   pass twice yields no duplicates.
 
 ## Wave 17 — Read tracking + trash window
-status: pending
+status: done
 - Outcome: explicit mark-read RPC + reading_completed event; after read, chapter files move to
   a trash directory with a retention window (timer recorded, not purged).
 - Check: tests — mark read → files relocated to trash dir, retention timestamp recorded,
