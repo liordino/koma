@@ -14,3 +14,76 @@ message PingRequest {}
 message PingResponse {
   string message = 1;
 }
+
+// ---- Library (M1) — reads/writes ride the DB rows via unary RPCs --------------------
+
+service Library {
+  // Add (upsert) a manga from a source into the library, optionally into a category.
+  rpc AddManga(AddMangaRequest) returns (MangaSummary);
+  rpc ListLibrary(ListLibraryRequest) returns (ListLibraryResponse);
+  rpc GetManga(GetMangaRequest) returns (MangaSummary);
+  rpc CreateCategory(CreateCategoryRequest) returns (Category);
+  rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse);
+  rpc AddMangaToCategory(AddToCategoryRequest) returns (Empty);
+  // Page-anchored progress (decision 10) for the calling user (v1 single-user).
+  rpc UpsertProgress(UpsertProgressRequest) returns (Empty);
+}
+
+message MangaSummary {
+  int64 id = 1;
+  string source_key = 2;
+  string external_id = 3;
+  string title = 4;
+  string cover_url = 5;
+  string description = 6;
+}
+
+message Category {
+  int64 id = 1;
+  string name = 2;
+  bool delete_after_read = 3;
+}
+
+message AddMangaRequest {
+  string source_key = 1;
+  string external_id = 2;
+  string title = 3;
+  string cover_url = 4;
+  string description = 5;
+  int64 category_id = 6; // 0 = none
+}
+
+message ListLibraryRequest {
+  int64 category_id = 1; // 0 = all
+}
+
+message ListLibraryResponse {
+  repeated MangaSummary items = 1;
+}
+
+message GetMangaRequest {
+  int64 id = 1;
+}
+
+message CreateCategoryRequest {
+  string name = 1;
+}
+
+message ListCategoriesRequest {}
+
+message ListCategoriesResponse {
+  repeated Category items = 1;
+}
+
+message AddToCategoryRequest {
+  int64 manga_id = 1;
+  int64 category_id = 2;
+}
+
+message UpsertProgressRequest {
+  int64 chapter_id = 1;
+  int32 page_n = 2;
+  double scroll_ratio = 3;
+}
+
+message Empty {}

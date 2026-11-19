@@ -1,39 +1,42 @@
    Compiling koma-server v0.1.0 (C:\Users\liord\src\koma\server)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.64s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.72s
+    Checking koma-server v0.1.0 (C:\Users\liord\src\koma\server)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.82s
    Compiling koma-server v0.1.0 (C:\Users\liord\src\koma\server)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 4.18s
-   Compiling koma-server v0.1.0 (C:\Users\liord\src\koma\server)
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.79s
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.78s
 ────────────
- Nextest run ID cef39fe6-5435-4dda-b265-4417aa862cb4 with nextest profile: default
-    Starting 28 tests across 10 binaries
-        PASS [   0.134s] ( 1/28) koma-server::auth_transport wrong_token_is_401
-        PASS [   0.159s] ( 2/28) koma-server::auth_transport rpc_without_token_is_401
-        PASS [   0.165s] ( 3/28) koma-server::at_home_download end_to_end_download_and_serve
-        PASS [   0.187s] ( 4/28) koma-server fetch::tests::disallowed_host_is_rejected_before_any_delay
-        PASS [   0.188s] ( 5/28) koma-server::auth_transport rpc_with_valid_token_answers_unary_grpc_web
-        PASS [   0.221s] ( 6/28) koma-server log::tests::writes_valid_jsonl_lines
-        PASS [   0.241s] ( 7/28) koma-server::at_home_download unsafe_keys_fail_fast
-        PASS [   0.304s] ( 8/28) koma-server fetch::tests::planes_hold_independent_grant_queues
-        PASS [   0.394s] ( 9/28) koma-server fetch::tests::allowlist_matches_domains_not_substrings
-        PASS [   0.408s] (10/28) koma-server::auth_transport cors_preflight_from_allowed_origin_passes
-        PASS [   0.327s] (11/28) koma-server::fts_search no_false_match_on_unrelated_title
-        PASS [   0.331s] (12/28) koma-server::fts_search substring_query_matches_title_via_trigram
-        PASS [   0.369s] (13/28) koma-server::fts_search title_update_stays_in_sync
-        PASS [   0.368s] (14/28) koma-server::mangadex_adapter chapter_list_maps_and_orders_as_api_sends
-        PASS [   0.576s] (15/28) koma-server::at_home_download page_too_large_is_rejected_at_write_time
-        PASS [   0.418s] (16/28) koma-server::mangadex_adapter detail_map_and_missing_data_is_an_error
-        PASS [   0.413s] (17/28) koma-server::mangadex_adapter search_maps_titles_ids_and_covers
-        PASS [   0.634s] (18/28) koma-server fetch::tests::plane_limiter_throttles_beyond_budget
-        PASS [   0.423s] (19/28) koma-server::outbound_fetch allowlisted_mock_serves_json
-        PASS [   0.317s] (20/28) koma-server::outbound_fetch disallowed_host_hits_zero_requests_on_the_server
-        PASS [   0.318s] (21/28) koma-server::outbound_fetch lookalike_domain_is_rejected
-        PASS [   0.284s] (22/28) koma-server::path_safety page_bound_constant_is_reasonable
-        PASS [   0.328s] (23/28) koma-server::path_safety traversal_in_page_number_is_bounded
-        PASS [   0.313s] (24/28) koma-server::path_safety traversal_storage_dir_is_rejected
-        PASS [   0.314s] (25/28) koma-server::path_safety unknown_chapter_is_404_not_probe
-        PASS [   0.325s] (26/28) koma-server::path_safety valid_page_request_serves_bytes
-        PASS [   0.313s] (27/28) koma-server::sqlite_baseline baseline_pragmas_and_fk_enforcement
-        PASS [   1.190s] (28/28) koma-server::outbound_fetch at_home_plane_enforcement_is_visible_in_timing
+ Nextest run ID 6bcc0a45-c0e7-4908-9ae7-00c4f1eef4a3 with nextest profile: default
+    Starting 31 tests across 11 binaries
+        PASS [   0.098s] ( 1/31) koma-server::auth_transport rpc_with_valid_token_answers_unary_grpc_web
+        PASS [   0.169s] ( 2/31) koma-server::auth_transport rpc_without_token_is_401
+        PASS [   0.197s] ( 3/31) koma-server::auth_transport wrong_token_is_401
+        PASS [   0.237s] ( 4/31) koma-server fetch::tests::allowlist_matches_domains_not_substrings
+        PASS [   0.289s] ( 5/31) koma-server log::tests::writes_valid_jsonl_lines
+        PASS [   0.298s] ( 6/31) koma-server::at_home_download unsafe_keys_fail_fast
+        PASS [   0.299s] ( 7/31) koma-server::at_home_download end_to_end_download_and_serve
+        PASS [   0.326s] ( 8/31) koma-server fetch::tests::planes_hold_independent_grant_queues
+        PASS [   0.387s] ( 9/31) koma-server fetch::tests::disallowed_host_is_rejected_before_any_delay
+        PASS [   0.396s] (10/31) koma-server::auth_transport cors_preflight_from_allowed_origin_passes
+        PASS [   0.404s] (11/31) koma-server::at_home_download page_too_large_is_rejected_at_write_time
+        PASS [   0.431s] (12/31) koma-server fetch::tests::plane_limiter_throttles_beyond_budget
+        PASS [   0.361s] (13/31) koma-server::fts_search no_false_match_on_unrelated_title
+        PASS [   0.342s] (14/31) koma-server::fts_search substring_query_matches_title_via_trigram
+        PASS [   0.353s] (15/31) koma-server::fts_search title_update_stays_in_sync
+        PASS [   0.333s] (16/31) koma-server::library_rpc create_category_then_add_manga_into_it
+        PASS [   0.307s] (17/31) koma-server::library_rpc router_level_create_category_through_bearer_middleware
+        PASS [   0.326s] (18/31) koma-server::library_rpc upsert_progress_idempotent_and_clamped
+        PASS [   0.336s] (19/31) koma-server::mangadex_adapter chapter_list_maps_and_orders_as_api_sends
+        PASS [   0.337s] (20/31) koma-server::mangadex_adapter detail_map_and_missing_data_is_an_error
+        PASS [   0.304s] (21/31) koma-server::mangadex_adapter search_maps_titles_ids_and_covers
+        PASS [   0.327s] (22/31) koma-server::outbound_fetch allowlisted_mock_serves_json
+        PASS [   0.336s] (23/31) koma-server::outbound_fetch disallowed_host_hits_zero_requests_on_the_server
+        PASS [   0.323s] (24/31) koma-server::outbound_fetch lookalike_domain_is_rejected
+        PASS [   0.285s] (25/31) koma-server::path_safety page_bound_constant_is_reasonable
+        PASS [   0.341s] (26/31) koma-server::path_safety traversal_in_page_number_is_bounded
+        PASS [   0.392s] (27/31) koma-server::path_safety traversal_storage_dir_is_rejected
+        PASS [   0.371s] (28/31) koma-server::path_safety unknown_chapter_is_404_not_probe
+        PASS [   0.339s] (29/31) koma-server::sqlite_baseline baseline_pragmas_and_fk_enforcement
+        PASS [   0.355s] (30/31) koma-server::path_safety valid_page_request_serves_bytes
+        PASS [   1.148s] (31/31) koma-server::outbound_fetch at_home_plane_enforcement_is_visible_in_timing
 ────────────
-     Summary [   1.496s] 28 tests run: 28 passed, 0 skipped
+     Summary [   1.553s] 31 tests run: 31 passed, 0 skipped

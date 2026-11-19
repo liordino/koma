@@ -19,10 +19,15 @@ pub fn hash_token(token: &str) -> String {
     hex::encode(h.finalize())
 }
 
+/// The authenticated user's row id, inserted by `require_bearer` as a request extension.
+/// v1 is single-user; multi-user (post-v1) reads this extension per request.
+#[derive(Debug, Clone, Copy)]
+pub struct UserId(pub i64);
+
 /// Extract and validate the `Authorization: Bearer <token>` header against the users table.
 pub async fn require_bearer(
     State(pool): State<DbPool>,
-    req: Request,
+    mut req: Request,
     next: Next,
 ) -> Result<Response, StatusCode> {
     let presented = req
@@ -39,9 +44,8 @@ pub async fn require_bearer(
         .await
         .ok();
 
-    if known.is_none() {
-        return Err(StatusCode::UNAUTHORIZED);
-    }
+    let user_id = known.ok_or(StatusCode::UNAUTHORIZED)?.0;
+    req.extensions_mut().insert(UserId(user_id));
     Ok(next.run(req).await)
 }
 

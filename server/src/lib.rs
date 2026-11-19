@@ -3,6 +3,7 @@
 pub mod auth;
 pub mod db;
 pub mod download;
+pub mod library;
 pub mod log;
 pub mod source;
 pub mod fetch;
@@ -55,16 +56,21 @@ pub fn build_router(
 
     // GrpcWeb wraps only the gRPC routes: it must not sit over /pages, where plain binary
     // GETs would be rejected by the gRPC-Web content-type negotiation (found by the probe).
-    let grpc_router = tonic::service::Routes::new(
-        pb::koma_service_server::KomaServiceServer::new(KomaTransport),
-    )
-    .into_axum_router()
-    .layer(tonic_web::GrpcWebLayer::new());
+
+    // Both tonic services share ONE Routes (one axum fallback) — merging two
+    // into_axum_router() outputs panics (each carries its own fallback).
+    let grpc_router = tonic::service::Routes::new(pb::koma_service_server::KomaServiceServer::new(KomaTransport))
+        .add_service(pb::library_server::LibraryServer::new(library::LibraryDb {
+            pool: pool.clone(),
+        }))
+        .into_axum_router()
+        .layer(tonic_web::GrpcWebLayer::new());
 
     let pages_state = pages::PagesState {
         pool: pool.clone(),
         base_dir: storage_root,
     };
+
 
     Router::new()
         .merge(grpc_router)

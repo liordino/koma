@@ -1,0 +1,6 @@
+PASS: library RPC proto definitions exist
+PASS: library service module exists
+PASS: library RPCs registered in router
+PASS: user identity flows via middleware
+PASS: library integration tests exist
+PASS: library tests pass
