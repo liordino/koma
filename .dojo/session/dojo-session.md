@@ -3,7 +3,7 @@ mode: autonomous
 rigor: real
 type: feature
 wave: 8
-step: RED
+step: PAUSED_AT_CEILING
 gate_density: standard
 wave_ceiling: 4
 intent: Give the owner a self-hosted manga server/reader (Koma) by executing the mandatory Slice 0 decision pass, starting with a licensed, positioned repo.
