@@ -72,7 +72,7 @@ status: done
   request to an allowed domain passes; rate limiter enforces per-plane budgets.
 
 ## Wave 10 — MangaDex adapter core (search/manga/chapters)
-status: pending
+status: done
 - Outcome: tier-A source adapter: search, manga detail, chapter list via MangaDex API;
   source registry as table rows (behavior in data); search across all sources with badges in RPCs.
 - Check: adapter tests against a local mock conforming to recorded MangaDex responses.

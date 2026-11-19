@@ -102,3 +102,10 @@
 - tests: 9 new (unit: allowlist boundaries incl. lookalike + case; wiremock: allowlisted JSON ok,
   disallowed host hits ZERO wire requests, lookalike rejected, At-Home budget throttles in time).
 - 22/22 nextest; clippy -D warnings clean; evidence committed (wave9-check.log + check-proof).
+
+## Wave 10 — MangaDex adapter core — DONE (2026-11-19)
+- RED 3/4 first. Green: src/source/{mod,mangadex}.rs — search/detail/chapters mapped from recorded
+  {result,data[attributes+relationships]} shapes into Koma types (SearchResult carries source_key
+  badge per owner decision 3), title fallback en→ja-ro→first value, cover_art relationship →
+  covers URL, hard-bounded limits, urlencode fixed (self-collision bug caught at write time).
+- 3 wiremock tests (search/detail+error-on-empty/feed). 25/25 nextest; clippy clean; proof signed.
