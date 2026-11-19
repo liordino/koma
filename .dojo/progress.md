@@ -120,3 +120,12 @@
   crate-foreign adapter). Fixture FK bug in oversized-page test fixed.
 - Process lesson: transient gate failures when cargo invocations overlap — sequential cargo only.
 - 28/28 nextest; wave11 6/6; dojo proof signed. /pages serves freshly downloaded bytes end-to-end.
+
+## Wave 12 — Library/category RPCs — DONE (2026-11-19)
+- RED 4/6 first. Green: proto Library service (7 unary RPCs) + generated TS synced (tsc clean);
+  UserId request-extension from bearer middleware (multi-user-ready, v1 single-user);
+  library.rs: idempotent manga/category upserts, by-category/all list views, progress UPSERT
+  with clamped ratios; router now merges BOTH services in ONE tonic Routes (fallback-clash
+  lesson: two into_axum_router() merges panic).
+- 3 service-DB tests + 1 wire-level test (CreateCategory through gRPC-Web + bearer, 401 without).
+- Same-ms temp-collision race fixed with atomic serial. 31/31 nextest; clippy clean; proof signed.

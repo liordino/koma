@@ -84,7 +84,7 @@ status: done
 - Check: integration test — mock At-Home flow yields a downloaded chapter resolvable by /pages.
 
 ## Wave 12 — Library/category RPCs
-status: pending
+status: done
 - Outcome: gRPC RPCs for library CRUD, category membership, manga detail, progress upsert.
 - Check: integration tests over gRPC-Web RPCs with the bearer middleware.
 
