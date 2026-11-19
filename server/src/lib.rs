@@ -5,6 +5,7 @@ pub mod db;
 pub mod download;
 pub mod library;
 pub mod log;
+pub mod update;
 pub mod source;
 pub mod fetch;
 pub mod pages;

@@ -29,6 +29,14 @@ service Library {
   rpc UpsertProgress(UpsertProgressRequest) returns (Empty);
   // Last remembered position for a chapter; exists=false when nothing stored yet.
   rpc GetProgress(GetProgressRequest) returns (GetProgressResponse);
+  // Manual-first update pass (v1): external-ID upserts, idempotent by design.
+  rpc UpdateLibrary(UpdateLibraryRequest) returns (UpdateLibraryResponse);
+}
+
+message UpdateLibraryRequest {}
+
+message UpdateLibraryResponse {
+  int32 chapters_added = 1;
 }
 
 message MangaSummary {

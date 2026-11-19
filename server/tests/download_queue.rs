@@ -3,7 +3,7 @@
 
 use koma_server::db;
 use koma_server::download::{enqueue, run_queue_once, DownloadError, QueueRunner, QueueTask};
-use std::sync::atomic::{AtomicU32, Ordering};
+use std::sync::atomic::AtomicU32;
 
 static SERIAL: AtomicU32 = AtomicU32::new(0);
 

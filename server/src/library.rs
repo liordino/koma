@@ -232,6 +232,21 @@ impl Library for LibraryDb {
         Ok(Response::new(pb_types::Empty {}))
     }
 
+    async fn update_library(
+        &self,
+        _request: Request<pb_types::UpdateLibraryRequest>,
+    ) -> Grpc<pb_types::UpdateLibraryResponse> {
+        let adapter = crate::source::mangadex::MangaDexAdapter::production()
+            .map_err(|e| Status::internal(format!("outbound client: {e}")))?;
+        let added = crate::update::run_update_pass(&self.pool, &adapter, "mangadex", 100)
+            .await
+            .map_err(|e| match e {
+                crate::update::UpdateError::Db(db) => db_err(db),
+                other => Status::internal(other.to_string()),
+            })?;
+        Ok(Response::new(pb_types::UpdateLibraryResponse { chapters_added: added as i32 }))
+    }
+
     async fn get_progress(
         &self,
         request: Request<pb_types::GetProgressRequest>,

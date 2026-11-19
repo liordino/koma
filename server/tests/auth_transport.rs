@@ -5,7 +5,7 @@ use tower::ServiceExt;
 
 use koma_server::db;
 
-use std::sync::atomic::{AtomicU32, Ordering};
+use std::sync::atomic::AtomicU32;
 static SERIAL: AtomicU32 = AtomicU32::new(0);
 
 async fn seed_pool() -> koma_server::DbPool {

@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file koma/v1/koma.proto.
  */
 export const file_koma_v1_koma: GenFile = /*@__PURE__*/
-  fileDesc("ChJrb21hL3YxL2tvbWEucHJvdG8SB2tvbWEudjEiDQoLUGluZ1JlcXVlc3QiHwoMUGluZ1Jlc3BvbnNlEg8KB21lc3NhZ2UYASABKAkiegoMTWFuZ2FTdW1tYXJ5EgoKAmlkGAEgASgDEhIKCnNvdXJjZV9rZXkYAiABKAkSEwoLZXh0ZXJuYWxfaWQYAyABKAkSDQoFdGl0bGUYBCABKAkSEQoJY292ZXJfdXJsGAUgASgJEhMKC2Rlc2NyaXB0aW9uGAYgASgJIj8KCENhdGVnb3J5EgoKAmlkGAEgASgDEgwKBG5hbWUYAiABKAkSGQoRZGVsZXRlX2FmdGVyX3JlYWQYAyABKAgihgEKD0FkZE1hbmdhUmVxdWVzdBISCgpzb3VyY2Vfa2V5GAEgASgJEhMKC2V4dGVybmFsX2lkGAIgASgJEg0KBXRpdGxlGAMgASgJEhEKCWNvdmVyX3VybBgEIAEoCRITCgtkZXNjcmlwdGlvbhgFIAEoCRITCgtjYXRlZ29yeV9pZBgGIAEoAyIpChJMaXN0TGlicmFyeVJlcXVlc3QSEwoLY2F0ZWdvcnlfaWQYASABKAMiOwoTTGlzdExpYnJhcnlSZXNwb25zZRIkCgVpdGVtcxgBIAMoCzIVLmtvbWEudjEuTWFuZ2FTdW1tYXJ5Ih0KD0dldE1hbmdhUmVxdWVzdBIKCgJpZBgBIAEoAyIlChVDcmVhdGVDYXRlZ29yeVJlcXVlc3QSDAoEbmFtZRgBIAEoCSIXChVMaXN0Q2F0ZWdvcmllc1JlcXVlc3QiOgoWTGlzdENhdGVnb3JpZXNSZXNwb25zZRIgCgVpdGVtcxgBIAMoCzIRLmtvbWEudjEuQ2F0ZWdvcnkiPQoUQWRkVG9DYXRlZ29yeVJlcXVlc3QSEAoIbWFuZ2FfaWQYASABKAMSEwoLY2F0ZWdvcnlfaWQYAiABKAMiUQoVVXBzZXJ0UHJvZ3Jlc3NSZXF1ZXN0EhIKCmNoYXB0ZXJfaWQYASABKAMSDgoGcGFnZV9uGAIgASgFEhQKDHNjcm9sbF9yYXRpbxgDIAEoASIHCgVFbXB0eSIoChJHZXRQcm9ncmVzc1JlcXVlc3QSEgoKY2hhcHRlcl9pZBgBIAEoAyJLChNHZXRQcm9ncmVzc1Jlc3BvbnNlEg4KBmV4aXN0cxgBIAEoCBIOCgZwYWdlX24YAiABKAUSFAoMc2Nyb2xsX3JhdGlvGAMgASgBMkIKC0tvbWFTZXJ2aWNlEjMKBFBpbmcSFC5rb21hLnYxLlBpbmdSZXF1ZXN0GhUua29tYS52MS5QaW5nUmVzcG9uc2UytgQKB0xpYnJhcnkSOwoIQWRkTWFuZ2ESGC5rb21hLnYxLkFkZE1hbmdhUmVxdWVzdBoVLmtvbWEudjEuTWFuZ2FTdW1tYXJ5EkgKC0xpc3RMaWJyYXJ5Ehsua29tYS52MS5MaXN0TGlicmFyeVJlcXVlc3QaHC5rb21hLnYxLkxpc3RMaWJyYXJ5UmVzcG9uc2USOwoIR2V0TWFuZ2ESGC5rb21hLnYxLkdldE1hbmdhUmVxdWVzdBoVLmtvbWEudjEuTWFuZ2FTdW1tYXJ5EkMKDkNyZWF0ZUNhdGVnb3J5Eh4ua29tYS52MS5DcmVhdGVDYXRlZ29yeVJlcXVlc3QaES5rb21hLnYxLkNhdGVnb3J5ElEKDkxpc3RDYXRlZ29yaWVzEh4ua29tYS52MS5MaXN0Q2F0ZWdvcmllc1JlcXVlc3QaHy5rb21hLnYxLkxpc3RDYXRlZ29yaWVzUmVzcG9uc2USQwoSQWRkTWFuZ2FUb0NhdGVnb3J5Eh0ua29tYS52MS5BZGRUb0NhdGVnb3J5UmVxdWVzdBoOLmtvbWEudjEuRW1wdHkSQAoOVXBzZXJ0UHJvZ3Jlc3MSHi5rb21hLnYxLlVwc2VydFByb2dyZXNzUmVxdWVzdBoOLmtvbWEudjEuRW1wdHkSSAoLR2V0UHJvZ3Jlc3MSGy5rb21hLnYxLkdldFByb2dyZXNzUmVxdWVzdBocLmtvbWEudjEuR2V0UHJvZ3Jlc3NSZXNwb25zZWIGcHJvdG8z");
+  fileDesc("ChJrb21hL3YxL2tvbWEucHJvdG8SB2tvbWEudjEiDQoLUGluZ1JlcXVlc3QiHwoMUGluZ1Jlc3BvbnNlEg8KB21lc3NhZ2UYASABKAkiFgoUVXBkYXRlTGlicmFyeVJlcXVlc3QiLwoVVXBkYXRlTGlicmFyeVJlc3BvbnNlEhYKDmNoYXB0ZXJzX2FkZGVkGAEgASgFInoKDE1hbmdhU3VtbWFyeRIKCgJpZBgBIAEoAxISCgpzb3VyY2Vfa2V5GAIgASgJEhMKC2V4dGVybmFsX2lkGAMgASgJEg0KBXRpdGxlGAQgASgJEhEKCWNvdmVyX3VybBgFIAEoCRITCgtkZXNjcmlwdGlvbhgGIAEoCSI/CghDYXRlZ29yeRIKCgJpZBgBIAEoAxIMCgRuYW1lGAIgASgJEhkKEWRlbGV0ZV9hZnRlcl9yZWFkGAMgASgIIoYBCg9BZGRNYW5nYVJlcXVlc3QSEgoKc291cmNlX2tleRgBIAEoCRITCgtleHRlcm5hbF9pZBgCIAEoCRINCgV0aXRsZRgDIAEoCRIRCgljb3Zlcl91cmwYBCABKAkSEwoLZGVzY3JpcHRpb24YBSABKAkSEwoLY2F0ZWdvcnlfaWQYBiABKAMiKQoSTGlzdExpYnJhcnlSZXF1ZXN0EhMKC2NhdGVnb3J5X2lkGAEgASgDIjsKE0xpc3RMaWJyYXJ5UmVzcG9uc2USJAoFaXRlbXMYASADKAsyFS5rb21hLnYxLk1hbmdhU3VtbWFyeSIdCg9HZXRNYW5nYVJlcXVlc3QSCgoCaWQYASABKAMiJQoVQ3JlYXRlQ2F0ZWdvcnlSZXF1ZXN0EgwKBG5hbWUYASABKAkiFwoVTGlzdENhdGVnb3JpZXNSZXF1ZXN0IjoKFkxpc3RDYXRlZ29yaWVzUmVzcG9uc2USIAoFaXRlbXMYASADKAsyES5rb21hLnYxLkNhdGVnb3J5Ij0KFEFkZFRvQ2F0ZWdvcnlSZXF1ZXN0EhAKCG1hbmdhX2lkGAEgASgDEhMKC2NhdGVnb3J5X2lkGAIgASgDIlEKFVVwc2VydFByb2dyZXNzUmVxdWVzdBISCgpjaGFwdGVyX2lkGAEgASgDEg4KBnBhZ2VfbhgCIAEoBRIUCgxzY3JvbGxfcmF0aW8YAyABKAEiBwoFRW1wdHkiKAoSR2V0UHJvZ3Jlc3NSZXF1ZXN0EhIKCmNoYXB0ZXJfaWQYASABKAMiSwoTR2V0UHJvZ3Jlc3NSZXNwb25zZRIOCgZleGlzdHMYASABKAgSDgoGcGFnZV9uGAIgASgFEhQKDHNjcm9sbF9yYXRpbxgDIAEoATJCCgtLb21hU2VydmljZRIzCgRQaW5nEhQua29tYS52MS5QaW5nUmVxdWVzdBoVLmtvbWEudjEuUGluZ1Jlc3BvbnNlMoYFCgdMaWJyYXJ5EjsKCEFkZE1hbmdhEhgua29tYS52MS5BZGRNYW5nYVJlcXVlc3QaFS5rb21hLnYxLk1hbmdhU3VtbWFyeRJICgtMaXN0TGlicmFyeRIbLmtvbWEudjEuTGlzdExpYnJhcnlSZXF1ZXN0Ghwua29tYS52MS5MaXN0TGlicmFyeVJlc3BvbnNlEjsKCEdldE1hbmdhEhgua29tYS52MS5HZXRNYW5nYVJlcXVlc3QaFS5rb21hLnYxLk1hbmdhU3VtbWFyeRJDCg5DcmVhdGVDYXRlZ29yeRIeLmtvbWEudjEuQ3JlYXRlQ2F0ZWdvcnlSZXF1ZXN0GhEua29tYS52MS5DYXRlZ29yeRJRCg5MaXN0Q2F0ZWdvcmllcxIeLmtvbWEudjEuTGlzdENhdGVnb3JpZXNSZXF1ZXN0Gh8ua29tYS52MS5MaXN0Q2F0ZWdvcmllc1Jlc3BvbnNlEkMKEkFkZE1hbmdhVG9DYXRlZ29yeRIdLmtvbWEudjEuQWRkVG9DYXRlZ29yeVJlcXVlc3QaDi5rb21hLnYxLkVtcHR5EkAKDlVwc2VydFByb2dyZXNzEh4ua29tYS52MS5VcHNlcnRQcm9ncmVzc1JlcXVlc3QaDi5rb21hLnYxLkVtcHR5EkgKC0dldFByb2dyZXNzEhsua29tYS52MS5HZXRQcm9ncmVzc1JlcXVlc3QaHC5rb21hLnYxLkdldFByb2dyZXNzUmVzcG9uc2USTgoNVXBkYXRlTGlicmFyeRIdLmtvbWEudjEuVXBkYXRlTGlicmFyeVJlcXVlc3QaHi5rb21hLnYxLlVwZGF0ZUxpYnJhcnlSZXNwb25zZWIGcHJvdG8z");
 
 /**
  * @generated from message koma.v1.PingRequest
@@ -41,6 +41,36 @@ export type PingResponse = Message<"koma.v1.PingResponse"> & {
  */
 export const PingResponseSchema: GenMessage<PingResponse> = /*@__PURE__*/
   messageDesc(file_koma_v1_koma, 1);
+
+/**
+ * @generated from message koma.v1.UpdateLibraryRequest
+ */
+export type UpdateLibraryRequest = Message<"koma.v1.UpdateLibraryRequest"> & {
+};
+
+/**
+ * Describes the message koma.v1.UpdateLibraryRequest.
+ * Use `create(UpdateLibraryRequestSchema)` to create a new message.
+ */
+export const UpdateLibraryRequestSchema: GenMessage<UpdateLibraryRequest> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 2);
+
+/**
+ * @generated from message koma.v1.UpdateLibraryResponse
+ */
+export type UpdateLibraryResponse = Message<"koma.v1.UpdateLibraryResponse"> & {
+  /**
+   * @generated from field: int32 chapters_added = 1;
+   */
+  chaptersAdded: number;
+};
+
+/**
+ * Describes the message koma.v1.UpdateLibraryResponse.
+ * Use `create(UpdateLibraryResponseSchema)` to create a new message.
+ */
+export const UpdateLibraryResponseSchema: GenMessage<UpdateLibraryResponse> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 3);
 
 /**
  * @generated from message koma.v1.MangaSummary
@@ -82,7 +112,7 @@ export type MangaSummary = Message<"koma.v1.MangaSummary"> & {
  * Use `create(MangaSummarySchema)` to create a new message.
  */
 export const MangaSummarySchema: GenMessage<MangaSummary> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 2);
+  messageDesc(file_koma_v1_koma, 4);
 
 /**
  * @generated from message koma.v1.Category
@@ -109,7 +139,7 @@ export type Category = Message<"koma.v1.Category"> & {
  * Use `create(CategorySchema)` to create a new message.
  */
 export const CategorySchema: GenMessage<Category> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 3);
+  messageDesc(file_koma_v1_koma, 5);
 
 /**
  * @generated from message koma.v1.AddMangaRequest
@@ -153,7 +183,7 @@ export type AddMangaRequest = Message<"koma.v1.AddMangaRequest"> & {
  * Use `create(AddMangaRequestSchema)` to create a new message.
  */
 export const AddMangaRequestSchema: GenMessage<AddMangaRequest> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 4);
+  messageDesc(file_koma_v1_koma, 6);
 
 /**
  * @generated from message koma.v1.ListLibraryRequest
@@ -172,7 +202,7 @@ export type ListLibraryRequest = Message<"koma.v1.ListLibraryRequest"> & {
  * Use `create(ListLibraryRequestSchema)` to create a new message.
  */
 export const ListLibraryRequestSchema: GenMessage<ListLibraryRequest> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 5);
+  messageDesc(file_koma_v1_koma, 7);
 
 /**
  * @generated from message koma.v1.ListLibraryResponse
@@ -189,7 +219,7 @@ export type ListLibraryResponse = Message<"koma.v1.ListLibraryResponse"> & {
  * Use `create(ListLibraryResponseSchema)` to create a new message.
  */
 export const ListLibraryResponseSchema: GenMessage<ListLibraryResponse> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 6);
+  messageDesc(file_koma_v1_koma, 8);
 
 /**
  * @generated from message koma.v1.GetMangaRequest
@@ -206,7 +236,7 @@ export type GetMangaRequest = Message<"koma.v1.GetMangaRequest"> & {
  * Use `create(GetMangaRequestSchema)` to create a new message.
  */
 export const GetMangaRequestSchema: GenMessage<GetMangaRequest> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 7);
+  messageDesc(file_koma_v1_koma, 9);
 
 /**
  * @generated from message koma.v1.CreateCategoryRequest
@@ -223,7 +253,7 @@ export type CreateCategoryRequest = Message<"koma.v1.CreateCategoryRequest"> & {
  * Use `create(CreateCategoryRequestSchema)` to create a new message.
  */
 export const CreateCategoryRequestSchema: GenMessage<CreateCategoryRequest> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 8);
+  messageDesc(file_koma_v1_koma, 10);
 
 /**
  * @generated from message koma.v1.ListCategoriesRequest
@@ -236,7 +266,7 @@ export type ListCategoriesRequest = Message<"koma.v1.ListCategoriesRequest"> & {
  * Use `create(ListCategoriesRequestSchema)` to create a new message.
  */
 export const ListCategoriesRequestSchema: GenMessage<ListCategoriesRequest> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 9);
+  messageDesc(file_koma_v1_koma, 11);
 
 /**
  * @generated from message koma.v1.ListCategoriesResponse
@@ -253,7 +283,7 @@ export type ListCategoriesResponse = Message<"koma.v1.ListCategoriesResponse"> &
  * Use `create(ListCategoriesResponseSchema)` to create a new message.
  */
 export const ListCategoriesResponseSchema: GenMessage<ListCategoriesResponse> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 10);
+  messageDesc(file_koma_v1_koma, 12);
 
 /**
  * @generated from message koma.v1.AddToCategoryRequest
@@ -275,7 +305,7 @@ export type AddToCategoryRequest = Message<"koma.v1.AddToCategoryRequest"> & {
  * Use `create(AddToCategoryRequestSchema)` to create a new message.
  */
 export const AddToCategoryRequestSchema: GenMessage<AddToCategoryRequest> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 11);
+  messageDesc(file_koma_v1_koma, 13);
 
 /**
  * @generated from message koma.v1.UpsertProgressRequest
@@ -302,7 +332,7 @@ export type UpsertProgressRequest = Message<"koma.v1.UpsertProgressRequest"> & {
  * Use `create(UpsertProgressRequestSchema)` to create a new message.
  */
 export const UpsertProgressRequestSchema: GenMessage<UpsertProgressRequest> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 12);
+  messageDesc(file_koma_v1_koma, 14);
 
 /**
  * @generated from message koma.v1.Empty
@@ -315,7 +345,7 @@ export type Empty = Message<"koma.v1.Empty"> & {
  * Use `create(EmptySchema)` to create a new message.
  */
 export const EmptySchema: GenMessage<Empty> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 13);
+  messageDesc(file_koma_v1_koma, 15);
 
 /**
  * @generated from message koma.v1.GetProgressRequest
@@ -332,7 +362,7 @@ export type GetProgressRequest = Message<"koma.v1.GetProgressRequest"> & {
  * Use `create(GetProgressRequestSchema)` to create a new message.
  */
 export const GetProgressRequestSchema: GenMessage<GetProgressRequest> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 14);
+  messageDesc(file_koma_v1_koma, 16);
 
 /**
  * @generated from message koma.v1.GetProgressResponse
@@ -359,7 +389,7 @@ export type GetProgressResponse = Message<"koma.v1.GetProgressResponse"> & {
  * Use `create(GetProgressResponseSchema)` to create a new message.
  */
 export const GetProgressResponseSchema: GenMessage<GetProgressResponse> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 15);
+  messageDesc(file_koma_v1_koma, 17);
 
 /**
  * Koma's single cross-repo source of truth (decision: separate origins — buf keeps this file
@@ -454,6 +484,16 @@ export const Library: GenService<{
     methodKind: "unary";
     input: typeof GetProgressRequestSchema;
     output: typeof GetProgressResponseSchema;
+  },
+  /**
+   * Manual-first update pass (v1): external-ID upserts, idempotent by design.
+   *
+   * @generated from rpc koma.v1.Library.UpdateLibrary
+   */
+  updateLibrary: {
+    methodKind: "unary";
+    input: typeof UpdateLibraryRequestSchema;
+    output: typeof UpdateLibraryResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_koma_v1_koma, 1);
