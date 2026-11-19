@@ -78,7 +78,7 @@ status: done
 - Check: adapter tests against a local mock conforming to recorded MangaDex responses.
 
 ## Wave 11 — At-Home image flow + chapter download
-status: pending
+status: done
 - Outcome: At-Home report-key flow (signed image URLs from the report-token plane), chapter
   download worker storing files under storage root (single-writer discipline).
 - Check: integration test — mock At-Home flow yields a downloaded chapter resolvable by /pages.

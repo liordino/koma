@@ -109,3 +109,14 @@
   badge per owner decision 3), title fallback en→ja-ro→first value, cover_art relationship →
   covers URL, hard-bounded limits, urlencode fixed (self-collision bug caught at write time).
 - 3 wiremock tests (search/detail+error-on-empty/feed). 25/25 nextest; clippy clean; proof signed.
+
+## Wave 11 — At-Home flow + chapter download — DONE (2026-11-19)
+- RED 5/6 first. Green: post_json added to OutboundClient (report-key POST via Api plane);
+  guarded_host() unified all pre-connection rejection; MangaDexAdapter::at_home (recorded block
+  shape: baseUrl/hash/data/reportUrl) + send_report best-effort; download.rs single-writer worker
+  (AtHomeUrls type alias + DownloadContext struct after clippy hits, path-safe storage_dir_for
+  with fail-fast key assertions, 64MB page cap at write time).
+- Orphan-rule fix: PageSource impl moved into crate (test crate can't impl crate trait for
+  crate-foreign adapter). Fixture FK bug in oversized-page test fixed.
+- Process lesson: transient gate failures when cargo invocations overlap — sequential cargo only.
+- 28/28 nextest; wave11 6/6; dojo proof signed. /pages serves freshly downloaded bytes end-to-end.
