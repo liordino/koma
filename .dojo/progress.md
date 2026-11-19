@@ -155,3 +155,17 @@
   host half 14.6s (open+discover over LAN 7.1, close+resume 7.5) → total ≈25.9s vs 90s gate: PASS 3.5x.
 - First target ("Vivi" webtoon) was 1-page long-strip — loop run against 23-page chapter instead,
   noted in baseline.md. Evidence in benchmarks/baseline.md + core-loop.spec.ts (90s assertion in CI).
+
+## Wave 15 — Download queue + supervised worker — DONE (2026-11-19)
+- RED 4/5. Green: migration 0004 (chapter.state pending/queued/downloading/downloaded/failed +
+  state_error + queued_at, index); enqueue (idempotent, never resets downloaded), next_queued
+  FIFO by (queued_at, id), run_queue_once supervised pass (one task at a time, per-task failure
+  contained into state='failed'+error text, done work never redone); QueueRunner trait injectable
+  (deterministic test runner; RealRunner resolves adapter from the source row's key, At-Home report fired).
+- Real bugs fixed: FromRow maps by column name (aliased SQL); migration default 'pending' vs
+  legacy UPDATE; RPITIT style (no async-trait dep).
+- FLAKE ROOT CAUSE (findings.md): Windows pid reuse + stale temp DBs -> nanos-unique
+  db::temp_test_dir used by all 7 suites; 10+ consecutive full-suite passes after.
+- Gate bug fixed: wave15's "all tests" grep expected plain-cargo 'test result: ok' which nextest
+  never prints (34/34 was passing while the gate said FAIL).
+- 34/34 nextest repeatedly; clippy clean; dojo proof signed.

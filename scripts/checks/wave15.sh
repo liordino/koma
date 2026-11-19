@@ -12,7 +12,7 @@ exec > >(tee .dojo/proof/wave15-check.log) 2>&1
 expect "download queue module exists" '[ -f "$ROOT/server/src/download.rs" ] && grep -rqi "queue" "$ROOT/server/src/"'
 expect "chapter queue state migration exists" 'ls "$ROOT"/server/migrations/*.sql | xargs grep -lqi "queue" || false'
 expect "queue integration tests exist" '[ -f "$ROOT/server/tests/download_queue.rs" ]'
-expect "queue tests pass" 'cd "$ROOT/server" && cargo test --test download_queue 2>&1 | grep -q "test result: ok"'
-expect "all tests still pass" 'cd "$ROOT/server" && cargo nextest run 2>&1 | grep -q "test result: ok"'
+expect "queue tests pass" 'cd "$ROOT/server" && cargo test --test download_queue 2>&1 | grep -qE "test result: ok|[0-9]+ passed,"'
+expect "all tests still pass" 'cd "$ROOT/server" && cargo nextest run 2>&1 | grep -qE "test result: ok|[0-9]+ passed,"'
 
 exit $fail

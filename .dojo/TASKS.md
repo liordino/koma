@@ -103,7 +103,7 @@ status: done
 ## M2 — Server habits (plan branch plan/koma-m2; safety rides in the same milestone)
 
 ## Wave 15 — Download manager: queue + supervised single-writer worker
-status: pending
+status: done
 - Outcome: chapter download queue (DB rows as queue state, FIFO), one worker that processes
   serially, survives failures (retry/skip + error state), supervision restart on next item.
 - Check: integration tests — out-of-order enqueue is processed in FIFO; a failing page mid-task
