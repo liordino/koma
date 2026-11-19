@@ -129,3 +129,19 @@
   lesson: two into_axum_router() merges panic).
 - 3 service-DB tests + 1 wire-level test (CreateCategory through gRPC-Web + bearer, 401 without).
 - Same-ms temp-collision race fixed with atomic serial. 31/31 nextest; clippy clean; proof signed.
+
+## Wave 13 — Web UI + windowed reader — DONE (2026-11-19)
+- RED 5/6 first. Green: SvelteKit scaffold (adapter-static SPA) in web/; windowed vertical reader
+  (fixed 1200px placeholders, ±2-image window, blob cache; far pages unmount); page-anchored
+  progress = round(scrollY/PAGE_H) + ratio, debounced UpsertProgress; resume via new GetProgress
+  RPC (proto + rust + TS synced) restores scroll BEFORE first paint of the anchor.
+- fetch-to-blob decision 26 implemented as transport-level authedFetch.
+- Playwright gate: read to deep page → reload → restored with zero further interactions (7.6s).
+- Bugs found on the way: CORS must allow connect/grpc-web protocol headers (x-grpc-web,
+  connect-protocol-version...) or every browser RPC dies at preflight; connect-es client must use
+  createGrpcWebTransport (tonic-web speaks gRPC-Web, not the Connect protocol — HTTP 400s explained);
+  tonic/webview stray processes and Windows forbidden-socket ranges forced gate port 18100.
+- Gate-quality lesson: expect() evals shared one shell — a 'cd web' persisted and silently broke
+  later relative paths; ROOT resolution was one level short; ROOT must be exported into bash -c
+  children. Gate now uses fresh subshells + scripts/checks/run-playwright.sh (exit-code contract).
+- Evidence: wave13-check.log (7/7 PASS) + playwright13-rerun.json committed.

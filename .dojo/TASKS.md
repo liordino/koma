@@ -89,7 +89,7 @@ status: done
 - Check: integration tests over gRPC-Web RPCs with the bearer middleware.
 
 ## Wave 13 — Web UI scaffold + windowed reader with resumable progress
-status: pending
+status: done
 - Outcome: SvelteKit SPA (`npx sv create`), windowed vertical reader (preload ±2–3 pages,
   fixed placeholders, unmount far pages), page-anchored progress persisted via RPC; fetch-to-blob
   page loading.
