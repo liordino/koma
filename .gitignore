@@ -5,3 +5,10 @@ dist/
 .env
 .env.*
 *.log.lck
+
+web/build/
+web/.svelte-kit/
+web/test-results/
+web/playwright-report/
+koma.db*
+storage/

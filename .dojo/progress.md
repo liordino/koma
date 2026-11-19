@@ -94,3 +94,64 @@
 - Reference numbers: idle RSS 578 MB, restart-to-first-200 8.6s, page p95 233ms (host).
 - NOT the device baseline — labeled informational in baseline.md. Device JVM infeasibility now
   evidence-backed (578MB > 512MB RAM).
+
+## Wave 9 — Outbound-fetch foundation — DONE (2026-11-18)
+- RED 6/6 first. Green: OutboundClient (domain allowlist with suffix-boundary match, rejection
+  pre-connection pre-throttle), dual PlaneLimiter (Api / AtHome) as try_grant+wait-hint so no
+  mutex is held across await (clippy catch), reqwest+rustls for static-friendliness.
+- tests: 9 new (unit: allowlist boundaries incl. lookalike + case; wiremock: allowlisted JSON ok,
+  disallowed host hits ZERO wire requests, lookalike rejected, At-Home budget throttles in time).
+- 22/22 nextest; clippy -D warnings clean; evidence committed (wave9-check.log + check-proof).
+
+## Wave 10 — MangaDex adapter core — DONE (2026-11-19)
+- RED 3/4 first. Green: src/source/{mod,mangadex}.rs — search/detail/chapters mapped from recorded
+  {result,data[attributes+relationships]} shapes into Koma types (SearchResult carries source_key
+  badge per owner decision 3), title fallback en→ja-ro→first value, cover_art relationship →
+  covers URL, hard-bounded limits, urlencode fixed (self-collision bug caught at write time).
+- 3 wiremock tests (search/detail+error-on-empty/feed). 25/25 nextest; clippy clean; proof signed.
+
+## Wave 11 — At-Home flow + chapter download — DONE (2026-11-19)
+- RED 5/6 first. Green: post_json added to OutboundClient (report-key POST via Api plane);
+  guarded_host() unified all pre-connection rejection; MangaDexAdapter::at_home (recorded block
+  shape: baseUrl/hash/data/reportUrl) + send_report best-effort; download.rs single-writer worker
+  (AtHomeUrls type alias + DownloadContext struct after clippy hits, path-safe storage_dir_for
+  with fail-fast key assertions, 64MB page cap at write time).
+- Orphan-rule fix: PageSource impl moved into crate (test crate can't impl crate trait for
+  crate-foreign adapter). Fixture FK bug in oversized-page test fixed.
+- Process lesson: transient gate failures when cargo invocations overlap — sequential cargo only.
+- 28/28 nextest; wave11 6/6; dojo proof signed. /pages serves freshly downloaded bytes end-to-end.
+
+## Wave 12 — Library/category RPCs — DONE (2026-11-19)
+- RED 4/6 first. Green: proto Library service (7 unary RPCs) + generated TS synced (tsc clean);
+  UserId request-extension from bearer middleware (multi-user-ready, v1 single-user);
+  library.rs: idempotent manga/category upserts, by-category/all list views, progress UPSERT
+  with clamped ratios; router now merges BOTH services in ONE tonic Routes (fallback-clash
+  lesson: two into_axum_router() merges panic).
+- 3 service-DB tests + 1 wire-level test (CreateCategory through gRPC-Web + bearer, 401 without).
+- Same-ms temp-collision race fixed with atomic serial. 31/31 nextest; clippy clean; proof signed.
+
+## Wave 13 — Web UI + windowed reader — DONE (2026-11-19)
+- RED 5/6 first. Green: SvelteKit scaffold (adapter-static SPA) in web/; windowed vertical reader
+  (fixed 1200px placeholders, ±2-image window, blob cache; far pages unmount); page-anchored
+  progress = round(scrollY/PAGE_H) + ratio, debounced UpsertProgress; resume via new GetProgress
+  RPC (proto + rust + TS synced) restores scroll BEFORE first paint of the anchor.
+- fetch-to-blob decision 26 implemented as transport-level authedFetch.
+- Playwright gate: read to deep page → reload → restored with zero further interactions (7.6s).
+- Bugs found on the way: CORS must allow connect/grpc-web protocol headers (x-grpc-web,
+  connect-protocol-version...) or every browser RPC dies at preflight; connect-es client must use
+  createGrpcWebTransport (tonic-web speaks gRPC-Web, not the Connect protocol — HTTP 400s explained);
+  tonic/webview stray processes and Windows forbidden-socket ranges forced gate port 18100.
+- Gate-quality lesson: expect() evals shared one shell — a 'cd web' persisted and silently broke
+  later relative paths; ROOT resolution was one level short; ROOT must be exported into bash -c
+  children. Gate now uses fresh subshells + scripts/checks/run-playwright.sh (exit-code contract).
+- Evidence: wave13-check.log (7/7 PASS) + playwright13-rerun.json committed.
+
+## Wave 14 — Core-loop benchmark on device — DONE (2026-11-18)
+- bin/bench-loop added (find/add/download timed via real MangaDex over device network; source row
+  registered by the bin — registry-as-data); aarch64 release rebuilt via zig recipe; shared_production_client.
+- On-device friction (all process, not product): ssh link flake (retry discipline), stale server
+  holding deleted DB inode (AddrInUse → worker now pkills predecessor), stdout block buffering.
+- Results: device half 11.3s (find 1533 + add 15 + download 9801 = 23 pages At-Home compliant),
+  host half 14.6s (open+discover over LAN 7.1, close+resume 7.5) → total ≈25.9s vs 90s gate: PASS 3.5x.
+- First target ("Vivi" webtoon) was 1-page long-strip — loop run against 23-page chapter instead,
+  noted in baseline.md. Evidence in benchmarks/baseline.md + core-loop.spec.ts (90s assertion in CI).

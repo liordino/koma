@@ -1,0 +1,4 @@
+PASS: mangadex adapter module exists
+PASS: source registry table migration exists
+PASS: adapter tests exist
+PASS: adapter tests pass

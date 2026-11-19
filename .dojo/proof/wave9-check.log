@@ -1,0 +1,6 @@
+PASS: outbound fetch module exists
+PASS: domain allowlist enforced in code
+PASS: two rate-limit planes exist
+PASS: wiremock dev-dependency present
+PASS: ssrf/ratelimit tests exist
+PASS: tests pass

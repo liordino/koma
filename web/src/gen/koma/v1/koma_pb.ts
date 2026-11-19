@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file koma/v1/koma.proto.
  */
 export const file_koma_v1_koma: GenFile = /*@__PURE__*/
-  fileDesc("ChJrb21hL3YxL2tvbWEucHJvdG8SB2tvbWEudjEiDQoLUGluZ1JlcXVlc3QiHwoMUGluZ1Jlc3BvbnNlEg8KB21lc3NhZ2UYASABKAkyQgoLS29tYVNlcnZpY2USMwoEUGluZxIULmtvbWEudjEuUGluZ1JlcXVlc3QaFS5rb21hLnYxLlBpbmdSZXNwb25zZWIGcHJvdG8z");
+  fileDesc("ChJrb21hL3YxL2tvbWEucHJvdG8SB2tvbWEudjEiDQoLUGluZ1JlcXVlc3QiHwoMUGluZ1Jlc3BvbnNlEg8KB21lc3NhZ2UYASABKAkiegoMTWFuZ2FTdW1tYXJ5EgoKAmlkGAEgASgDEhIKCnNvdXJjZV9rZXkYAiABKAkSEwoLZXh0ZXJuYWxfaWQYAyABKAkSDQoFdGl0bGUYBCABKAkSEQoJY292ZXJfdXJsGAUgASgJEhMKC2Rlc2NyaXB0aW9uGAYgASgJIj8KCENhdGVnb3J5EgoKAmlkGAEgASgDEgwKBG5hbWUYAiABKAkSGQoRZGVsZXRlX2FmdGVyX3JlYWQYAyABKAgihgEKD0FkZE1hbmdhUmVxdWVzdBISCgpzb3VyY2Vfa2V5GAEgASgJEhMKC2V4dGVybmFsX2lkGAIgASgJEg0KBXRpdGxlGAMgASgJEhEKCWNvdmVyX3VybBgEIAEoCRITCgtkZXNjcmlwdGlvbhgFIAEoCRITCgtjYXRlZ29yeV9pZBgGIAEoAyIpChJMaXN0TGlicmFyeVJlcXVlc3QSEwoLY2F0ZWdvcnlfaWQYASABKAMiOwoTTGlzdExpYnJhcnlSZXNwb25zZRIkCgVpdGVtcxgBIAMoCzIVLmtvbWEudjEuTWFuZ2FTdW1tYXJ5Ih0KD0dldE1hbmdhUmVxdWVzdBIKCgJpZBgBIAEoAyIlChVDcmVhdGVDYXRlZ29yeVJlcXVlc3QSDAoEbmFtZRgBIAEoCSIXChVMaXN0Q2F0ZWdvcmllc1JlcXVlc3QiOgoWTGlzdENhdGVnb3JpZXNSZXNwb25zZRIgCgVpdGVtcxgBIAMoCzIRLmtvbWEudjEuQ2F0ZWdvcnkiPQoUQWRkVG9DYXRlZ29yeVJlcXVlc3QSEAoIbWFuZ2FfaWQYASABKAMSEwoLY2F0ZWdvcnlfaWQYAiABKAMiUQoVVXBzZXJ0UHJvZ3Jlc3NSZXF1ZXN0EhIKCmNoYXB0ZXJfaWQYASABKAMSDgoGcGFnZV9uGAIgASgFEhQKDHNjcm9sbF9yYXRpbxgDIAEoASIHCgVFbXB0eSIoChJHZXRQcm9ncmVzc1JlcXVlc3QSEgoKY2hhcHRlcl9pZBgBIAEoAyJLChNHZXRQcm9ncmVzc1Jlc3BvbnNlEg4KBmV4aXN0cxgBIAEoCBIOCgZwYWdlX24YAiABKAUSFAoMc2Nyb2xsX3JhdGlvGAMgASgBMkIKC0tvbWFTZXJ2aWNlEjMKBFBpbmcSFC5rb21hLnYxLlBpbmdSZXF1ZXN0GhUua29tYS52MS5QaW5nUmVzcG9uc2UytgQKB0xpYnJhcnkSOwoIQWRkTWFuZ2ESGC5rb21hLnYxLkFkZE1hbmdhUmVxdWVzdBoVLmtvbWEudjEuTWFuZ2FTdW1tYXJ5EkgKC0xpc3RMaWJyYXJ5Ehsua29tYS52MS5MaXN0TGlicmFyeVJlcXVlc3QaHC5rb21hLnYxLkxpc3RMaWJyYXJ5UmVzcG9uc2USOwoIR2V0TWFuZ2ESGC5rb21hLnYxLkdldE1hbmdhUmVxdWVzdBoVLmtvbWEudjEuTWFuZ2FTdW1tYXJ5EkMKDkNyZWF0ZUNhdGVnb3J5Eh4ua29tYS52MS5DcmVhdGVDYXRlZ29yeVJlcXVlc3QaES5rb21hLnYxLkNhdGVnb3J5ElEKDkxpc3RDYXRlZ29yaWVzEh4ua29tYS52MS5MaXN0Q2F0ZWdvcmllc1JlcXVlc3QaHy5rb21hLnYxLkxpc3RDYXRlZ29yaWVzUmVzcG9uc2USQwoSQWRkTWFuZ2FUb0NhdGVnb3J5Eh0ua29tYS52MS5BZGRUb0NhdGVnb3J5UmVxdWVzdBoOLmtvbWEudjEuRW1wdHkSQAoOVXBzZXJ0UHJvZ3Jlc3MSHi5rb21hLnYxLlVwc2VydFByb2dyZXNzUmVxdWVzdBoOLmtvbWEudjEuRW1wdHkSSAoLR2V0UHJvZ3Jlc3MSGy5rb21hLnYxLkdldFByb2dyZXNzUmVxdWVzdBocLmtvbWEudjEuR2V0UHJvZ3Jlc3NSZXNwb25zZWIGcHJvdG8z");
 
 /**
  * @generated from message koma.v1.PingRequest
@@ -43,6 +43,325 @@ export const PingResponseSchema: GenMessage<PingResponse> = /*@__PURE__*/
   messageDesc(file_koma_v1_koma, 1);
 
 /**
+ * @generated from message koma.v1.MangaSummary
+ */
+export type MangaSummary = Message<"koma.v1.MangaSummary"> & {
+  /**
+   * @generated from field: int64 id = 1;
+   */
+  id: bigint;
+
+  /**
+   * @generated from field: string source_key = 2;
+   */
+  sourceKey: string;
+
+  /**
+   * @generated from field: string external_id = 3;
+   */
+  externalId: string;
+
+  /**
+   * @generated from field: string title = 4;
+   */
+  title: string;
+
+  /**
+   * @generated from field: string cover_url = 5;
+   */
+  coverUrl: string;
+
+  /**
+   * @generated from field: string description = 6;
+   */
+  description: string;
+};
+
+/**
+ * Describes the message koma.v1.MangaSummary.
+ * Use `create(MangaSummarySchema)` to create a new message.
+ */
+export const MangaSummarySchema: GenMessage<MangaSummary> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 2);
+
+/**
+ * @generated from message koma.v1.Category
+ */
+export type Category = Message<"koma.v1.Category"> & {
+  /**
+   * @generated from field: int64 id = 1;
+   */
+  id: bigint;
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * @generated from field: bool delete_after_read = 3;
+   */
+  deleteAfterRead: boolean;
+};
+
+/**
+ * Describes the message koma.v1.Category.
+ * Use `create(CategorySchema)` to create a new message.
+ */
+export const CategorySchema: GenMessage<Category> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 3);
+
+/**
+ * @generated from message koma.v1.AddMangaRequest
+ */
+export type AddMangaRequest = Message<"koma.v1.AddMangaRequest"> & {
+  /**
+   * @generated from field: string source_key = 1;
+   */
+  sourceKey: string;
+
+  /**
+   * @generated from field: string external_id = 2;
+   */
+  externalId: string;
+
+  /**
+   * @generated from field: string title = 3;
+   */
+  title: string;
+
+  /**
+   * @generated from field: string cover_url = 4;
+   */
+  coverUrl: string;
+
+  /**
+   * @generated from field: string description = 5;
+   */
+  description: string;
+
+  /**
+   * 0 = none
+   *
+   * @generated from field: int64 category_id = 6;
+   */
+  categoryId: bigint;
+};
+
+/**
+ * Describes the message koma.v1.AddMangaRequest.
+ * Use `create(AddMangaRequestSchema)` to create a new message.
+ */
+export const AddMangaRequestSchema: GenMessage<AddMangaRequest> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 4);
+
+/**
+ * @generated from message koma.v1.ListLibraryRequest
+ */
+export type ListLibraryRequest = Message<"koma.v1.ListLibraryRequest"> & {
+  /**
+   * 0 = all
+   *
+   * @generated from field: int64 category_id = 1;
+   */
+  categoryId: bigint;
+};
+
+/**
+ * Describes the message koma.v1.ListLibraryRequest.
+ * Use `create(ListLibraryRequestSchema)` to create a new message.
+ */
+export const ListLibraryRequestSchema: GenMessage<ListLibraryRequest> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 5);
+
+/**
+ * @generated from message koma.v1.ListLibraryResponse
+ */
+export type ListLibraryResponse = Message<"koma.v1.ListLibraryResponse"> & {
+  /**
+   * @generated from field: repeated koma.v1.MangaSummary items = 1;
+   */
+  items: MangaSummary[];
+};
+
+/**
+ * Describes the message koma.v1.ListLibraryResponse.
+ * Use `create(ListLibraryResponseSchema)` to create a new message.
+ */
+export const ListLibraryResponseSchema: GenMessage<ListLibraryResponse> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 6);
+
+/**
+ * @generated from message koma.v1.GetMangaRequest
+ */
+export type GetMangaRequest = Message<"koma.v1.GetMangaRequest"> & {
+  /**
+   * @generated from field: int64 id = 1;
+   */
+  id: bigint;
+};
+
+/**
+ * Describes the message koma.v1.GetMangaRequest.
+ * Use `create(GetMangaRequestSchema)` to create a new message.
+ */
+export const GetMangaRequestSchema: GenMessage<GetMangaRequest> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 7);
+
+/**
+ * @generated from message koma.v1.CreateCategoryRequest
+ */
+export type CreateCategoryRequest = Message<"koma.v1.CreateCategoryRequest"> & {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+};
+
+/**
+ * Describes the message koma.v1.CreateCategoryRequest.
+ * Use `create(CreateCategoryRequestSchema)` to create a new message.
+ */
+export const CreateCategoryRequestSchema: GenMessage<CreateCategoryRequest> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 8);
+
+/**
+ * @generated from message koma.v1.ListCategoriesRequest
+ */
+export type ListCategoriesRequest = Message<"koma.v1.ListCategoriesRequest"> & {
+};
+
+/**
+ * Describes the message koma.v1.ListCategoriesRequest.
+ * Use `create(ListCategoriesRequestSchema)` to create a new message.
+ */
+export const ListCategoriesRequestSchema: GenMessage<ListCategoriesRequest> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 9);
+
+/**
+ * @generated from message koma.v1.ListCategoriesResponse
+ */
+export type ListCategoriesResponse = Message<"koma.v1.ListCategoriesResponse"> & {
+  /**
+   * @generated from field: repeated koma.v1.Category items = 1;
+   */
+  items: Category[];
+};
+
+/**
+ * Describes the message koma.v1.ListCategoriesResponse.
+ * Use `create(ListCategoriesResponseSchema)` to create a new message.
+ */
+export const ListCategoriesResponseSchema: GenMessage<ListCategoriesResponse> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 10);
+
+/**
+ * @generated from message koma.v1.AddToCategoryRequest
+ */
+export type AddToCategoryRequest = Message<"koma.v1.AddToCategoryRequest"> & {
+  /**
+   * @generated from field: int64 manga_id = 1;
+   */
+  mangaId: bigint;
+
+  /**
+   * @generated from field: int64 category_id = 2;
+   */
+  categoryId: bigint;
+};
+
+/**
+ * Describes the message koma.v1.AddToCategoryRequest.
+ * Use `create(AddToCategoryRequestSchema)` to create a new message.
+ */
+export const AddToCategoryRequestSchema: GenMessage<AddToCategoryRequest> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 11);
+
+/**
+ * @generated from message koma.v1.UpsertProgressRequest
+ */
+export type UpsertProgressRequest = Message<"koma.v1.UpsertProgressRequest"> & {
+  /**
+   * @generated from field: int64 chapter_id = 1;
+   */
+  chapterId: bigint;
+
+  /**
+   * @generated from field: int32 page_n = 2;
+   */
+  pageN: number;
+
+  /**
+   * @generated from field: double scroll_ratio = 3;
+   */
+  scrollRatio: number;
+};
+
+/**
+ * Describes the message koma.v1.UpsertProgressRequest.
+ * Use `create(UpsertProgressRequestSchema)` to create a new message.
+ */
+export const UpsertProgressRequestSchema: GenMessage<UpsertProgressRequest> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 12);
+
+/**
+ * @generated from message koma.v1.Empty
+ */
+export type Empty = Message<"koma.v1.Empty"> & {
+};
+
+/**
+ * Describes the message koma.v1.Empty.
+ * Use `create(EmptySchema)` to create a new message.
+ */
+export const EmptySchema: GenMessage<Empty> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 13);
+
+/**
+ * @generated from message koma.v1.GetProgressRequest
+ */
+export type GetProgressRequest = Message<"koma.v1.GetProgressRequest"> & {
+  /**
+   * @generated from field: int64 chapter_id = 1;
+   */
+  chapterId: bigint;
+};
+
+/**
+ * Describes the message koma.v1.GetProgressRequest.
+ * Use `create(GetProgressRequestSchema)` to create a new message.
+ */
+export const GetProgressRequestSchema: GenMessage<GetProgressRequest> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 14);
+
+/**
+ * @generated from message koma.v1.GetProgressResponse
+ */
+export type GetProgressResponse = Message<"koma.v1.GetProgressResponse"> & {
+  /**
+   * @generated from field: bool exists = 1;
+   */
+  exists: boolean;
+
+  /**
+   * @generated from field: int32 page_n = 2;
+   */
+  pageN: number;
+
+  /**
+   * @generated from field: double scroll_ratio = 3;
+   */
+  scrollRatio: number;
+};
+
+/**
+ * Describes the message koma.v1.GetProgressResponse.
+ * Use `create(GetProgressResponseSchema)` to create a new message.
+ */
+export const GetProgressResponseSchema: GenMessage<GetProgressResponse> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 15);
+
+/**
  * Koma's single cross-repo source of truth (decision: separate origins — buf keeps this file
  * authoritative for both the Rust server and the TypeScript clients).
  *
@@ -61,4 +380,81 @@ export const KomaService: GenService<{
   },
 }> = /*@__PURE__*/
   serviceDesc(file_koma_v1_koma, 0);
+
+/**
+ * @generated from service koma.v1.Library
+ */
+export const Library: GenService<{
+  /**
+   * Add (upsert) a manga from a source into the library, optionally into a category.
+   *
+   * @generated from rpc koma.v1.Library.AddManga
+   */
+  addManga: {
+    methodKind: "unary";
+    input: typeof AddMangaRequestSchema;
+    output: typeof MangaSummarySchema;
+  },
+  /**
+   * @generated from rpc koma.v1.Library.ListLibrary
+   */
+  listLibrary: {
+    methodKind: "unary";
+    input: typeof ListLibraryRequestSchema;
+    output: typeof ListLibraryResponseSchema;
+  },
+  /**
+   * @generated from rpc koma.v1.Library.GetManga
+   */
+  getManga: {
+    methodKind: "unary";
+    input: typeof GetMangaRequestSchema;
+    output: typeof MangaSummarySchema;
+  },
+  /**
+   * @generated from rpc koma.v1.Library.CreateCategory
+   */
+  createCategory: {
+    methodKind: "unary";
+    input: typeof CreateCategoryRequestSchema;
+    output: typeof CategorySchema;
+  },
+  /**
+   * @generated from rpc koma.v1.Library.ListCategories
+   */
+  listCategories: {
+    methodKind: "unary";
+    input: typeof ListCategoriesRequestSchema;
+    output: typeof ListCategoriesResponseSchema;
+  },
+  /**
+   * @generated from rpc koma.v1.Library.AddMangaToCategory
+   */
+  addMangaToCategory: {
+    methodKind: "unary";
+    input: typeof AddToCategoryRequestSchema;
+    output: typeof EmptySchema;
+  },
+  /**
+   * Page-anchored progress (decision 10) for the calling user (v1 single-user).
+   *
+   * @generated from rpc koma.v1.Library.UpsertProgress
+   */
+  upsertProgress: {
+    methodKind: "unary";
+    input: typeof UpsertProgressRequestSchema;
+    output: typeof EmptySchema;
+  },
+  /**
+   * Last remembered position for a chapter; exists=false when nothing stored yet.
+   *
+   * @generated from rpc koma.v1.Library.GetProgress
+   */
+  getProgress: {
+    methodKind: "unary";
+    input: typeof GetProgressRequestSchema;
+    output: typeof GetProgressResponseSchema;
+  },
+}> = /*@__PURE__*/
+  serviceDesc(file_koma_v1_koma, 1);
 

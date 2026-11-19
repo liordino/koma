@@ -1,0 +1,185 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\liord\\src\\koma\\web\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--project=chromium",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\liord\\src\\koma\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/liord/src/koma/web/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/liord/src/koma/web/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/liord/src/koma/web/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\liord\\src\\koma\\web\\test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "chromium",
+        "testDir": "C:\\Users\\liord\\src\\koma\\web\\tests",
+        "snapshotDir": "C:\\Users\\liord\\src\\koma\\web\\tests",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 120000,
+        "use": {
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/159.0.8154.6 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.1",
+    "workers": 6,
+    "webServer": {
+      "command": "npx vite dev --port 5173 --strictPort",
+      "port": 5173,
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "reader.spec.ts",
+      "file": "reader.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "read to a deep page, reload, resume in <= 2 interactions",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 31210,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/page 1 \\/ 10/)\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText(/page 1 \\/ 10/) with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/page 1 \\/ 10/)\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/page 1 \\/ 10/)\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText(/page 1 \\/ 10/) with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/page 1 \\/ 10/)\u001b[22m\n\n    at C:\\Users\\liord\\src\\koma\\web\\tests\\reader.spec.ts:16:47",
+                    "location": {
+                      "file": "C:\\Users\\liord\\src\\koma\\web\\tests\\reader.spec.ts",
+                      "column": 47,
+                      "line": 16
+                    },
+                    "snippet": " \u001b[90m 14 |\u001b[39m\n \u001b[90m 15 |\u001b[39m \t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mgoto(\u001b[32m'http://localhost:5173/reader/1'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 16 |\u001b[39m \t\u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[35m/page 1 \\/ 10/\u001b[39m))\u001b[33m.\u001b[39mtoBeVisible({ timeout\u001b[33m:\u001b[39m \u001b[35m30_000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m \t                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 17 |\u001b[39m\n \u001b[90m 18 |\u001b[39m \t\u001b[90m// Read forward: jump to a deep page (interaction 1), then scroll a bit (interaction 2).\u001b[39m\n \u001b[90m 19 |\u001b[39m \t\u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mevaluate((h) \u001b[33m=>\u001b[39m window\u001b[33m.\u001b[39mscrollTo({ top\u001b[33m:\u001b[39m \u001b[35m8\u001b[39m \u001b[33m*\u001b[39m h })\u001b[33m,\u001b[39m \u001b[33mPAGE_H\u001b[39m)\u001b[33m;\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\liord\\src\\koma\\web\\tests\\reader.spec.ts",
+                        "column": 47,
+                        "line": 16
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText(/page 1 \\/ 10/)\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText(/page 1 \\/ 10/) with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByText(/page 1 \\/ 10/)\u001b[22m\n\n\n  14 |\n  15 | \tawait page.goto('http://localhost:5173/reader/1');\n> 16 | \tawait expect(page.getByText(/page 1 \\/ 10/)).toBeVisible({ timeout: 30_000 });\n     | \t                                             ^\n  17 |\n  18 | \t// Read forward: jump to a deep page (interaction 1), then scroll a bit (interaction 2).\n  19 | \tawait page.evaluate((h) => window.scrollTo({ top: 8 * h }), PAGE_H);\n    at C:\\Users\\liord\\src\\koma\\web\\tests\\reader.spec.ts:16:47"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-19T02:03:54.067Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\liord\\src\\koma\\web\\test-results\\reader-read-to-a-deep-page-reload-resume-in-2-interactions-chromium\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\liord\\src\\koma\\web\\tests\\reader.spec.ts",
+                    "column": 47,
+                    "line": 16
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "74de4b60cc20d5f05aaf-254588115b289fa096ec",
+          "file": "reader.spec.ts",
+          "line": 9,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-19T02:03:49.630Z",
+    "duration": 36483.705,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

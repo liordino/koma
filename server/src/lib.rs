@@ -2,7 +2,11 @@
 
 pub mod auth;
 pub mod db;
+pub mod download;
+pub mod library;
 pub mod log;
+pub mod source;
+pub mod fetch;
 pub mod pages;
 
 pub use db::DbPool;
@@ -48,20 +52,34 @@ pub fn build_router(
                 .collect::<Vec<_>>(),
         )
         .allow_methods([Method::GET, Method::POST, Method::OPTIONS])
-        .allow_headers([header::AUTHORIZATION, header::CONTENT_TYPE]);
+        // connect-es protocol headers must be allowed or every browser RPC dies on preflight.
+        .allow_headers([
+            header::AUTHORIZATION,
+            header::CONTENT_TYPE,
+            header::HeaderName::from_static("connect-protocol-version"),
+            header::HeaderName::from_static("connect-timeout-ms"),
+            header::HeaderName::from_static("grpc-timeout"),
+            header::HeaderName::from_static("x-user-agent"),
+            header::HeaderName::from_static("x-grpc-web"),
+        ]);
 
     // GrpcWeb wraps only the gRPC routes: it must not sit over /pages, where plain binary
     // GETs would be rejected by the gRPC-Web content-type negotiation (found by the probe).
-    let grpc_router = tonic::service::Routes::new(
-        pb::koma_service_server::KomaServiceServer::new(KomaTransport),
-    )
-    .into_axum_router()
-    .layer(tonic_web::GrpcWebLayer::new());
+
+    // Both tonic services share ONE Routes (one axum fallback) — merging two
+    // into_axum_router() outputs panics (each carries its own fallback).
+    let grpc_router = tonic::service::Routes::new(pb::koma_service_server::KomaServiceServer::new(KomaTransport))
+        .add_service(pb::library_server::LibraryServer::new(library::LibraryDb {
+            pool: pool.clone(),
+        }))
+        .into_axum_router()
+        .layer(tonic_web::GrpcWebLayer::new());
 
     let pages_state = pages::PagesState {
         pool: pool.clone(),
         base_dir: storage_root,
     };
+
 
     Router::new()
         .merge(grpc_router)
