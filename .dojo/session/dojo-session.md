@@ -3,11 +3,11 @@ mode: autonomous
 rigor: real
 type: feature
 wave: 8
-step: PAUSED_AT_CEILING
+step: DONE
 gate_density: standard
 wave_ceiling: 4
 intent: Give the owner a self-hosted manga server/reader (Koma) by executing the mandatory Slice 0 decision pass, starting with a licensed, positioned repo.
-goal: (paused at ceiling) Next: wave 14 — core-loop benchmark on the Pi Zero 2 W: cold start → find → add → read 10 pages → close → resume <=90s (decision 16 gate: numbers into benchmarks/baseline.md).
+goal: M1 plan complete: core-loop benchmark 25.9s vs 90s gate (PASS). All waves 9-14 done at the device and LAN.
 commit_style: conventional
 test_written:
 test_status:

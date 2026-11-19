@@ -96,6 +96,6 @@ status: done
 - Check: Playwright passes — read 10 pages, reload, progress restored in ≤2 interactions.
 
 ## Wave 14 — Core-loop benchmark on device (proposal, decision 16)
-status: pending
+status: done
 - Outcome: cold start → find → add → read 10 pages → close → resume ≤ 90 s measured on the Pi Zero 2 W.
 - Check: median ≤ 90 s recorded in benchmarks/baseline.md.

@@ -140,6 +140,20 @@ pub struct MangaDexAdapter {
 }
 
 impl MangaDexAdapter {
+    /// Shared production client (allowlisted, plane-budgeted) for tools that need the adapter's
+    /// client directly (e.g. the core-loop benchmark bin driving the download worker).
+    pub fn shared_production_client() -> crate::fetch::SharedClient {
+        std::sync::Arc::new(
+            OutboundClient::new(
+                MANGADEX_ALLOWLIST.iter().map(|s| s.to_string()).collect(),
+                5,
+                10,
+                std::time::Duration::from_secs(1),
+            )
+            .expect("production outbound client"),
+        )
+    }
+
     pub fn production() -> Result<Self, crate::fetch::FetchError> {
         let http = OutboundClient::new(
             MANGADEX_ALLOWLIST.iter().map(|s| s.to_string()).collect(),
