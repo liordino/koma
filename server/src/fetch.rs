@@ -10,6 +10,7 @@ use std::sync::Arc;
 use std::time::{Duration, Instant};
 
 use serde::de::DeserializeOwned;
+use serde_json::Value;
 
 /// A rate-limit plane. MangaDex documents separate limits for API and At-Home image delivery.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -135,16 +136,7 @@ impl OutboundClient {
         url: &str,
         plane: Plane,
     ) -> Result<T, FetchError> {
-        let parsed = reqwest::Url::parse(url)
-            .map_err(|_e| FetchError::Unexpected { url: url.to_string(), status: 0 })?;
-        let host = parsed
-            .host_str()
-            .ok_or_else(|| FetchError::Unexpected { url: url.to_string(), status: 0 })?
-            .to_string();
-        if !host_allowed(&host, &self.allowlist) {
-            return Err(FetchError::Disallowed { host });
-        }
-
+        let _ = self.guarded_host(url)?;
         self.throttle(plane).await;
 
         let resp = self.http.get(url).send().await?;
@@ -154,6 +146,32 @@ impl OutboundClient {
 
     /// Raw bytes for image-plane downloads (At-Home page images).
     pub async fn get_bytes(&self, url: &str, plane: Plane) -> Result<Vec<u8>, FetchError> {
+        let _ = self.guarded_host(url)?;
+        self.throttle(plane).await;
+
+        let resp = self.http.get(url).send().await?;
+        let bytes = resp.bytes().await?.to_vec();
+        Ok(bytes)
+    }
+
+    /// POST JSON on the Api plane (At-Home report-key flow). Rejections pre-connection.
+    pub async fn post_json(
+        &self,
+        url: &str,
+        plane: Plane,
+        body: &Value,
+    ) -> Result<Value, FetchError> {
+        let _ = self.guarded_host(url)?;
+        self.throttle(plane).await;
+
+        let resp = self.http.post(url).json(body).send().await?;
+        resp.error_for_status_ref().map_err(FetchError::Http)?;
+        resp.json::<Value>().await.map_err(FetchError::Http)
+    }
+
+    /// Parse the URL, take the host, enforce the allowlist — the single choke point
+    /// every outbound method must pass before touching the network.
+    fn guarded_host(&self, url: &str) -> Result<String, FetchError> {
         let parsed = reqwest::Url::parse(url)
             .map_err(|_e| FetchError::Unexpected { url: url.to_string(), status: 0 })?;
         let host = parsed
@@ -163,12 +181,7 @@ impl OutboundClient {
         if !host_allowed(&host, &self.allowlist) {
             return Err(FetchError::Disallowed { host });
         }
-
-        self.throttle(plane).await;
-
-        let resp = self.http.get(url).send().await?;
-        let bytes = resp.bytes().await?.to_vec();
-        Ok(bytes)
+        Ok(host)
     }
 }
 

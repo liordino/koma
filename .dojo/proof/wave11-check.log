@@ -1,0 +1,6 @@
+PASS: at-home flow in adapter
+PASS: download worker module exists
+PASS: download writes page files + DB row update
+PASS: report-key POST implemented
+PASS: integration tests exist
+PASS: tests pass

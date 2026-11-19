@@ -233,3 +233,86 @@ fn urlencode(s: &str) -> String {
     }
     out
 }
+
+/// At-Home chapter image delivery (decision 18 — compliance lives in MVP, not the backlog).
+///
+/// `GET /at-home/server/{chapterId}` → `{ baseUrl, chapter.hash, chapter.data[] }`; images at
+/// `{baseUrl}/data/{hash}/{file}` on the At-Home image plane; a report POST goes to `reportUrl`.
+#[derive(Debug, Clone)]
+pub struct AtHomeChapter {
+    pub base_url: String,
+    pub hash: String,
+    pub image_urls: Vec<String>,
+    pub report: Option<(String, serde_json::Value)>,
+}
+
+impl MangaDexAdapter {
+    /// Resolve the At-Home delivery block for a chapter (recorded response shape).
+    pub async fn at_home(&self, chapter_external_id: &str) -> Result<AtHomeChapter, crate::fetch::FetchError> {
+        #[derive(serde::Deserialize)]
+        struct AtHomeRaw {
+            #[serde(rename = "baseUrl")]
+            base_url: String,
+            chapter: serde_json::Value,
+            #[serde(rename = "reportUrl")]
+            report_url: Option<String>,
+        }
+        let url = format!("{}/at-home/server/{}?forcePort443", self.base, urlencode(chapter_external_id));
+        let raw: AtHomeRaw = self.http.get_json(&url, Plane::Api).await?;
+        let hash = raw
+            .chapter
+            .get("hash")
+            .and_then(Value::as_str)
+            .unwrap_or_default()
+            .to_string();
+        let files: Vec<String> = raw
+            .chapter
+            .get("data")
+            .and_then(Value::as_array)
+            .map(|a| {
+                a.iter()
+                    .filter_map(Value::as_str)
+                    .map(str::to_string)
+                    .collect()
+            })
+            .unwrap_or_default();
+        let image_urls = files
+            .iter()
+            .map(|f| format!("{}/data/{}/{}", raw.base_url, hash, f))
+            .collect();
+        let report = raw.report_url.map(|u| {
+            (
+                u,
+                serde_json::json!({ "status": 200, "data": { "empty": false } }),
+            )
+        });
+        Ok(AtHomeChapter { base_url: raw.base_url, hash, image_urls, report })
+    }
+
+    /// Fire the report-key POST after reading (best-effort: a failed report must not
+    /// fail the download; it is an API-hygiene duty, not a data dependency).
+    pub async fn send_report(
+        &self,
+        at_home: &AtHomeChapter,
+    ) -> Result<(), crate::fetch::FetchError> {
+        if let Some((url, body)) = &at_home.report {
+            let url = url.clone();
+            let body = body.clone();
+            self.http.post_json(&url, Plane::Api, &body).await?;
+        }
+        Ok(())
+    }
+}
+
+impl crate::download::PageSource for MangaDexAdapter {
+    async fn at_home_urls_and_report(
+        &self,
+        chapter_external_id: &str,
+    ) -> Result<(Vec<String>, Option<(String, Value)>), crate::download::DownloadError> {
+        let ath = self
+            .at_home(chapter_external_id)
+            .await
+            .map_err(crate::download::DownloadError::Fetch)?;
+        Ok((ath.image_urls, ath.report))
+    }
+}
