@@ -94,3 +94,11 @@
 - Reference numbers: idle RSS 578 MB, restart-to-first-200 8.6s, page p95 233ms (host).
 - NOT the device baseline — labeled informational in baseline.md. Device JVM infeasibility now
   evidence-backed (578MB > 512MB RAM).
+
+## Wave 9 — Outbound-fetch foundation — DONE (2026-11-18)
+- RED 6/6 first. Green: OutboundClient (domain allowlist with suffix-boundary match, rejection
+  pre-connection pre-throttle), dual PlaneLimiter (Api / AtHome) as try_grant+wait-hint so no
+  mutex is held across await (clippy catch), reqwest+rustls for static-friendliness.
+- tests: 9 new (unit: allowlist boundaries incl. lookalike + case; wiremock: allowlisted JSON ok,
+  disallowed host hits ZERO wire requests, lookalike rejected, At-Home budget throttles in time).
+- 22/22 nextest; clippy -D warnings clean; evidence committed (wave9-check.log + check-proof).

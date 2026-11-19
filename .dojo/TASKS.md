@@ -60,3 +60,42 @@ status: done
 ## Notes (post-execution)
 - Wave 8b executed by the agent over SSH (owner granted device access mid-session).
 - Suwayomi comparative baseline deferred with reason recorded in benchmarks/baseline.md — owner pace.
+
+## M1 — Readable MVP (plan branch plan/koma-m1)
+
+## Wave 9 — Outbound-fetch foundation (SSRF + dual-plane rate limiter)
+status: done
+- Outcome: central outbound-fetch module with per-adapter domain allowlists (decision-network
+  baseline) and the two-plane rate limiter (API plane vs At-Home image plane) implementing the
+  At-Home compliance requirement (decision 18).
+- Check: unit tests — request to a non-allowlisted domain is rejected before any connection;
+  request to an allowed domain passes; rate limiter enforces per-plane budgets.
+
+## Wave 10 — MangaDex adapter core (search/manga/chapters)
+status: pending
+- Outcome: tier-A source adapter: search, manga detail, chapter list via MangaDex API;
+  source registry as table rows (behavior in data); search across all sources with badges in RPCs.
+- Check: adapter tests against a local mock conforming to recorded MangaDex responses.
+
+## Wave 11 — At-Home image flow + chapter download
+status: pending
+- Outcome: At-Home report-key flow (signed image URLs from the report-token plane), chapter
+  download worker storing files under storage root (single-writer discipline).
+- Check: integration test — mock At-Home flow yields a downloaded chapter resolvable by /pages.
+
+## Wave 12 — Library/category RPCs
+status: pending
+- Outcome: gRPC RPCs for library CRUD, category membership, manga detail, progress upsert.
+- Check: integration tests over gRPC-Web RPCs with the bearer middleware.
+
+## Wave 13 — Web UI scaffold + windowed reader with resumable progress
+status: pending
+- Outcome: SvelteKit SPA (`npx sv create`), windowed vertical reader (preload ±2–3 pages,
+  fixed placeholders, unmount far pages), page-anchored progress persisted via RPC; fetch-to-blob
+  page loading.
+- Check: Playwright passes — read 10 pages, reload, progress restored in ≤2 interactions.
+
+## Wave 14 — Core-loop benchmark on device (proposal, decision 16)
+status: pending
+- Outcome: cold start → find → add → read 10 pages → close → resume ≤ 90 s measured on the Pi Zero 2 W.
+- Check: median ≤ 90 s recorded in benchmarks/baseline.md.
