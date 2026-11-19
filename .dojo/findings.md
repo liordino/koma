@@ -10,3 +10,13 @@
   plus `AR_<target>=zig.exe ar`. Env: CC_<target>="C:/tools/zig/ccz.cmd", CCZ_TARGET=<zig triple>.
 - Both `cargo check --target aarch64-unknown-linux-musl` and `armv7-unknown-linux-musleabihf`
   green. Release-link step not yet exercised (needs full build; do at 8b).
+
+## 2026-11-19 — Test flake root cause (fixed in wave 15)
+- Symptom: full-suite failures (UNIQUE constraint on source.id / "unable to open db") that never
+  reproduced solo, across random tests.
+- Root cause: Windows pid reuse — test temp dirs named koma-<wave>-{pid}-{serial} collided with
+  stale DBs from prior runs when a new process inherited a recycled pid; rwc then opened a stale
+  DB with old rows.
+- Fix: db::temp_test_dir(prefix) — nanos-timestamped dir (cannot collide); create_dir_all before
+  connecting (new subdirs don't auto-exist). All seven suites migrated. 8 consecutive full-run
+  passes incl. the wave gate and dojo proof.

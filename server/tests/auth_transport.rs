@@ -9,16 +9,13 @@ use std::sync::atomic::{AtomicU32, Ordering};
 static SERIAL: AtomicU32 = AtomicU32::new(0);
 
 async fn seed_pool() -> koma_server::DbPool {
+    let test_dir = db::temp_test_dir("wave3");
+    std::fs::create_dir_all(&test_dir).expect("test dir");
     let url = format!(
         "sqlite://{}?mode=rwc",
-        std::env::temp_dir()
-            .join(format!(
-                "koma-wave3-{}-{}.db",
-                std::process::id(),
-                SERIAL.fetch_add(1, Ordering::SeqCst)
-            ))
-            .display()
+        test_dir.join("koma.db").display()
     );
+    let _ = SERIAL;
     let pool = db::connect(&url).await.expect("connect");
     db::migrate(&pool).await.expect("migrate");
     koma_server::auth::seed_owner(&pool, "test-token")

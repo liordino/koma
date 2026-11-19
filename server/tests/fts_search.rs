@@ -4,13 +4,11 @@
 use koma_server::db;
 
 async fn seed_pool() -> koma_server::DbPool {
-    static SERIAL: std::sync::atomic::AtomicU32 = std::sync::atomic::AtomicU32::new(0);
-    let n = SERIAL.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
+    let test_dir = db::temp_test_dir("wave4");
+    std::fs::create_dir_all(&test_dir).expect("test dir");
     let url = format!(
         "sqlite://{}?mode=rwc",
-        std::env::temp_dir()
-            .join(format!("koma-wave4-{}-{n}.db", std::process::id()))
-            .display()
+        test_dir.join("koma.db").display()
     );
     let pool = db::connect(&url).await.expect("connect");
     db::migrate(&pool).await.expect("migrate");

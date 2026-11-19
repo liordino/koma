@@ -38,3 +38,15 @@ use std::str::FromStr;
 pub async fn migrate(pool: &Pool<Sqlite>) -> Result<(), sqlx::migrate::MigrateError> {
     sqlx::migrate!("./migrations").run(pool).await
 }
+
+/// Globally-unique temp dir for integration tests. Windows reuses pids aggressively, so
+/// pid-based temp names collide with stale DBs from prior runs (observed as UNIQUE
+/// constraint failures); nanos timestamps cannot collide. Callers remove the dir on exit
+/// (or leave it — stale dirs are now harmless).
+pub fn temp_test_dir(prefix: &str) -> std::path::PathBuf {
+    let nanos = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map(|d| d.as_nanos())
+        .unwrap_or(0);
+    std::env::temp_dir().join(format!("koma-test-{prefix}-{nanos}"))
+}

@@ -83,7 +83,7 @@ fn adapter(server: &MockServer) -> MangaDexAdapter {
 #[tokio::test]
 async fn end_to_end_download_and_serve() {
     let server = mock_athome().await;
-    let root = std::env::temp_dir().join(format!("koma-wave11-{}", std::process::id()));
+    let root = db::temp_test_dir("wave11-a");
     std::fs::create_dir_all(&root).expect("root");
     let pool = seed_pool(&root).await;
 
@@ -173,7 +173,7 @@ async fn page_too_large_is_rejected_at_write_time() {
         .mount(&server)
         .await;
 
-    let root = std::env::temp_dir().join(format!("koma-wave11b-{}", std::process::id()));
+    let root = db::temp_test_dir("wave11-b");
     std::fs::create_dir_all(&root).expect("root");
     let pool = seed_pool(&root).await;
     sqlx::query("INSERT INTO source (id, key, name) VALUES (1, 'mangadex', 'MangaDex')")
