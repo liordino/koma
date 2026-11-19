@@ -1,13 +1,14 @@
 //! Koma server binary — boots the SQLite baseline, seeds the owner token, serves Axum.
 
-use koma_server::{auth, db, build_router};
+use koma_server::{auth, build_router, db};
 use std::path::PathBuf;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let db_url =
         std::env::var("KOMA_DB_URL").unwrap_or_else(|_| "sqlite://koma.db?mode=rwc".to_string());
-    let storage_root = PathBuf::from(std::env::var("KOMA_STORAGE").unwrap_or_else(|_| "./storage".into()));
+    let storage_root =
+        PathBuf::from(std::env::var("KOMA_STORAGE").unwrap_or_else(|_| "./storage".into()));
     let addr = std::env::var("KOMA_ADDR").unwrap_or_else(|_| "0.0.0.0:8080".into());
     let token = std::env::var("KOMA_TOKEN").unwrap_or_else(|_| "koma-dev-token".into());
     let allowed_origins: Vec<String> = std::env::var("KOMA_ORIGINS")
