@@ -99,3 +99,38 @@ status: done
 status: done
 - Outcome: cold start → find → add → read 10 pages → close → resume ≤ 90 s measured on the Pi Zero 2 W.
 - Check: median ≤ 90 s recorded in benchmarks/baseline.md.
+
+## M2 — Server habits (plan branch plan/koma-m2; safety rides in the same milestone)
+
+## Wave 15 — Download manager: queue + supervised single-writer worker
+status: pending
+- Outcome: chapter download queue (DB rows as queue state, FIFO), one worker that processes
+  serially, survives failures (retry/skip + error state), supervision restart on next item.
+- Check: integration tests — out-of-order enqueue is processed in FIFO; a failing page mid-task
+  leaves the item failed, the worker moves to the next; queue drained correctly.
+
+## Wave 16 — Auto-update checker
+status: pending
+- Outcome: update pass over library rows using external_id upserts, idempotent, triggered
+  manually in v1.
+- Check: mocked adapter returning newer chapters → rows added idempotently; re-running the
+  pass twice yields no duplicates.
+
+## Wave 17 — Read tracking + trash window
+status: pending
+- Outcome: explicit mark-read RPC + reading_completed event; after read, chapter files move to
+  a trash directory with a retention window (timer recorded, not purged).
+- Check: tests — mark read → files relocated to trash dir, retention timestamp recorded,
+  originals gone from serving path, re-download available.
+
+## Wave 18 — delete_after_read safety: backup gate + explicit purge
+status: pending
+- Outcome: metadata-only JSON backup export; a cleanup pass REFUSES to run without a fresh
+  backup (freshness = newer than last read event being purged); permanent purge is an explicit
+  per-category, user-confirmed action; never a seeded default on the primary category.
+- Check: tests — cleanup blocked without fresh backup; runs after backup; purge is opt-in only.
+
+## Open owner decision (parked, recorded in CONTEXT Decisions on answer)
+- Reader mode: webtoon-strip-only (state it in UI) vs budget shared rendering primitives.
+  Agent recommendation: webtoon-strip-only v1 — matches leanest-device goal; long-strips already
+  render acceptably as single tall pages; revisit only if reading UX suffers.
