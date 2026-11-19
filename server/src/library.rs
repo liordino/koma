@@ -232,6 +232,21 @@ impl Library for LibraryDb {
         Ok(Response::new(pb_types::Empty {}))
     }
 
+    async fn purge_category(
+        &self,
+        request: Request<pb_types::PurgeCategoryRequest>,
+    ) -> Grpc<pb_types::PurgeCategoryResponse> {
+        let r = request.into_inner();
+        let trash_root = crate::trash_root();
+        let purged = crate::backup::purge_category(&self.pool, &trash_root, r.category_id, r.confirm)
+            .await
+            .map_err(|e| match e {
+                crate::backup::SafetyError::Db(db) => db_err(db),
+                other => Status::internal(other.to_string()),
+            })?;
+        Ok(Response::new(pb_types::PurgeCategoryResponse { chapters_purged: purged }))
+    }
+
     async fn mark_read(
         &self,
         request: Request<pb_types::MarkReadRequest>,

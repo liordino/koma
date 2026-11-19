@@ -5,6 +5,7 @@ pub mod db;
 pub mod download;
 pub mod library;
 pub mod log;
+pub mod backup;
 pub mod trash;
 pub mod update;
 pub mod source;

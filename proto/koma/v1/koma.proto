@@ -33,12 +33,24 @@ service Library {
   rpc UpdateLibrary(UpdateLibraryRequest) returns (UpdateLibraryResponse);
   // Explicit read tracking: the read predicate is an explicit mark (v1).
   rpc MarkRead(MarkReadRequest) returns (MarkReadResponse);
+  // Per-category purge of trash-consumed chapters. confirm MUST be true;
+  // a fresh metadata backup is a precondition (stop condition).
+  rpc PurgeCategory(PurgeCategoryRequest) returns (PurgeCategoryResponse);
 }
 
 message UpdateLibraryRequest {}
 
 message UpdateLibraryResponse {
   int32 chapters_added = 1;
+}
+
+message PurgeCategoryRequest {
+  int64 category_id = 1;
+  bool confirm = 2; // explicit user confirmation — required
+}
+
+message PurgeCategoryResponse {
+  int32 chapters_purged = 1;
 }
 
 message MarkReadRequest {
