@@ -3,11 +3,11 @@ mode: autonomous
 rigor: real
 type: feature
 wave: 18
-step: RED
+step: DONE
 gate_density: standard
 wave_ceiling: 4
 intent: Give the owner a self-hosted manga server/reader (Koma) by executing the mandatory Slice 0 decision pass, starting with a licensed, positioned repo.
-goal: delete_after_read safety chain: metadata-only JSON backup export; cleanup refuses without a fresh backup; purge is explicit per-category user-confirmed (never seeded).
+goal: M2 complete: backup-gated explicit purge proven by safety_chain tests. Waves 15-18 done.
 commit_style: conventional
 test_written:
 test_status:

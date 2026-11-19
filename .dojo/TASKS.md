@@ -124,7 +124,7 @@ status: done
   originals gone from serving path, re-download available.
 
 ## Wave 18 — delete_after_read safety: backup gate + explicit purge
-status: pending
+status: done
 - Outcome: metadata-only JSON backup export; a cleanup pass REFUSES to run without a fresh
   backup (freshness = newer than last read event being purged); permanent purge is an explicit
   per-category, user-confirmed action; never a seeded default on the primary category.

@@ -182,3 +182,10 @@
   reset to pending (re-download possible); non-delete categories keep files. temp_test_dir got a
   counter+pid component (Windows 15ms timer granularity); rename now moves file-by-file into a
   created trash dir. 39/39 nextest; clippy clean after fixture fix; proof signed.
+
+## Wave 18 — delete_after_read safety chain — DONE (2026-11-19)
+- backup.rs: metadata-only JSON export; purge_category refuses unconfirmed/stale-backup/unknown
+  category; freshness = last_backup_at >= newest trash_moved_at of the category's chapters.
+- safety_chain tests 5/5: export real JSON; unconfirmed refused; stale refused; fresh-backup
+  purge deletes trash files + rows; unknown category refused. 44/44 nextest; proof signed.
+- M2 COMPLETE -> merge to main.
