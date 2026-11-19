@@ -8,7 +8,7 @@ Harness: `benchmarks/run-benchmarks.sh` (JSONL); raw runs in `benchmarks/raw/`
 ## Measured (wave 8b, 2026-11-18 — 3 runs, medians)
 
 | Metric | Koma (median; runs) | Target / gate | Verdict |
-|---|---|---|---|
+|---| --- | --- | --- |
 | Idle RSS | **4.3 MB** (4304 / 4308 / 4324 KB) | < 100 MB | PASS — 23× headroom |
 | Cold start | **768 ms** genuine cold (root `drop_caches`; warm-restart runs 451 / 612 ms) | < 2 s | PASS |
 | Page p95 (localhost, 20 pulls) | **63 ms** (62 / 63 / 65) | < 50–200 ms | PASS (within envelope; LAN adds RTT only) |
@@ -42,7 +42,7 @@ Owner authorized a direct test; Suwayomi-Server (bundled Zulu JRE 25, jar 2025 b
 Windows host — different hardware than the pinned device, so these are reference points only:
 
 | Metric | Suwayomi-Server (host) | Koma (device, for contrast) |
-|---|---|---|
+| --- | --- | --- |
 | Idle RSS | 578 MB (java.exe working set) | 4.3 MB |
 | Restart-to-first-200 | 8.6 s (no cache drop) | 768 ms (genuine cold on device) |
 | Page p95 (20 pulls, warm cache) | 233 ms (WEBP; first-fetch per chapter costs seconds-to-minutes on first touch) | 63 ms (local files) |
