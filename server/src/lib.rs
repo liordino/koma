@@ -3,6 +3,7 @@
 pub mod auth;
 pub mod db;
 pub mod log;
+pub mod fetch;
 pub mod pages;
 
 pub use db::DbPool;
