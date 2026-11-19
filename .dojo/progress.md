@@ -169,3 +169,9 @@
 - Gate bug fixed: wave15's "all tests" grep expected plain-cargo 'test result: ok' which nextest
   never prints (34/34 was passing while the gate said FAIL).
 - 34/34 nextest repeatedly; clippy clean; dojo proof signed.
+
+## Wave 16 — Auto-update checker — DONE (2026-11-19)
+- RED 4/5. Green: rpc UpdateLibrary (proto + TS synced); update.rs with UpdatableSource trait
+  (MangaDexAdapter implements; mock-able), run_update_pass scoped per source_key, INSERT OR IGNORE
+  + rows_affected novelty counting — idempotency contract proven (2 add, re-runs 0; incremental
+  adds only new; other-source manga untouched). 37/37 nextest; clippy clean; proof signed.

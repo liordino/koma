@@ -110,7 +110,7 @@ status: done
   leaves the item failed, the worker moves to the next; queue drained correctly.
 
 ## Wave 16 — Auto-update checker
-status: pending
+status: done
 - Outcome: update pass over library rows using external_id upserts, idempotent, triggered
   manually in v1.
 - Check: mocked adapter returning newer chapters → rows added idempotently; re-running the
