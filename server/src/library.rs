@@ -232,6 +232,19 @@ impl Library for LibraryDb {
         Ok(Response::new(pb_types::Empty {}))
     }
 
+    async fn mark_read(
+        &self,
+        request: Request<pb_types::MarkReadRequest>,
+    ) -> Grpc<pb_types::MarkReadResponse> {
+        let r = request.into_inner();
+        let trash_root = crate::trash_root();
+        let (moved, retention) =
+            crate::trash::mark_read(&self.pool, r.chapter_id, &trash_root)
+                .await
+                .map_err(|e| Status::internal(e.to_string()))?;
+        Ok(Response::new(pb_types::MarkReadResponse { moved_to_trash: moved, trash_retention_until: retention }))
+    }
+
     async fn update_library(
         &self,
         _request: Request<pb_types::UpdateLibraryRequest>,

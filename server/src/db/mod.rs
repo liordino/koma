@@ -44,9 +44,17 @@ pub async fn migrate(pool: &Pool<Sqlite>) -> Result<(), sqlx::migrate::MigrateEr
 /// constraint failures); nanos timestamps cannot collide. Callers remove the dir on exit
 /// (or leave it — stale dirs are now harmless).
 pub fn temp_test_dir(prefix: &str) -> std::path::PathBuf {
+    use std::sync::atomic::{AtomicU64, Ordering};
+    static COUNTER: AtomicU64 = AtomicU64::new(0);
     let nanos = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .map(|d| d.as_nanos())
         .unwrap_or(0);
-    std::env::temp_dir().join(format!("koma-test-{prefix}-{nanos}"))
+    // Counter beats Windows' ~15ms timer granularity for same-process tests;
+    // pid + nanos beat pid-recycling across processes.
+    std::env::temp_dir().join(format!(
+        "koma-test-{prefix}-{}-{nanos}-{}",
+        std::process::id(),
+        COUNTER.fetch_add(1, Ordering::SeqCst)
+    ))
 }

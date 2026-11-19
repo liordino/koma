@@ -1,0 +1,6 @@
+PASS: MarkRead RPC in proto
+PASS: trash module exists
+PASS: retention timestamps in schema
+PASS: trash tests exist
+PASS: trash tests pass
+PASS: full suite green

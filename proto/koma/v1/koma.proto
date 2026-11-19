@@ -31,6 +31,8 @@ service Library {
   rpc GetProgress(GetProgressRequest) returns (GetProgressResponse);
   // Manual-first update pass (v1): external-ID upserts, idempotent by design.
   rpc UpdateLibrary(UpdateLibraryRequest) returns (UpdateLibraryResponse);
+  // Explicit read tracking: the read predicate is an explicit mark (v1).
+  rpc MarkRead(MarkReadRequest) returns (MarkReadResponse);
 }
 
 message UpdateLibraryRequest {}
@@ -38,6 +40,17 @@ message UpdateLibraryRequest {}
 message UpdateLibraryResponse {
   int32 chapters_added = 1;
 }
+
+message MarkReadRequest {
+  int64 chapter_id = 1;
+}
+
+message MarkReadResponse {
+  bool moved_to_trash = 1;
+  int64 trash_retention_until = 2;
+}
+
+
 
 message MangaSummary {
   int64 id = 1;
