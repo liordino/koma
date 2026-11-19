@@ -52,7 +52,16 @@ pub fn build_router(
                 .collect::<Vec<_>>(),
         )
         .allow_methods([Method::GET, Method::POST, Method::OPTIONS])
-        .allow_headers([header::AUTHORIZATION, header::CONTENT_TYPE]);
+        // connect-es protocol headers must be allowed or every browser RPC dies on preflight.
+        .allow_headers([
+            header::AUTHORIZATION,
+            header::CONTENT_TYPE,
+            header::HeaderName::from_static("connect-protocol-version"),
+            header::HeaderName::from_static("connect-timeout-ms"),
+            header::HeaderName::from_static("grpc-timeout"),
+            header::HeaderName::from_static("x-user-agent"),
+            header::HeaderName::from_static("x-grpc-web"),
+        ]);
 
     // GrpcWeb wraps only the gRPC routes: it must not sit over /pages, where plain binary
     // GETs would be rejected by the gRPC-Web content-type negotiation (found by the probe).

@@ -27,6 +27,8 @@ service Library {
   rpc AddMangaToCategory(AddToCategoryRequest) returns (Empty);
   // Page-anchored progress (decision 10) for the calling user (v1 single-user).
   rpc UpsertProgress(UpsertProgressRequest) returns (Empty);
+  // Last remembered position for a chapter; exists=false when nothing stored yet.
+  rpc GetProgress(GetProgressRequest) returns (GetProgressResponse);
 }
 
 message MangaSummary {
@@ -87,3 +89,14 @@ message UpsertProgressRequest {
 }
 
 message Empty {}
+
+message GetProgressRequest {
+  int64 chapter_id = 1;
+}
+
+message GetProgressResponse {
+  bool exists = 1;
+  int32 page_n = 2;
+  double scroll_ratio = 3;
+}
+

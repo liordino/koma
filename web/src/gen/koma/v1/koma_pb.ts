@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file koma/v1/koma.proto.
  */
 export const file_koma_v1_koma: GenFile = /*@__PURE__*/
-  fileDesc("ChJrb21hL3YxL2tvbWEucHJvdG8SB2tvbWEudjEiDQoLUGluZ1JlcXVlc3QiHwoMUGluZ1Jlc3BvbnNlEg8KB21lc3NhZ2UYASABKAkiegoMTWFuZ2FTdW1tYXJ5EgoKAmlkGAEgASgDEhIKCnNvdXJjZV9rZXkYAiABKAkSEwoLZXh0ZXJuYWxfaWQYAyABKAkSDQoFdGl0bGUYBCABKAkSEQoJY292ZXJfdXJsGAUgASgJEhMKC2Rlc2NyaXB0aW9uGAYgASgJIj8KCENhdGVnb3J5EgoKAmlkGAEgASgDEgwKBG5hbWUYAiABKAkSGQoRZGVsZXRlX2FmdGVyX3JlYWQYAyABKAgihgEKD0FkZE1hbmdhUmVxdWVzdBISCgpzb3VyY2Vfa2V5GAEgASgJEhMKC2V4dGVybmFsX2lkGAIgASgJEg0KBXRpdGxlGAMgASgJEhEKCWNvdmVyX3VybBgEIAEoCRITCgtkZXNjcmlwdGlvbhgFIAEoCRITCgtjYXRlZ29yeV9pZBgGIAEoAyIpChJMaXN0TGlicmFyeVJlcXVlc3QSEwoLY2F0ZWdvcnlfaWQYASABKAMiOwoTTGlzdExpYnJhcnlSZXNwb25zZRIkCgVpdGVtcxgBIAMoCzIVLmtvbWEudjEuTWFuZ2FTdW1tYXJ5Ih0KD0dldE1hbmdhUmVxdWVzdBIKCgJpZBgBIAEoAyIlChVDcmVhdGVDYXRlZ29yeVJlcXVlc3QSDAoEbmFtZRgBIAEoCSIXChVMaXN0Q2F0ZWdvcmllc1JlcXVlc3QiOgoWTGlzdENhdGVnb3JpZXNSZXNwb25zZRIgCgVpdGVtcxgBIAMoCzIRLmtvbWEudjEuQ2F0ZWdvcnkiPQoUQWRkVG9DYXRlZ29yeVJlcXVlc3QSEAoIbWFuZ2FfaWQYASABKAMSEwoLY2F0ZWdvcnlfaWQYAiABKAMiUQoVVXBzZXJ0UHJvZ3Jlc3NSZXF1ZXN0EhIKCmNoYXB0ZXJfaWQYASABKAMSDgoGcGFnZV9uGAIgASgFEhQKDHNjcm9sbF9yYXRpbxgDIAEoASIHCgVFbXB0eTJCCgtLb21hU2VydmljZRIzCgRQaW5nEhQua29tYS52MS5QaW5nUmVxdWVzdBoVLmtvbWEudjEuUGluZ1Jlc3BvbnNlMuwDCgdMaWJyYXJ5EjsKCEFkZE1hbmdhEhgua29tYS52MS5BZGRNYW5nYVJlcXVlc3QaFS5rb21hLnYxLk1hbmdhU3VtbWFyeRJICgtMaXN0TGlicmFyeRIbLmtvbWEudjEuTGlzdExpYnJhcnlSZXF1ZXN0Ghwua29tYS52MS5MaXN0TGlicmFyeVJlc3BvbnNlEjsKCEdldE1hbmdhEhgua29tYS52MS5HZXRNYW5nYVJlcXVlc3QaFS5rb21hLnYxLk1hbmdhU3VtbWFyeRJDCg5DcmVhdGVDYXRlZ29yeRIeLmtvbWEudjEuQ3JlYXRlQ2F0ZWdvcnlSZXF1ZXN0GhEua29tYS52MS5DYXRlZ29yeRJRCg5MaXN0Q2F0ZWdvcmllcxIeLmtvbWEudjEuTGlzdENhdGVnb3JpZXNSZXF1ZXN0Gh8ua29tYS52MS5MaXN0Q2F0ZWdvcmllc1Jlc3BvbnNlEkMKEkFkZE1hbmdhVG9DYXRlZ29yeRIdLmtvbWEudjEuQWRkVG9DYXRlZ29yeVJlcXVlc3QaDi5rb21hLnYxLkVtcHR5EkAKDlVwc2VydFByb2dyZXNzEh4ua29tYS52MS5VcHNlcnRQcm9ncmVzc1JlcXVlc3QaDi5rb21hLnYxLkVtcHR5YgZwcm90bzM");
+  fileDesc("ChJrb21hL3YxL2tvbWEucHJvdG8SB2tvbWEudjEiDQoLUGluZ1JlcXVlc3QiHwoMUGluZ1Jlc3BvbnNlEg8KB21lc3NhZ2UYASABKAkiegoMTWFuZ2FTdW1tYXJ5EgoKAmlkGAEgASgDEhIKCnNvdXJjZV9rZXkYAiABKAkSEwoLZXh0ZXJuYWxfaWQYAyABKAkSDQoFdGl0bGUYBCABKAkSEQoJY292ZXJfdXJsGAUgASgJEhMKC2Rlc2NyaXB0aW9uGAYgASgJIj8KCENhdGVnb3J5EgoKAmlkGAEgASgDEgwKBG5hbWUYAiABKAkSGQoRZGVsZXRlX2FmdGVyX3JlYWQYAyABKAgihgEKD0FkZE1hbmdhUmVxdWVzdBISCgpzb3VyY2Vfa2V5GAEgASgJEhMKC2V4dGVybmFsX2lkGAIgASgJEg0KBXRpdGxlGAMgASgJEhEKCWNvdmVyX3VybBgEIAEoCRITCgtkZXNjcmlwdGlvbhgFIAEoCRITCgtjYXRlZ29yeV9pZBgGIAEoAyIpChJMaXN0TGlicmFyeVJlcXVlc3QSEwoLY2F0ZWdvcnlfaWQYASABKAMiOwoTTGlzdExpYnJhcnlSZXNwb25zZRIkCgVpdGVtcxgBIAMoCzIVLmtvbWEudjEuTWFuZ2FTdW1tYXJ5Ih0KD0dldE1hbmdhUmVxdWVzdBIKCgJpZBgBIAEoAyIlChVDcmVhdGVDYXRlZ29yeVJlcXVlc3QSDAoEbmFtZRgBIAEoCSIXChVMaXN0Q2F0ZWdvcmllc1JlcXVlc3QiOgoWTGlzdENhdGVnb3JpZXNSZXNwb25zZRIgCgVpdGVtcxgBIAMoCzIRLmtvbWEudjEuQ2F0ZWdvcnkiPQoUQWRkVG9DYXRlZ29yeVJlcXVlc3QSEAoIbWFuZ2FfaWQYASABKAMSEwoLY2F0ZWdvcnlfaWQYAiABKAMiUQoVVXBzZXJ0UHJvZ3Jlc3NSZXF1ZXN0EhIKCmNoYXB0ZXJfaWQYASABKAMSDgoGcGFnZV9uGAIgASgFEhQKDHNjcm9sbF9yYXRpbxgDIAEoASIHCgVFbXB0eSIoChJHZXRQcm9ncmVzc1JlcXVlc3QSEgoKY2hhcHRlcl9pZBgBIAEoAyJLChNHZXRQcm9ncmVzc1Jlc3BvbnNlEg4KBmV4aXN0cxgBIAEoCBIOCgZwYWdlX24YAiABKAUSFAoMc2Nyb2xsX3JhdGlvGAMgASgBMkIKC0tvbWFTZXJ2aWNlEjMKBFBpbmcSFC5rb21hLnYxLlBpbmdSZXF1ZXN0GhUua29tYS52MS5QaW5nUmVzcG9uc2UytgQKB0xpYnJhcnkSOwoIQWRkTWFuZ2ESGC5rb21hLnYxLkFkZE1hbmdhUmVxdWVzdBoVLmtvbWEudjEuTWFuZ2FTdW1tYXJ5EkgKC0xpc3RMaWJyYXJ5Ehsua29tYS52MS5MaXN0TGlicmFyeVJlcXVlc3QaHC5rb21hLnYxLkxpc3RMaWJyYXJ5UmVzcG9uc2USOwoIR2V0TWFuZ2ESGC5rb21hLnYxLkdldE1hbmdhUmVxdWVzdBoVLmtvbWEudjEuTWFuZ2FTdW1tYXJ5EkMKDkNyZWF0ZUNhdGVnb3J5Eh4ua29tYS52MS5DcmVhdGVDYXRlZ29yeVJlcXVlc3QaES5rb21hLnYxLkNhdGVnb3J5ElEKDkxpc3RDYXRlZ29yaWVzEh4ua29tYS52MS5MaXN0Q2F0ZWdvcmllc1JlcXVlc3QaHy5rb21hLnYxLkxpc3RDYXRlZ29yaWVzUmVzcG9uc2USQwoSQWRkTWFuZ2FUb0NhdGVnb3J5Eh0ua29tYS52MS5BZGRUb0NhdGVnb3J5UmVxdWVzdBoOLmtvbWEudjEuRW1wdHkSQAoOVXBzZXJ0UHJvZ3Jlc3MSHi5rb21hLnYxLlVwc2VydFByb2dyZXNzUmVxdWVzdBoOLmtvbWEudjEuRW1wdHkSSAoLR2V0UHJvZ3Jlc3MSGy5rb21hLnYxLkdldFByb2dyZXNzUmVxdWVzdBocLmtvbWEudjEuR2V0UHJvZ3Jlc3NSZXNwb25zZWIGcHJvdG8z");
 
 /**
  * @generated from message koma.v1.PingRequest
@@ -318,6 +318,50 @@ export const EmptySchema: GenMessage<Empty> = /*@__PURE__*/
   messageDesc(file_koma_v1_koma, 13);
 
 /**
+ * @generated from message koma.v1.GetProgressRequest
+ */
+export type GetProgressRequest = Message<"koma.v1.GetProgressRequest"> & {
+  /**
+   * @generated from field: int64 chapter_id = 1;
+   */
+  chapterId: bigint;
+};
+
+/**
+ * Describes the message koma.v1.GetProgressRequest.
+ * Use `create(GetProgressRequestSchema)` to create a new message.
+ */
+export const GetProgressRequestSchema: GenMessage<GetProgressRequest> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 14);
+
+/**
+ * @generated from message koma.v1.GetProgressResponse
+ */
+export type GetProgressResponse = Message<"koma.v1.GetProgressResponse"> & {
+  /**
+   * @generated from field: bool exists = 1;
+   */
+  exists: boolean;
+
+  /**
+   * @generated from field: int32 page_n = 2;
+   */
+  pageN: number;
+
+  /**
+   * @generated from field: double scroll_ratio = 3;
+   */
+  scrollRatio: number;
+};
+
+/**
+ * Describes the message koma.v1.GetProgressResponse.
+ * Use `create(GetProgressResponseSchema)` to create a new message.
+ */
+export const GetProgressResponseSchema: GenMessage<GetProgressResponse> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 15);
+
+/**
  * Koma's single cross-repo source of truth (decision: separate origins — buf keeps this file
  * authoritative for both the Rust server and the TypeScript clients).
  *
@@ -400,6 +444,16 @@ export const Library: GenService<{
     methodKind: "unary";
     input: typeof UpsertProgressRequestSchema;
     output: typeof EmptySchema;
+  },
+  /**
+   * Last remembered position for a chapter; exists=false when nothing stored yet.
+   *
+   * @generated from rpc koma.v1.Library.GetProgress
+   */
+  getProgress: {
+    methodKind: "unary";
+    input: typeof GetProgressRequestSchema;
+    output: typeof GetProgressResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_koma_v1_koma, 1);

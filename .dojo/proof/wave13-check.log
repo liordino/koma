@@ -1,0 +1,7 @@
+PASS: sveltekit app scaffolded in web/
+PASS: windowed reader exists (fixed placeholders, ±2 window, unmount far pages)
+PASS: page-anchored progress via RPC
+PASS: fetch-to-blob page loading
+PASS: playwright config + reader test
+PASS: vite build compiles the SPA
+PASS: playwright reader test passes

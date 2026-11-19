@@ -231,4 +231,32 @@ impl Library for LibraryDb {
         .map_err(db_err)?;
         Ok(Response::new(pb_types::Empty {}))
     }
+
+    async fn get_progress(
+        &self,
+        request: Request<pb_types::GetProgressRequest>,
+    ) -> Grpc<pb_types::GetProgressResponse> {
+        let user = request.extensions().get::<UserId>().copied().unwrap_or(UserId(1));
+        let r = request.into_inner();
+        let row: Option<(i32, f64)> = sqlx::query_as(
+            "SELECT page_n, scroll_ratio FROM reading_progress WHERE user_id = ? AND chapter_id = ?",
+        )
+        .bind(user.0)
+        .bind(r.chapter_id)
+        .fetch_optional(&self.pool)
+        .await
+        .map_err(db_err)?;
+        match row {
+            Some((page_n, ratio)) => Ok(Response::new(pb_types::GetProgressResponse {
+                exists: true,
+                page_n,
+                scroll_ratio: ratio.clamp(0.0, 1.0),
+            })),
+            None => Ok(Response::new(pb_types::GetProgressResponse {
+                exists: false,
+                page_n: 0,
+                scroll_ratio: 0.0,
+            })),
+        }
+    }
 }
