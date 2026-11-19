@@ -85,7 +85,10 @@ fn cover_url_of(item: &Value) -> Option<String> {
         .and_then(Value::as_array)?
         .iter()
         .find(|r| r.get("type").and_then(Value::as_str) == Some("cover_art"))?;
-    let file = cov.get("attributes").and_then(|a| a.get("fileName")).and_then(Value::as_str)?;
+    let file = cov
+        .get("attributes")
+        .and_then(|a| a.get("fileName"))
+        .and_then(Value::as_str)?;
     Some(format!("https://mangadex.org/covers/{file}"))
 }
 
@@ -113,7 +116,10 @@ fn chapter_list_from(raw: &Value) -> Vec<ChapterEntry> {
                             .and_then(Value::as_str)
                             .unwrap_or("?")
                             .to_string(),
-                        title: attrs.get("title").and_then(Value::as_str).map(str::to_string),
+                        title: attrs
+                            .get("title")
+                            .and_then(Value::as_str)
+                            .map(str::to_string),
                         pages: attrs.get("pages").and_then(Value::as_u64).unwrap_or(0) as u32,
                         scanlator: attrs
                             .get("scanlator")
@@ -141,11 +147,17 @@ impl MangaDexAdapter {
             10,
             std::time::Duration::from_secs(1),
         )?;
-        Ok(Self { http: std::sync::Arc::new(http), base: MANGADEX_API.to_string() })
+        Ok(Self {
+            http: std::sync::Arc::new(http),
+            base: MANGADEX_API.to_string(),
+        })
     }
 
     pub fn with_client(http: SharedClient, base: &str) -> Self {
-        Self { http, base: base.to_string() }
+        Self {
+            http,
+            base: base.to_string(),
+        }
     }
 
     /// Search titles. `limit` bounded hard — the API allows up to 100.
@@ -168,7 +180,11 @@ impl MangaDexAdapter {
                 let attrs = attrs_of(item);
                 SearchResult {
                     source_key: "mangadex".to_string(),
-                    external_id: item.get("id").and_then(Value::as_str).unwrap_or("?").to_string(),
+                    external_id: item
+                        .get("id")
+                        .and_then(Value::as_str)
+                        .unwrap_or("?")
+                        .to_string(),
                     title: title_of(attrs),
                     cover_url: cover_url_of(item),
                     description: description_of(attrs),
@@ -188,14 +204,15 @@ impl MangaDexAdapter {
         let first = data_attributes(&raw)
             .into_iter()
             .next()
-            .ok_or(crate::fetch::FetchError::Unexpected {
-                url,
-                status: 404,
-            })?;
+            .ok_or(crate::fetch::FetchError::Unexpected { url, status: 404 })?;
         let attrs = attrs_of(&first);
         Ok(MangaDetail {
             source_key: "mangadex".to_string(),
-            external_id: first.get("id").and_then(Value::as_str).unwrap_or("?").to_string(),
+            external_id: first
+                .get("id")
+                .and_then(Value::as_str)
+                .unwrap_or("?")
+                .to_string(),
             title: title_of(attrs),
             cover_url: cover_url_of(&first),
             description: description_of(attrs),
@@ -248,7 +265,10 @@ pub struct AtHomeChapter {
 
 impl MangaDexAdapter {
     /// Resolve the At-Home delivery block for a chapter (recorded response shape).
-    pub async fn at_home(&self, chapter_external_id: &str) -> Result<AtHomeChapter, crate::fetch::FetchError> {
+    pub async fn at_home(
+        &self,
+        chapter_external_id: &str,
+    ) -> Result<AtHomeChapter, crate::fetch::FetchError> {
         #[derive(serde::Deserialize)]
         struct AtHomeRaw {
             #[serde(rename = "baseUrl")]
@@ -257,7 +277,11 @@ impl MangaDexAdapter {
             #[serde(rename = "reportUrl")]
             report_url: Option<String>,
         }
-        let url = format!("{}/at-home/server/{}?forcePort443", self.base, urlencode(chapter_external_id));
+        let url = format!(
+            "{}/at-home/server/{}?forcePort443",
+            self.base,
+            urlencode(chapter_external_id)
+        );
         let raw: AtHomeRaw = self.http.get_json(&url, Plane::Api).await?;
         let hash = raw
             .chapter
@@ -286,7 +310,12 @@ impl MangaDexAdapter {
                 serde_json::json!({ "status": 200, "data": { "empty": false } }),
             )
         });
-        Ok(AtHomeChapter { base_url: raw.base_url, hash, image_urls, report })
+        Ok(AtHomeChapter {
+            base_url: raw.base_url,
+            hash,
+            image_urls,
+            report,
+        })
     }
 
     /// Fire the report-key POST after reading (best-effort: a failed report must not

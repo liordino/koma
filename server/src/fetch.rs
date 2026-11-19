@@ -29,7 +29,11 @@ struct PlaneLimiter {
 
 impl PlaneLimiter {
     fn new(budget: usize, window: Duration) -> Self {
-        Self { budget, window, granted: VecDeque::new() }
+        Self {
+            budget,
+            window,
+            granted: VecDeque::new(),
+        }
     }
 
     fn sweep(&mut self) {
@@ -52,10 +56,13 @@ impl PlaneLimiter {
             None
         } else {
             let oldest = *self.granted.front().expect("non-empty after sweep");
-            Some(self.window.saturating_sub(oldest.elapsed()).max(Duration::from_millis(10)))
+            Some(
+                self.window
+                    .saturating_sub(oldest.elapsed())
+                    .max(Duration::from_millis(10)),
+            )
         }
     }
-
 }
 
 #[derive(Debug, thiserror::Error)]
@@ -172,11 +179,16 @@ impl OutboundClient {
     /// Parse the URL, take the host, enforce the allowlist — the single choke point
     /// every outbound method must pass before touching the network.
     fn guarded_host(&self, url: &str) -> Result<String, FetchError> {
-        let parsed = reqwest::Url::parse(url)
-            .map_err(|_e| FetchError::Unexpected { url: url.to_string(), status: 0 })?;
+        let parsed = reqwest::Url::parse(url).map_err(|_e| FetchError::Unexpected {
+            url: url.to_string(),
+            status: 0,
+        })?;
         let host = parsed
             .host_str()
-            .ok_or_else(|| FetchError::Unexpected { url: url.to_string(), status: 0 })?
+            .ok_or_else(|| FetchError::Unexpected {
+                url: url.to_string(),
+                status: 0,
+            })?
             .to_string();
         if !host_allowed(&host, &self.allowlist) {
             return Err(FetchError::Disallowed { host });
@@ -216,7 +228,10 @@ mod tests {
             .await
             .expect_err("must reject");
         assert!(err.to_string().contains("allowlist"), "got {err}");
-        assert!(t0.elapsed() < Duration::from_millis(200), "rejection must be pre-connection, pre-throttle");
+        assert!(
+            t0.elapsed() < Duration::from_millis(200),
+            "rejection must be pre-connection, pre-throttle"
+        );
     }
 
     #[tokio::test]
