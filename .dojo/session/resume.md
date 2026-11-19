@@ -1,14 +1,12 @@
-# Resume checkpoint — M1 wave 13 done, ceiling pause (2026-11-19)
+# Resume checkpoint — M2 complete, merged to main (2026-11-19)
 
-- Branch plan/koma-m1. Clean tree. 34 tests green incl. the Playwright reader gate (7/7 PASS).
-- Done: waves 9–13 (fetch foundation, MangaDex adapter, At-Home + download worker, library RPCs,
-  SvelteKit windowed reader with resumable progress).
-- Next wave 14: core-loop benchmark on Pi Zero 2 W (cold start → find → add → read 10 pages →
-  close → resume ≤ 90 s). Needs: release binary rebuilt (cross recipe in .dojo/findings.md),
-  SPA static build hosted for the device API origin, benchmark harness extension, MangaDex live
-  search on device (real network, At-Home compliance on the device is exercised here).
-- Then: M1 completion review → possible merge decision (owner), and M2 (download queue,
-  auto-updates, delete-after-read safety design).
-- Dev-run recipe (host): export KOMA_DB_URL/KOMA_STORAGE/KOMA_TOKEN/KOMA_ADDR=127.0.0.1:18100,
-  bench-seed, koma-server, `npx playwright test` in web/. Ports note: 18080 fell into Windows'
-  forbidden socket range (os error 5/10013) — 18100 chosen; update spec + gate together.
+- main holds M1 + M2 (60 commits), tree clean, 44/44 tests green incl. the 5-test safety chain.
+- M2 delivered: DB-backed FIFO download queue + supervised worker (w15); idempotent auto-update
+  pass w/ UpdateLibrary RPC (w16); explicit mark-read + trash window with 7d retention record
+  (w17); metadata-only backup export + stale-backup-gated purge with per-category user-confirmed
+  PurgeCategory RPC (w18) — the stop conditions are enforced in code, not just documented.
+- Deferred/open: Suwayomi hardware baseline (physically infeasible on Zero 2 W — recorded);
+  Docker packaging + .tachibk import (M3); Tauri shell probation; online sources beyond MangaDex
+  (verification sheets required).
+- Next milestone: M3 — Publish (staged .tachibk import, category config UI, Docker packaging,
+  Tauri shell). Requires owner decisions on repo publication + README positioning.
