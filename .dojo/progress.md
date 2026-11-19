@@ -145,3 +145,13 @@
   later relative paths; ROOT resolution was one level short; ROOT must be exported into bash -c
   children. Gate now uses fresh subshells + scripts/checks/run-playwright.sh (exit-code contract).
 - Evidence: wave13-check.log (7/7 PASS) + playwright13-rerun.json committed.
+
+## Wave 14 — Core-loop benchmark on device — DONE (2026-11-18)
+- bin/bench-loop added (find/add/download timed via real MangaDex over device network; source row
+  registered by the bin — registry-as-data); aarch64 release rebuilt via zig recipe; shared_production_client.
+- On-device friction (all process, not product): ssh link flake (retry discipline), stale server
+  holding deleted DB inode (AddrInUse → worker now pkills predecessor), stdout block buffering.
+- Results: device half 11.3s (find 1533 + add 15 + download 9801 = 23 pages At-Home compliant),
+  host half 14.6s (open+discover over LAN 7.1, close+resume 7.5) → total ≈25.9s vs 90s gate: PASS 3.5x.
+- First target ("Vivi" webtoon) was 1-page long-strip — loop run against 23-page chapter instead,
+  noted in baseline.md. Evidence in benchmarks/baseline.md + core-loop.spec.ts (90s assertion in CI).

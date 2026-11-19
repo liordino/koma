@@ -52,3 +52,23 @@ on a 512 MB Zero 2 W with co-tenants — the deferral recorded above is now evid
 just judgment. The comparative claim (decision on cutover) stays open until an equivalent
 hardware run exists; on host-relative terms Koma's footprint and latency profile are ~100× lighter
 in RSS and ~11× faster in cold start.
+
+## Core-loop benchmark (wave 14, 2026-11-18 — device + LAN, real MangaDex)
+
+Loop: cold-ish start → find ("berserk") → add → download full chapter (At-Home compliant,
+23 pages) → open reader over LAN → read 10 pages → close → resume. Measured in two halves:
+
+| Segment | Result |
+|---|---|
+| find (live MangaDex search from device, rate-limited planes) | 1533 ms |
+| add (library RPC upsert) | 15 ms |
+| download (23 pages via At-Home, device network) | 9801 ms |
+| device half total | 11349 ms |
+| open reader + 23-page discovery over LAN + read 10 pages | 7104 ms |
+| close + resume (fresh page, GetProgress restore) | 7472 ms |
+| **Total** | **≈ 25.9 s** |
+
+Target ≤ 90 s → **PASS** with 3.5× headroom. Notes: the first search hit for "berserk" is a
+long-strip webtoon ("Vivi") whose chapter 1 is a single page — the loop was run against
+"Boushoku no Berserk" (23 real pages). Raw run on-device: `~/koma-bench/run14/loop14.txt`;
+browser half: `web/tests/core-loop.spec.ts` (asserts < 90 s as part of CI).
