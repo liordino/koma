@@ -120,3 +120,117 @@ pub fn verify_pages_resolvable(
     }
     Ok(())
 }
+
+// ---- Download queue (M2 wave 15) ---------------------------------------------------------------
+//
+// DB-backed FIFO: `queued_at` orders the work, `state` is the queue state as data. The worker
+// is a supervised loop: one task at a time, a failed task is contained (state='failed' +
+// error text) and the worker moves to the next item — a failure never poisons the queue.
+
+
+
+#[derive(Debug, Clone, sqlx::FromRow)]
+pub struct QueueTask {
+    pub chapter_row_id: i64,
+    pub external_id: String,
+    pub source_key: String,
+}
+
+/// Enqueue a chapter for download (idempotent: re-enqueue clears failure state, does not
+/// reset an already-downloaded chapter).
+pub async fn enqueue(pool: &DbPool, chapter_row_id: i64) -> Result<(), DownloadError> {
+    sqlx::query(
+        "UPDATE chapter SET state = 'queued', state_error = NULL, \
+         queued_at = COALESCE(queued_at, strftime('%s','now')) WHERE id = ? AND state != 'downloaded'",
+    )
+    .bind(chapter_row_id)
+    .execute(pool)
+    .await?;
+    Ok(())
+}
+
+/// Pop the oldest queued row (FIFO by queue time, ties by row id).
+pub async fn next_queued(pool: &DbPool) -> Result<Option<QueueTask>, DownloadError> {
+    let row: Option<QueueTask> = sqlx::query_as(
+        "SELECT c.id AS chapter_row_id, c.source_key AS external_id, s.key AS source_key FROM chapter c          JOIN manga m ON m.id = c.manga_id          JOIN source s ON s.id = m.source_id          WHERE c.state = 'queued'          ORDER BY c.queued_at, c.id LIMIT 1",
+    )
+    .fetch_optional(pool)
+    .await
+    .map_err(DownloadError::Db)?;
+    Ok(row)
+}
+
+/// The worker's unit of work — injectable so the queue logic is testable deterministically.
+pub trait QueueRunner: Send + Sync {
+    fn run(
+        &self,
+        task: &QueueTask,
+    ) -> impl std::future::Future<Output = Result<usize, DownloadError>> + Send;
+}
+
+/// One supervised pass over the queue: FIFO, failure-contained, stops when drained.
+/// Returns (processed_ok, failed).
+pub async fn run_queue_once<R: QueueRunner>(
+    pool: &DbPool,
+    runner: &R,
+) -> Result<(usize, usize), DownloadError> {
+    let mut ok = 0;
+    let mut failed = 0;
+    loop {
+        let Some(task) = next_queued(pool).await? else { break };
+        sqlx::query("UPDATE chapter SET state = 'downloading' WHERE id = ?")
+            .bind(task.chapter_row_id)
+            .execute(pool)
+            .await?;
+        match runner.run(&task).await {
+            Ok(_) => {
+                sqlx::query("UPDATE chapter SET state = 'downloaded', state_error = NULL WHERE id = ?")
+                    .bind(task.chapter_row_id)
+                    .execute(pool)
+                    .await?;
+                ok += 1;
+            }
+            Err(e) => {
+                sqlx::query("UPDATE chapter SET state = 'failed', state_error = ? WHERE id = ?")
+                    .bind(e.to_string())
+                    .bind(task.chapter_row_id)
+                    .execute(pool)
+                    .await?;
+                failed += 1;
+            }
+        }
+    }
+    Ok((ok, failed))
+}
+
+/// The production runner: resolves the adapter for the task's source row, fetches the At-Home
+/// block, downloads, and fires the report. Single-writer discipline: exactly one runner per app.
+pub struct RealRunner {
+    pub http: SharedClient,
+    pub pool: DbPool,
+    pub storage_root: std::path::PathBuf,
+}
+
+impl QueueRunner for RealRunner {
+    async fn run(&self, task: &QueueTask) -> Result<usize, DownloadError> {
+        // Source resolution is data: the source row's key selects the adapter.
+        let source_key = task.source_key.as_str();
+        if source_key != "mangadex" {
+            return Err(DownloadError::Db(sqlx::Error::RowNotFound)); // unknown adapter → failed, contained
+        }
+        let adapter = crate::source::mangadex::MangaDexAdapter::production()?;
+        let ath = adapter
+            .at_home(&task.external_id)
+            .await
+            .map_err(DownloadError::Fetch)?;
+        let ctx = DownloadContext {
+            pool: &self.pool,
+            storage_root: &self.storage_root,
+            chapter_row_id: task.chapter_row_id,
+            chapter_external_id: &task.external_id,
+            source_key: &task.source_key,
+            report: ath.report.as_ref().map(|(u, b)| (u.as_str(), b)),
+        };
+        download_chapter(&self.http, &adapter, &ctx).await
+    }
+}

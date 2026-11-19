@@ -1,0 +1,5 @@
+PASS: update module exists
+PASS: UpdateLibrary RPC in proto
+PASS: update tests exist
+PASS: update tests pass (idempotency proven)
+PASS: full suite green

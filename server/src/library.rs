@@ -232,6 +232,49 @@ impl Library for LibraryDb {
         Ok(Response::new(pb_types::Empty {}))
     }
 
+    async fn purge_category(
+        &self,
+        request: Request<pb_types::PurgeCategoryRequest>,
+    ) -> Grpc<pb_types::PurgeCategoryResponse> {
+        let r = request.into_inner();
+        let trash_root = crate::trash_root();
+        let purged = crate::backup::purge_category(&self.pool, &trash_root, r.category_id, r.confirm)
+            .await
+            .map_err(|e| match e {
+                crate::backup::SafetyError::Db(db) => db_err(db),
+                other => Status::internal(other.to_string()),
+            })?;
+        Ok(Response::new(pb_types::PurgeCategoryResponse { chapters_purged: purged }))
+    }
+
+    async fn mark_read(
+        &self,
+        request: Request<pb_types::MarkReadRequest>,
+    ) -> Grpc<pb_types::MarkReadResponse> {
+        let r = request.into_inner();
+        let trash_root = crate::trash_root();
+        let (moved, retention) =
+            crate::trash::mark_read(&self.pool, r.chapter_id, &trash_root)
+                .await
+                .map_err(|e| Status::internal(e.to_string()))?;
+        Ok(Response::new(pb_types::MarkReadResponse { moved_to_trash: moved, trash_retention_until: retention }))
+    }
+
+    async fn update_library(
+        &self,
+        _request: Request<pb_types::UpdateLibraryRequest>,
+    ) -> Grpc<pb_types::UpdateLibraryResponse> {
+        let adapter = crate::source::mangadex::MangaDexAdapter::production()
+            .map_err(|e| Status::internal(format!("outbound client: {e}")))?;
+        let added = crate::update::run_update_pass(&self.pool, &adapter, "mangadex", 100)
+            .await
+            .map_err(|e| match e {
+                crate::update::UpdateError::Db(db) => db_err(db),
+                other => Status::internal(other.to_string()),
+            })?;
+        Ok(Response::new(pb_types::UpdateLibraryResponse { chapters_added: added as i32 }))
+    }
+
     async fn get_progress(
         &self,
         request: Request<pb_types::GetProgressRequest>,

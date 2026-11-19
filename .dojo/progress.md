@@ -155,3 +155,37 @@
   host half 14.6s (open+discover over LAN 7.1, close+resume 7.5) → total ≈25.9s vs 90s gate: PASS 3.5x.
 - First target ("Vivi" webtoon) was 1-page long-strip — loop run against 23-page chapter instead,
   noted in baseline.md. Evidence in benchmarks/baseline.md + core-loop.spec.ts (90s assertion in CI).
+
+## Wave 15 — Download queue + supervised worker — DONE (2026-11-19)
+- RED 4/5. Green: migration 0004 (chapter.state pending/queued/downloading/downloaded/failed +
+  state_error + queued_at, index); enqueue (idempotent, never resets downloaded), next_queued
+  FIFO by (queued_at, id), run_queue_once supervised pass (one task at a time, per-task failure
+  contained into state='failed'+error text, done work never redone); QueueRunner trait injectable
+  (deterministic test runner; RealRunner resolves adapter from the source row's key, At-Home report fired).
+- Real bugs fixed: FromRow maps by column name (aliased SQL); migration default 'pending' vs
+  legacy UPDATE; RPITIT style (no async-trait dep).
+- FLAKE ROOT CAUSE (findings.md): Windows pid reuse + stale temp DBs -> nanos-unique
+  db::temp_test_dir used by all 7 suites; 10+ consecutive full-suite passes after.
+- Gate bug fixed: wave15's "all tests" grep expected plain-cargo 'test result: ok' which nextest
+  never prints (34/34 was passing while the gate said FAIL).
+- 34/34 nextest repeatedly; clippy clean; dojo proof signed.
+
+## Wave 16 — Auto-update checker — DONE (2026-11-19)
+- RED 4/5. Green: rpc UpdateLibrary (proto + TS synced); update.rs with UpdatableSource trait
+  (MangaDexAdapter implements; mock-able), run_update_pass scoped per source_key, INSERT OR IGNORE
+  + rows_affected novelty counting — idempotency contract proven (2 add, re-runs 0; incremental
+  adds only new; other-source manga untouched). 37/37 nextest; clippy clean; proof signed.
+
+## Wave 17 — Mark-read + trash window — DONE (2026-11-19)
+- MarkRead RPC (proto+TS synced); trash.rs: explicit read predicate, delete_after_read-only file
+  relocation to a trash SIBLING dir (leaves /pages prefix naturally), retention 7d recorded, chapter
+  reset to pending (re-download possible); non-delete categories keep files. temp_test_dir got a
+  counter+pid component (Windows 15ms timer granularity); rename now moves file-by-file into a
+  created trash dir. 39/39 nextest; clippy clean after fixture fix; proof signed.
+
+## Wave 18 — delete_after_read safety chain — DONE (2026-11-19)
+- backup.rs: metadata-only JSON export; purge_category refuses unconfirmed/stale-backup/unknown
+  category; freshness = last_backup_at >= newest trash_moved_at of the category's chapters.
+- safety_chain tests 5/5: export real JSON; unconfirmed refused; stale refused; fresh-backup
+  purge deletes trash files + rows; unknown category refused. 44/44 nextest; proof signed.
+- M2 COMPLETE -> merge to main.

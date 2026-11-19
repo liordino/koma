@@ -8,12 +8,7 @@ use tower::ServiceExt;
 use koma_server::{db, pages};
 
 async fn seed() -> (koma_server::DbPool, std::path::PathBuf, axum::Router) {
-    static SERIAL: std::sync::atomic::AtomicU32 = std::sync::atomic::AtomicU32::new(0);
-    let n = SERIAL.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
-    let root = std::env::temp_dir().join(format!(
-        "koma-wave7-{}-{n}",
-        std::process::id()
-    ));
+    let root: std::path::PathBuf = db::temp_test_dir("wave7");
     std::fs::create_dir_all(&root).expect("create storage root");
 
     let url = format!("sqlite://{}?mode=rwc", root.join("koma.db").display());

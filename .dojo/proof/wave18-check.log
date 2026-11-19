@@ -1,0 +1,6 @@
+PASS: backup export module exists
+PASS: cleanup refuses without fresh backup (code path)
+PASS: purge is explicit user-confirmed RPC
+PASS: safety tests exist
+PASS: safety tests pass
+PASS: full suite green

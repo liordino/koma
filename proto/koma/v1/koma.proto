@@ -29,7 +29,40 @@ service Library {
   rpc UpsertProgress(UpsertProgressRequest) returns (Empty);
   // Last remembered position for a chapter; exists=false when nothing stored yet.
   rpc GetProgress(GetProgressRequest) returns (GetProgressResponse);
+  // Manual-first update pass (v1): external-ID upserts, idempotent by design.
+  rpc UpdateLibrary(UpdateLibraryRequest) returns (UpdateLibraryResponse);
+  // Explicit read tracking: the read predicate is an explicit mark (v1).
+  rpc MarkRead(MarkReadRequest) returns (MarkReadResponse);
+  // Per-category purge of trash-consumed chapters. confirm MUST be true;
+  // a fresh metadata backup is a precondition (stop condition).
+  rpc PurgeCategory(PurgeCategoryRequest) returns (PurgeCategoryResponse);
 }
+
+message UpdateLibraryRequest {}
+
+message UpdateLibraryResponse {
+  int32 chapters_added = 1;
+}
+
+message PurgeCategoryRequest {
+  int64 category_id = 1;
+  bool confirm = 2; // explicit user confirmation — required
+}
+
+message PurgeCategoryResponse {
+  int32 chapters_purged = 1;
+}
+
+message MarkReadRequest {
+  int64 chapter_id = 1;
+}
+
+message MarkReadResponse {
+  bool moved_to_trash = 1;
+  int64 trash_retention_until = 2;
+}
+
+
 
 message MangaSummary {
   int64 id = 1;
