@@ -71,6 +71,8 @@
 
 <svelte:window onscroll={onScroll} />
 <p style="position:sticky;top:0;background:#111;margin:0;padding:4px 8px;">
+	<!-- decision 30: strip-only v1 — stated in the UI per the recorded decision -->
+	<small title="decision 30: vertical strip reading is the only mode in v1">strip · </small>
 	{pagesCount === 0 ? 'loading…' : `page ${current + 1} / ${pagesCount}`}
 </p>
 
