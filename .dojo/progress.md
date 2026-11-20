@@ -189,3 +189,15 @@
 - safety_chain tests 5/5: export real JSON; unconfirmed refused; stale refused; fresh-backup
   purge deletes trash files + rows; unknown category refused. 44/44 nextest; proof signed.
 - M2 COMPLETE -> merge to main.
+
+## Wave 19 — .tachibk import — DONE (2026-11-20, owner real fixture)
+- Fixture: owner's real app.mihon_2026-04-08 .tachibk (gzip protobuf, 26 manga, 6589 chapters,
+  mangabats+mangadex sources, no favorite=true entries on this export).
+- import_tachibk.rs: decode (gzip -> prost, subset proto with Apache-2.0 notice; prost skips
+  unknowns), source registry from the backup's own backupSources (name->slug), VACUUM INTO
+  snapshot (nanos name), single-transaction upserts, novelty counters.
+- Real-encoding lessons: Mihon v2 backups include browsed-but-not-library manga (favorite=false
+  on everything here) -> import-all-as-metadata policy with favorites reported separately;
+  ground truth via protoc --decode_raw; manga unique is a column constraint (no composite
+  conflict); title refresh on re-import for upsert semantics; idempotency proven (re-import adds 0).
+- 47/47 nextest; clippy clean; wave19 gate 6/6; dojo proof signed.

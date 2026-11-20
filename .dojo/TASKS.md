@@ -136,7 +136,7 @@ status: done
 ## M3 — Publish (plan branch plan/koma-m3)
 
 ## Wave 19 — Staged .tachibk import
-status: pending
+status: done
 - Outcome: Mihon backup (public Apache-2.0 schema) import — dry-run report -> VACUUM INTO
   snapshot -> single-transaction commit with external-ID upserts (decision 14); tested with
   the owner's real export.
