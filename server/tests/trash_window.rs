@@ -26,15 +26,6 @@ async fn seeded(with_delete_category: bool) -> (koma_server::DbPool, std::path::
     (pool, root, cid)
 }
 
-fn plant_files(storage_root: &std::path::Path) -> std::path::PathBuf {
-    let dir = storage_root.join("mangadex/chapters/ch-ext");
-    std::fs::create_dir_all(&dir).expect("dir");
-    for n in 0..3u32 {
-        std::fs::write(dir.join(format!("page_{n}.jpg")), b"jpg").expect("file");
-    }
-    std::path::Path::new(storage_root).join("trash")
-}
-
 #[tokio::test]
 async fn delete_after_read_moves_files_to_trash() {
     let (pool, storage_root, cid) = seeded(true).await;

@@ -4,6 +4,7 @@ pub mod auth;
 pub mod db;
 pub mod download;
 pub mod library;
+pub mod import_tachibk;
 pub mod log;
 pub mod backup;
 pub mod trash;

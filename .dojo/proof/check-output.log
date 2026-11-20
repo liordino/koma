@@ -1,82 +1,58 @@
    Compiling koma-server v0.1.0 (C:\Users\liord\src\koma\server)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 8.09s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 7.01s
    Compiling koma-server v0.1.0 (C:\Users\liord\src\koma\server)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 6.21s
-warning: function `plant_files` is never used
-  --> server\tests\trash_window.rs:29:4
-   |
-29 | fn plant_files(storage_root: &std::path::Path) -> std::path::PathBuf {
-   |    ^^^^^^^^^^^
-   |
-   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
-
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 6.34s
    Compiling koma-server v0.1.0 (C:\Users\liord\src\koma\server)
-warning: `koma-server` (test "trash_window") generated 1 warning
-warning: static `SERIAL` is never used
-  --> server\tests\library_rpc.rs:10:8
-   |
-10 | static SERIAL: std::sync::atomic::AtomicU32 = std::sync::atomic::AtomicU32::new(0);
-   |        ^^^^^^
-   |
-   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
-
-warning: static `SERIAL` is never used
- --> server\tests\download_queue.rs:8:8
-  |
-8 | static SERIAL: AtomicU32 = AtomicU32::new(0);
-  |        ^^^^^^
-  |
-  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
-
-warning: `koma-server` (test "library_rpc") generated 1 warning
-warning: `koma-server` (test "download_queue") generated 1 warning
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.20s
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.71s
 ────────────
- Nextest run ID 5426ec2e-eb73-4371-b448-f03e08758bf8 with nextest profile: default
-    Starting 44 tests across 16 binaries
-        PASS [   0.121s] ( 1/44) koma-server fetch::tests::planes_hold_independent_grant_queues
-        PASS [   0.151s] ( 2/44) koma-server::auth_transport cors_preflight_from_allowed_origin_passes
-        PASS [   0.157s] ( 3/44) koma-server fetch::tests::allowlist_matches_domains_not_substrings
-        PASS [   0.182s] ( 4/44) koma-server log::tests::writes_valid_jsonl_lines
-        PASS [   0.266s] ( 5/44) koma-server::auth_transport wrong_token_is_401
-        PASS [   0.322s] ( 6/44) koma-server fetch::tests::disallowed_host_is_rejected_before_any_delay
-        PASS [   0.379s] ( 7/44) koma-server::at_home_download end_to_end_download_and_serve
-        PASS [   0.384s] ( 8/44) koma-server::at_home_download unsafe_keys_fail_fast
-        PASS [   0.487s] ( 9/44) koma-server::auth_transport rpc_with_valid_token_answers_unary_grpc_web
-        PASS [   0.515s] (10/44) koma-server::auth_transport rpc_without_token_is_401
-        PASS [   0.418s] (11/44) koma-server::download_queue drained_work_is_not_redone
-        PASS [   0.547s] (12/44) koma-server::at_home_download page_too_large_is_rejected_at_write_time
-        PASS [   0.451s] (13/44) koma-server::download_queue fifo_order_and_failure_containment
-        PASS [   0.497s] (14/44) koma-server::download_queue new_rows_start_pending_and_unqueued_rows_are_untouched
-        PASS [   0.661s] (15/44) koma-server fetch::tests::plane_limiter_throttles_beyond_budget
-        PASS [   0.502s] (16/44) koma-server::fts_search no_false_match_on_unrelated_title
-        PASS [   0.447s] (17/44) koma-server::fts_search substring_query_matches_title_via_trigram
-        PASS [   0.415s] (18/44) koma-server::fts_search title_update_stays_in_sync
-        PASS [   0.446s] (19/44) koma-server::library_rpc create_category_then_add_manga_into_it
-        PASS [   0.445s] (20/44) koma-server::library_rpc router_level_create_category_through_bearer_middleware
-        PASS [   0.345s] (21/44) koma-server::mangadex_adapter chapter_list_maps_and_orders_as_api_sends
-        PASS [   0.396s] (22/44) koma-server::library_rpc upsert_progress_idempotent_and_clamped
-        PASS [   0.372s] (23/44) koma-server::mangadex_adapter detail_map_and_missing_data_is_an_error
-        PASS [   0.405s] (24/44) koma-server::mangadex_adapter search_maps_titles_ids_and_covers
-        PASS [   0.386s] (25/44) koma-server::outbound_fetch allowlisted_mock_serves_json
-        PASS [   0.388s] (26/44) koma-server::outbound_fetch disallowed_host_hits_zero_requests_on_the_server
-        PASS [   0.384s] (27/44) koma-server::outbound_fetch lookalike_domain_is_rejected
-        PASS [   0.385s] (28/44) koma-server::path_safety page_bound_constant_is_reasonable
-        PASS [   0.457s] (29/44) koma-server::path_safety traversal_in_page_number_is_bounded
-        PASS [   0.390s] (30/44) koma-server::path_safety traversal_storage_dir_is_rejected
-        PASS [   0.428s] (31/44) koma-server::path_safety unknown_chapter_is_404_not_probe
-        PASS [   0.435s] (32/44) koma-server::path_safety valid_page_request_serves_bytes
-        PASS [   0.432s] (33/44) koma-server::safety_chain backup_export_writes_real_metadata
-        PASS [   0.448s] (34/44) koma-server::safety_chain purge_refuses_stale_backup
-        PASS [   0.425s] (35/44) koma-server::safety_chain purge_refuses_unconfirmed
-        PASS [   0.442s] (36/44) koma-server::safety_chain purge_succeeds_after_fresh_backup_and_is_explicit
-        PASS [   0.425s] (37/44) koma-server::safety_chain purge_unknown_category_refused
-        PASS [   0.445s] (38/44) koma-server::sqlite_baseline baseline_pragmas_and_fk_enforcement
-        PASS [   0.470s] (39/44) koma-server::trash_window delete_after_read_moves_files_to_trash
-        PASS [   0.395s] (40/44) koma-server::trash_window non_delete_category_keeps_files
-        PASS [   0.402s] (41/44) koma-server::update_pass incremental_pass_adds_only_new_chapters
-        PASS [   0.385s] (42/44) koma-server::update_pass pass_adds_new_then_rerun_adds_zero
-        PASS [   0.381s] (43/44) koma-server::update_pass pass_ignores_manga_of_other_sources
-        PASS [   1.175s] (44/44) koma-server::outbound_fetch at_home_plane_enforcement_is_visible_in_timing
+ Nextest run ID 55c23b97-49c7-41e9-9e26-668939845496 with nextest profile: default
+    Starting 47 tests across 17 binaries
+        PASS [   0.124s] ( 1/47) koma-server::auth_transport cors_preflight_from_allowed_origin_passes
+        PASS [   0.140s] ( 2/47) koma-server fetch::tests::disallowed_host_is_rejected_before_any_delay
+        PASS [   0.173s] ( 3/47) koma-server fetch::tests::planes_hold_independent_grant_queues
+        PASS [   0.203s] ( 4/47) koma-server::at_home_download end_to_end_download_and_serve
+        PASS [   0.272s] ( 5/47) koma-server log::tests::writes_valid_jsonl_lines
+        PASS [   0.299s] ( 6/47) koma-server fetch::tests::allowlist_matches_domains_not_substrings
+        PASS [   0.422s] ( 7/47) koma-server::auth_transport rpc_with_valid_token_answers_unary_grpc_web
+        PASS [   0.437s] ( 8/47) koma-server::at_home_download unsafe_keys_fail_fast
+        PASS [   0.476s] ( 9/47) koma-server::auth_transport rpc_without_token_is_401
+        PASS [   0.528s] (10/47) koma-server::at_home_download page_too_large_is_rejected_at_write_time
+        PASS [   0.545s] (11/47) koma-server::auth_transport wrong_token_is_401
+        PASS [   0.554s] (12/47) koma-server fetch::tests::plane_limiter_throttles_beyond_budget
+        PASS [   0.448s] (13/47) koma-server::download_queue drained_work_is_not_redone
+        PASS [   0.475s] (14/47) koma-server::download_queue fifo_order_and_failure_containment
+        PASS [   0.464s] (15/47) koma-server::download_queue new_rows_start_pending_and_unqueued_rows_are_untouched
+        PASS [   0.464s] (16/47) koma-server::fts_search no_false_match_on_unrelated_title
+        PASS [   0.416s] (17/47) koma-server::fts_search substring_query_matches_title_via_trigram
+        PASS [   0.467s] (18/47) koma-server::fts_search title_update_stays_in_sync
+        PASS [   0.388s] (19/47) koma-server::library_rpc create_category_then_add_manga_into_it
+        PASS [   0.308s] (20/47) koma-server::mangadex_adapter chapter_list_maps_and_orders_as_api_sends
+        PASS [   0.404s] (21/47) koma-server::library_rpc router_level_create_category_through_bearer_middleware
+        PASS [   0.381s] (22/47) koma-server::library_rpc upsert_progress_idempotent_and_clamped
+        PASS [   0.327s] (23/47) koma-server::mangadex_adapter detail_map_and_missing_data_is_an_error
+        PASS [   0.356s] (24/47) koma-server::mangadex_adapter search_maps_titles_ids_and_covers
+        PASS [   0.365s] (25/47) koma-server::outbound_fetch allowlisted_mock_serves_json
+        PASS [   0.350s] (26/47) koma-server::outbound_fetch disallowed_host_hits_zero_requests_on_the_server
+        PASS [   0.346s] (27/47) koma-server::outbound_fetch lookalike_domain_is_rejected
+        PASS [   0.354s] (28/47) koma-server::path_safety page_bound_constant_is_reasonable
+        PASS [   0.392s] (29/47) koma-server::path_safety traversal_in_page_number_is_bounded
+        PASS [   0.384s] (30/47) koma-server::path_safety traversal_storage_dir_is_rejected
+        PASS [   0.398s] (31/47) koma-server::path_safety unknown_chapter_is_404_not_probe
+        PASS [   0.450s] (32/47) koma-server::path_safety valid_page_request_serves_bytes
+        PASS [   0.456s] (33/47) koma-server::safety_chain backup_export_writes_real_metadata
+        PASS [   0.478s] (34/47) koma-server::safety_chain purge_refuses_stale_backup
+        PASS [   0.474s] (35/47) koma-server::safety_chain purge_refuses_unconfirmed
+        PASS [   0.463s] (36/47) koma-server::safety_chain purge_succeeds_after_fresh_backup_and_is_explicit
+        PASS [   0.451s] (37/47) koma-server::safety_chain purge_unknown_category_refused
+        PASS [   0.494s] (38/47) koma-server::sqlite_baseline baseline_pragmas_and_fk_enforcement
+        PASS [   0.411s] (39/47) koma-server::trash_window delete_after_read_moves_files_to_trash
+        PASS [   0.381s] (40/47) koma-server::trash_window non_delete_category_keeps_files
+        PASS [   0.373s] (41/47) koma-server::update_pass incremental_pass_adds_only_new_chapters
+        PASS [   0.385s] (42/47) koma-server::update_pass pass_adds_new_then_rerun_adds_zero
+        PASS [   0.378s] (43/47) koma-server::update_pass pass_ignores_manga_of_other_sources
+        PASS [   1.159s] (44/47) koma-server::outbound_fetch at_home_plane_enforcement_is_visible_in_timing
+        PASS [   1.436s] (45/47) koma-server::tachibk_import categories_match_backup_count
+        PASS [   1.320s] (46/47) koma-server::tachibk_import real_fixture_decode_and_staged_import
+        PASS [   1.761s] (47/47) koma-server::tachibk_import reimport_is_idempotent
 ────────────
-     Summary [   1.831s] 44 tests run: 44 passed, 0 skipped
+     Summary [   2.957s] 47 tests run: 47 passed, 0 skipped

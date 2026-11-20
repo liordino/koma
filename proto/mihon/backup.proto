@@ -1,0 +1,45 @@
+// Mihon/Tachiyomi backup schema — subset consumed by Koma's staged import.
+// Derived from the public Apache-2.0 Mihon/Tachiyomi model definitions
+// (kotlinx.serialization.protobuf, eu.kanade.tachiyomi.data.backup.models.Backup).
+// NOTICE: original schema is Apache-2.0; notice preserved per Koma decision 25/21.
+// Unknown fields are skipped by prost, so only consumed fields are declared here.
+syntax = "proto2";
+
+package mihon.backup;
+
+message Backup {
+  repeated BackupManga backupManga = 1;
+  repeated BackupCategory backupCategories = 2;
+  repeated BackupSource backupSources = 101;
+}
+
+message BackupManga {
+  required int64 source = 1;
+  required string url = 2;
+  optional string title = 3;
+  optional string description = 6;
+  repeated string genre = 7;
+  repeated BackupChapter chapters = 16;
+  repeated int64 categories = 17;
+  optional bool favorite = 100;
+}
+
+message BackupChapter {
+  required string url = 1;
+  required string name = 2;
+  optional string scanlator = 3;
+  optional bool read = 4;
+  optional int64 lastPageRead = 6;
+  optional float chapterNumber = 9;
+  optional int64 sourceOrder = 10;
+}
+
+message BackupCategory {
+  required string name = 1;
+  optional int64 order = 2;
+}
+
+message BackupSource {
+  optional string name = 1;
+  required int64 sourceId = 2;
+}

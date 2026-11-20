@@ -1028,8 +1028,10 @@ version = "0.1.0"
 dependencies = [
  "axum",
  "chrono",
+ "flate2",
  "hex",
  "prost",
+ "prost-build",
  "reqwest",
  "serde",
  "serde_json",

@@ -7,7 +7,6 @@ use koma_server::library::{Library, LibraryDb};
 use koma_server::pb as pb_types;
 use tonic::Request;
 
-static SERIAL: std::sync::atomic::AtomicU32 = std::sync::atomic::AtomicU32::new(0);
 
 async fn seeded() -> (koma_server::DbPool, LibraryDb) {
     let root = db::temp_test_dir("wave12");
