@@ -201,3 +201,13 @@
   ground truth via protoc --decode_raw; manga unique is a column constraint (no composite
   conflict); title refresh on re-import for upsert semantics; idempotency proven (re-import adds 0).
 - 47/47 nextest; clippy clean; wave19 gate 6/6; dojo proof signed.
+
+## Wave 20 — Category config UI — DONE (2026-11-20)
+- Proto: UpdateCategory + ExportBackup RPCs (TS synced); global export stamps every category freshness.
+- SPA /categories: create, rename, consent-gated delete_after_read flip (typed dialog), membership
+  assignment, export-backup button, purge wired to PurgeCategory w/ confirm dialog + server-side
+  stale-backup refusal surfaced in UI. tsconfig now extends .svelte-kit (bigint-safe keys: int64
+  ids handled as strings), bind:value restricted to plain state (svelte 5 rule) -> oninput handlers.
+- Playwright: create/reload/option-presence assertions (server-persistence proof), consent dialog
+  accept, backup+purge flow. CSS lesson: input[type="text"] does NOT match inputs w/o explicit type.
+- wave20 gate 7/7; full suite 44+; proof signed.

@@ -143,7 +143,7 @@ status: done
 - Check: import test on a .tachibk fixture; re-import is idempotent; snapshot step present.
 
 ## Wave 20 — Category config UI
-status: pending
+status: done
 - Outcome: SPA pages for category CRUD (create/rename/flip delete_after_read with explicit
   consent for destructive flags), membership assignment; purge action wired to PurgeCategory
   with confirm gate + backup reminder.
