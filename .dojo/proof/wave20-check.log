@@ -1,0 +1,7 @@
+PASS: category UI route exists
+PASS: UpdateCategory + ExportBackup RPCs in proto
+PASS: consent gate in the purge UI flow
+PASS: category UI tests exist
+PASS: vite build compiles the SPA
+PASS: category UI tests pass
+PASS: full suite green

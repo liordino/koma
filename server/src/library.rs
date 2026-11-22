@@ -247,6 +247,45 @@ impl Library for LibraryDb {
         Ok(Response::new(pb_types::PurgeCategoryResponse { chapters_purged: purged }))
     }
 
+    async fn update_category(
+        &self,
+        request: Request<pb_types::UpdateCategoryRequest>,
+    ) -> Grpc<pb_types::Category> {
+        let r = request.into_inner();
+        if r.name.trim().is_empty() {
+            return Err(Status::invalid_argument("category name required"));
+        }
+        sqlx::query("UPDATE category SET name = ?, delete_after_read = ? WHERE id = ?")
+            .bind(r.name.trim())
+            .bind(r.delete_after_read as i32)
+            .bind(r.id)
+            .execute(&self.pool)
+            .await
+            .map_err(db_err)?;
+        Ok(Response::new(pb_types::Category {
+            id: r.id,
+            name: r.name.trim().to_string(),
+            delete_after_read: r.delete_after_read,
+        }))
+    }
+
+    async fn export_backup(
+        &self,
+        _request: Request<pb_types::ExportBackupRequest>,
+    ) -> Grpc<pb_types::ExportBackupResponse> {
+        let dir = crate::backup_dir();
+        let (path, ts) = crate::backup::export_metadata(&self.pool, &dir)
+            .await
+            .map_err(|e| Status::internal(e.to_string()))?;
+        // A global export freshens EVERY category (one backup covers all of them).
+        sqlx::query("UPDATE category SET last_backup_at = ?")
+            .bind(ts)
+            .execute(&self.pool)
+            .await
+            .map_err(db_err)?;
+        Ok(Response::new(pb_types::ExportBackupResponse { path: path.display().to_string() }))
+    }
+
     async fn mark_read(
         &self,
         request: Request<pb_types::MarkReadRequest>,
