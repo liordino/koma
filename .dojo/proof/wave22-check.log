@@ -1,0 +1,5 @@
+PASS: desktop shell crate exists
+PASS: shell config present (no sidecar; window from web origin)
+PASS: probation note recorded
+PASS: cargo check on the desktop crate
+PASS: shell launches against a running server (headless)

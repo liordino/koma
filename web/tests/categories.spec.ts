@@ -7,7 +7,7 @@ const TOKEN = process.env.KOMA_TOKEN ?? 't';
 const UI = 'http://localhost:5173';
 
 test('category config: create, consent flag, backup+purge flow', async ({ page }) => {
-	await page.addInitScript(([api, token]: [string, string]) => {
+	await page.addInitScript(([api, token]: string[]) => {
 		localStorage.setItem('koma_api', api);
 		localStorage.setItem('koma_token', token);
 	}, [API, TOKEN]);

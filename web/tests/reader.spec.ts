@@ -7,7 +7,7 @@ const TOKEN = process.env.KOMA_TOKEN ?? 't';
 const PAGE_H = 1200;
 
 test('read to a deep page, reload, resume in <= 2 interactions', async ({ page }) => {
-	await page.addInitScript(([api, token]: [string, string]) => {
+	await page.addInitScript(([api, token]: string[]) => {
 		localStorage.setItem('koma_api', api);
 		localStorage.setItem('koma_token', token);
 	}, [API, TOKEN]);
