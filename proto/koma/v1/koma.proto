@@ -33,6 +33,10 @@ service Library {
   rpc UpdateLibrary(UpdateLibraryRequest) returns (UpdateLibraryResponse);
   // Explicit read tracking: the read predicate is an explicit mark (v1).
   rpc MarkRead(MarkReadRequest) returns (MarkReadResponse);
+  // Category config: rename + flip destructive flags (consent handled in the UI layer).
+  rpc UpdateCategory(UpdateCategoryRequest) returns (Category);
+  // Metadata-only backup export; stamps every category's freshness.
+  rpc ExportBackup(ExportBackupRequest) returns (ExportBackupResponse);
   // Per-category purge of trash-consumed chapters. confirm MUST be true;
   // a fresh metadata backup is a precondition (stop condition).
   rpc PurgeCategory(PurgeCategoryRequest) returns (PurgeCategoryResponse);
@@ -51,6 +55,18 @@ message PurgeCategoryRequest {
 
 message PurgeCategoryResponse {
   int32 chapters_purged = 1;
+}
+
+message UpdateCategoryRequest {
+  int64 id = 1;
+  string name = 2;
+  bool delete_after_read = 3;
+}
+
+message ExportBackupRequest {}
+
+message ExportBackupResponse {
+  string path = 1;
 }
 
 message MarkReadRequest {

@@ -1,0 +1,6 @@
+PASS: Dockerfile exists (runtime-only, no in-container compile)
+PASS: compose ships loopback binding
+PASS: release artifacts staged (binary + web)
+PASS: context shipped to the device
+PASS: image builds on the pinned device
+PASS: container serves on loopback (401 without token, 200 with)

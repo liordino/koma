@@ -46,3 +46,9 @@ remove or disable access to the identified material promptly.
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+## Desktop shell (probation)
+
+The Tauri 2 shell is a thin separate-origin native client: it opens the web UI origin and
+contains no server logic (no sidecar, per the separate-origins posture). It is on probation —
+cut at any daily-use failure until ratified.

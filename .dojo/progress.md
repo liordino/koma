@@ -189,3 +189,51 @@
 - safety_chain tests 5/5: export real JSON; unconfirmed refused; stale refused; fresh-backup
   purge deletes trash files + rows; unknown category refused. 44/44 nextest; proof signed.
 - M2 COMPLETE -> merge to main.
+
+## Wave 19 — .tachibk import — DONE (2026-11-20, owner real fixture)
+- Fixture: owner's real app.mihon_2026-04-08 .tachibk (gzip protobuf, 26 manga, 6589 chapters,
+  mangabats+mangadex sources, no favorite=true entries on this export).
+- import_tachibk.rs: decode (gzip -> prost, subset proto with Apache-2.0 notice; prost skips
+  unknowns), source registry from the backup's own backupSources (name->slug), VACUUM INTO
+  snapshot (nanos name), single-transaction upserts, novelty counters.
+- Real-encoding lessons: Mihon v2 backups include browsed-but-not-library manga (favorite=false
+  on everything here) -> import-all-as-metadata policy with favorites reported separately;
+  ground truth via protoc --decode_raw; manga unique is a column constraint (no composite
+  conflict); title refresh on re-import for upsert semantics; idempotency proven (re-import adds 0).
+- 47/47 nextest; clippy clean; wave19 gate 6/6; dojo proof signed.
+
+## Wave 20 — Category config UI — DONE (2026-11-20)
+- Proto: UpdateCategory + ExportBackup RPCs (TS synced); global export stamps every category freshness.
+- SPA /categories: create, rename, consent-gated delete_after_read flip (typed dialog), membership
+  assignment, export-backup button, purge wired to PurgeCategory w/ confirm dialog + server-side
+  stale-backup refusal surfaced in UI. tsconfig now extends .svelte-kit (bigint-safe keys: int64
+  ids handled as strings), bind:value restricted to plain state (svelte 5 rule) -> oninput handlers.
+- Playwright: create/reload/option-presence assertions (server-persistence proof), consent dialog
+  accept, backup+purge flow. CSS lesson: input[type="text"] does NOT match inputs w/o explicit type.
+- wave20 gate 7/7; full suite 44+; proof signed.
+
+## Wave 21 — Docker packaging — DONE (2026-11-20)
+- No docker on the Windows host; Docker 29.7.1 lives ON the pinned device -> the gate builds
+  there (deployment target as the build host; ssh-based checks).
+- build-once-repackage-many: scripts/build-release.sh stages the docker CONTEXT under
+  target/docker-context/ (binary + SPA + Dockerfile) — build outputs never inside the repo
+  source tree (lesson: staging into docker/ put generated Svelte chunks in the scan surface).
+- Dockerfile: certs stage (bookworm-slim does NOT ship ca-certificates -> apt install) +
+  scratch runtime; COPY --chmod=755 (Windows-staged binaries lose the exec bit); ENV db/
+  storage under /data volume; server never serves the web UI (separate-origins decision 2).
+- compose: koma (127.0.0.1:8080 loopback shipped default) + koma-web (nginx :8081, second
+  origin), KOMA_ORIGINS wired to the web origin.
+- Proof: image built on device; container run -> 401 without token, 200 with (grpc-web Ping).
+- Gate fixes: stale artifact-path checks after relocation; docker-serve-check ssh'd properly.
+- Windows handle remnant: docker/web old-staging dir held by a watcher; gitignored, noted.
+
+## Wave 22 — Tauri 2 desktop shell (probation) — DONE (2026-11-23)
+- desktop/ crate: tauri 2, window built programmatically from KOMA_WEB_ORIGIN (default
+  127.0.0.1:8081 compose web origin) — no sidecar, zero server logic (decision 2 honored);
+  KOMA_HEADLESS=1 builds the window invisible for gate runs; icon.ico via magick (tauri-build
+  requires it for the Windows resource even with bundle.active=false).
+- Launch proof: server (18100) + SPA preview (4173) live, shell headless 6s, process alive,
+  clean log. cargo check + build green (13MB debug exe).
+- Spec tuple annotations fixed ([string,string] -> string[]) after the svelte-kit tsconfig
+  made tests typechecked (pre-existing looseness surfaced; runtime unaffected).
+- wave22 gate 5/5; 47/47 nextest; tsc clean; dojo proof 5caa7905.

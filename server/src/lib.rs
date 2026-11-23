@@ -4,6 +4,7 @@ pub mod auth;
 pub mod db;
 pub mod download;
 pub mod library;
+pub mod import_tachibk;
 pub mod log;
 pub mod backup;
 pub mod trash;
@@ -16,6 +17,15 @@ pub use db::DbPool;
 
 /// Trash root: a SIBLING of the storage root so moved files leave /pages' canonicalized prefix
 /// (the serve path), not another subdirectory of it.
+/// Metadata backup directory: sibling of storage (never inside the serve path).
+pub fn backup_dir() -> std::path::PathBuf {
+    let storage = std::env::var("KOMA_STORAGE").unwrap_or_else(|_| "./storage".into());
+    std::path::Path::new(&storage)
+        .parent()
+        .unwrap_or(std::path::Path::new("."))
+        .join("backups")
+}
+
 pub fn trash_root() -> std::path::PathBuf {
     let storage = std::env::var("KOMA_STORAGE").unwrap_or_else(|_| "./storage".into());
     std::path::Path::new(&storage)

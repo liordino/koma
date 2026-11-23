@@ -1,0 +1,6 @@
+PASS: import module exists
+PASS: mihon proto subset exists
+PASS: import tests exist
+PASS: real fixture committed
+PASS: import tests pass (real fixture + idempotent re-import)
+PASS: full suite green

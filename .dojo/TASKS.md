@@ -132,3 +132,34 @@ status: done
 
 ## Decisions
 - Reader mode: webtoon-strip-only v1 — decision 30 recorded (owner phone, alternates orientation freely; spreads degrade gracefully).
+
+## M3 — Publish (plan branch plan/koma-m3)
+
+## Wave 19 — Staged .tachibk import
+status: done
+- Outcome: Mihon backup (public Apache-2.0 schema) import — dry-run report -> VACUUM INTO
+  snapshot -> single-transaction commit with external-ID upserts (decision 14); tested with
+  the owner's real export.
+- Check: import test on a .tachibk fixture; re-import is idempotent; snapshot step present.
+
+## Wave 20 — Category config UI
+status: done
+- Outcome: SPA pages for category CRUD (create/rename/flip delete_after_read with explicit
+  consent for destructive flags), membership assignment; purge action wired to PurgeCategory
+  with confirm gate + backup reminder.
+- Check: Playwright — create category, assign manga, flip flag with consent; purge blocked
+  without confirm.
+
+## Wave 21 — Docker packaging (loopback default)
+status: done
+- Outcome: Dockerfile + compose bound to 127.0.0.1 by default; SQLite volume; token bootstrap.
+- Check: image builds; container serves ping + /pages on 127.0.0.1 only.
+
+## Wave 22 — Tauri desktop shell (probation)
+status: done
+- Outcome: Tauri 2 shell pointing at the SPA build, separate-origin posture; probation note
+  (cut at any daily-use failure until merge).
+- Check: cargo check on the tauri crate; shell launches against a running server.
+
+## Owner gates before repo publication (recorded on answer)
+- Repo public/private? publish posture + README final positioning review (decision 21 gates).

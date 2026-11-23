@@ -9,7 +9,7 @@ const UI = 'http://localhost:4173';
 const PAGE_H = 1200;
 
 test('core loop: read 10 pages over LAN, close, resume', async ({ page }) => {
-	await page.addInitScript(([api, token]: [string, string]) => {
+	await page.addInitScript(([api, token]: string[]) => {
 		localStorage.setItem('koma_api', api);
 		localStorage.setItem('koma_token', token);
 	}, [API, TOKEN]);
@@ -29,7 +29,7 @@ test('core loop: read 10 pages over LAN, close, resume', async ({ page }) => {
 
 	// resume on a fresh page
 	const page2 = await page.context().newPage();
-	await page2.addInitScript(([api, token]: [string, string]) => {
+	await page2.addInitScript(([api, token]: string[]) => {
 		localStorage.setItem('koma_api', api);
 		localStorage.setItem('koma_token', token);
 	}, [API, TOKEN]);

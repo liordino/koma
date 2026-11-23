@@ -20,3 +20,11 @@
 - Fix: db::temp_test_dir(prefix) — nanos-timestamped dir (cannot collide); create_dir_all before
   connecting (new subdirs don't auto-exist). All seven suites migrated. 8 consecutive full-run
   passes incl. the wave gate and dojo proof.
+
+## 2026-11-20 — lens false positive: generated Svelte chunk flagged for innerHTML
+- docker/web/_app/immutable/chunks/*.js are vite-generated Svelte hydration runtime (build
+  artifacts staged by scripts/build-release.sh; docker/ is gitignored — verified via
+  git check-ignore). innerHTML there is Svelte's own runtime, not hand-written source;
+  recorded to keep the scan history honest.
+- Windows handle note: docker/web (old staging location) is held by a watcher process and
+  cannot be deleted this session; it is gitignored and superseded by target/docker-context.
