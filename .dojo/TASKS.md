@@ -156,7 +156,7 @@ status: done
 - Check: image builds; container serves ping + /pages on 127.0.0.1 only.
 
 ## Wave 22 — Tauri desktop shell (probation)
-status: pending
+status: done
 - Outcome: Tauri 2 shell pointing at the SPA build, separate-origin posture; probation note
   (cut at any daily-use failure until merge).
 - Check: cargo check on the tauri crate; shell launches against a running server.

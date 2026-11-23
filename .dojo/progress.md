@@ -226,3 +226,14 @@
 - Proof: image built on device; container run -> 401 without token, 200 with (grpc-web Ping).
 - Gate fixes: stale artifact-path checks after relocation; docker-serve-check ssh'd properly.
 - Windows handle remnant: docker/web old-staging dir held by a watcher; gitignored, noted.
+
+## Wave 22 — Tauri 2 desktop shell (probation) — DONE (2026-11-23)
+- desktop/ crate: tauri 2, window built programmatically from KOMA_WEB_ORIGIN (default
+  127.0.0.1:8081 compose web origin) — no sidecar, zero server logic (decision 2 honored);
+  KOMA_HEADLESS=1 builds the window invisible for gate runs; icon.ico via magick (tauri-build
+  requires it for the Windows resource even with bundle.active=false).
+- Launch proof: server (18100) + SPA preview (4173) live, shell headless 6s, process alive,
+  clean log. cargo check + build green (13MB debug exe).
+- Spec tuple annotations fixed ([string,string] -> string[]) after the svelte-kit tsconfig
+  made tests typechecked (pre-existing looseness surfaced; runtime unaffected).
+- wave22 gate 5/5; 47/47 nextest; tsc clean; dojo proof 5caa7905.
