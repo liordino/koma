@@ -12,3 +12,4 @@ web/test-results/
 web/playwright-report/
 koma.db*
 storage/
+docker/

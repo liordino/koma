@@ -1,0 +1,4 @@
+# Minimal context: only the artifacts scripts/build-release.sh stages into docker/.
+*
+!docker/
+!Dockerfile
