@@ -211,3 +211,18 @@
 - Playwright: create/reload/option-presence assertions (server-persistence proof), consent dialog
   accept, backup+purge flow. CSS lesson: input[type="text"] does NOT match inputs w/o explicit type.
 - wave20 gate 7/7; full suite 44+; proof signed.
+
+## Wave 21 — Docker packaging — DONE (2026-11-20)
+- No docker on the Windows host; Docker 29.7.1 lives ON the pinned device -> the gate builds
+  there (deployment target as the build host; ssh-based checks).
+- build-once-repackage-many: scripts/build-release.sh stages the docker CONTEXT under
+  target/docker-context/ (binary + SPA + Dockerfile) — build outputs never inside the repo
+  source tree (lesson: staging into docker/ put generated Svelte chunks in the scan surface).
+- Dockerfile: certs stage (bookworm-slim does NOT ship ca-certificates -> apt install) +
+  scratch runtime; COPY --chmod=755 (Windows-staged binaries lose the exec bit); ENV db/
+  storage under /data volume; server never serves the web UI (separate-origins decision 2).
+- compose: koma (127.0.0.1:8080 loopback shipped default) + koma-web (nginx :8081, second
+  origin), KOMA_ORIGINS wired to the web origin.
+- Proof: image built on device; container run -> 401 without token, 200 with (grpc-web Ping).
+- Gate fixes: stale artifact-path checks after relocation; docker-serve-check ssh'd properly.
+- Windows handle remnant: docker/web old-staging dir held by a watcher; gitignored, noted.

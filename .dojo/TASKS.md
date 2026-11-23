@@ -151,7 +151,7 @@ status: done
   without confirm.
 
 ## Wave 21 — Docker packaging (loopback default)
-status: pending
+status: done
 - Outcome: Dockerfile + compose bound to 127.0.0.1 by default; SQLite volume; token bootstrap.
 - Check: image builds; container serves ping + /pages on 127.0.0.1 only.
 
