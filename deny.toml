@@ -28,6 +28,9 @@ allow = [
     # permissive for dependency use; recorded, not silently allowed.
     "MPL-2.0",
     "CDLA-Permissive-1.0",
+    # webpki-roots (rustls CA bundle) embeds Mozilla root data under
+    # CDLA-Permissive-2.0 — permissive data license, adopted deliberately.
+    "CDLA-Permissive-2.0",
 ]
 # Mihon/Apache-2.0 imports carry MIT + Apache-2.0 notices; everything allowed above preserves
 # notices. New licenses surface as CI failures for an explicit decision, not silent adoption.

@@ -1,5 +1,10 @@
 //! Koma server library entry point.
 
+// tonic's Result<_, Status> RPC pattern (ours and tonic-build-generated) trips
+// clippy::result_large_err; boxing Status is not an option (upstream API), so the
+// lint is allowed crate-wide. Linux CI surfaced this first (larger io types there).
+#![allow(clippy::result_large_err)]
+
 pub mod auth;
 pub mod db;
 pub mod download;
