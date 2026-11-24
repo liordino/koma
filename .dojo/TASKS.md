@@ -183,7 +183,7 @@ status: done
   -> results -> add -> appears in library); tsc + build green.
 
 ## Wave 25 — Manga detail + chapters + self-driving downloads
-status: pending
+status: done
 - Outcome: ListChapters + DownloadChapter RPCs; background queue worker task in main.rs
   (the M2 queue becomes self-driving); worker records chapter page counts; /manga/{id}
   detail page (hero + chapter list with state badges + download/read actions); library

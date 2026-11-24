@@ -296,3 +296,20 @@
 - search_rpc 3/3 (wiremock: badge mapping, upstream failure -> UNAVAILABLE, limit clamp);
   live Playwright flow: search "one piece" -> >=3 results -> add -> in-library -> library shows it.
 - wave24 gate 8/8; full suite green.
+
+## Wave 25 — Detail + self-driving downloads — DONE (2026-11-24)
+- ListChapters + DownloadChapter RPCs (ChapterInfo state-as-data; proto+TS synced);
+  RealRunner carries the injectable adapter (wiremock-testable); queue records page
+  counts on completion; main.rs spawns the self-driving worker loop (2s poll) — M2's
+  queue is now LIVE in the binary.
+- /manga/[id]: hero (cover via /covers fetch-to-blob, title, source, chapter count),
+  chapter list with state badges (color + text, never color-alone), download/read
+  actions, 2.5s polling while the queue works. bench-seed made state-coherent
+  (downloaded + pages on its INSERT).
+- detail_rpc 2/2 (enqueue -> worker pass -> downloaded+pages=4; latest-first order);
+  Playwright: real import title, states render, read link lands in the reader
+  (page 1/10), live download enqueues (badge flips to queued).
+- Seed lesson: LIMIT 200 latest-first hides old rows — wire demo states to the newest.
+- Lens false-positive chain documented (findings.md): stale LSP snapshot refuted by
+  tsc + direct probe + runtime pass.
+- wave25 gate 8/8.
