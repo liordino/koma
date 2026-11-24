@@ -167,7 +167,7 @@ status: done
 ## M4 — UI overhaul (plan branch plan/koma-m4; direction: Ink & Amber, user-pinned)
 
 ## Wave 23 — Covers infrastructure + design system + app shell
-status: pending
+status: done
 - Outcome: migration 0007 (manga.cover_url, chapter.pages); /covers/{manga_id} auth-gated
   route (disk cache, allowlisted outbound fetch, placeholder 404); web design tokens
   (ink/amber, Outfit 500/700 self-hosted), app shell (top bar + mobile bottom tabs),

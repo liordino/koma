@@ -269,3 +269,18 @@
 - README: hero banner + badges, reader/library/categories/desktop sections, honest
   content preserved (two-tier, status, running, development, DMCA).
 - 47/47 + clippy + tsc + desktop check green. MD033/MD041 advisories accepted by design.
+
+## Wave 23 — Covers infra + design system + library grid — DONE (2026-11-24)
+- Server: migration 0007 (manga.cover_url, chapter.pages); covers.rs auth-gated route
+  (expectation-free handler: statuses mapped, fetch-once disk cache via from_parts-built
+  outbound client); build_router grew the outbound param (7 test call sites updated);
+  main.rs builds the production allowlisted client; add_manga persists cover_url
+  (insert + refresh upsert); ListLibrary fills /covers/{id}.
+- Web: app.css tokens (ink/amber, Outfit 500/700 self-hosted woff2, browser surfaces:
+  selection/focus/scrollbar); app shell (top bar with panel mark, desktop nav >=768px,
+  mobile bottom tabs with lit amber dot — Svelte 5 snippet API); covers.ts fetch-to-blob
+  cache; library rebuilt as cover-panel grid (chips, cards, placeholder mark, hover lift).
+- Gates: covers_route 2/2 (fetch-once proof via wiremock request count), library spec
+  (shell at BOTH viewports + 26 cards + placeholders + chips), tsc+build. Shell-test
+  lesson: mobile-only UI asserts need a mobile viewport context.
+- Full suite green; wave23 gate 8/8.
