@@ -237,3 +237,9 @@
 - Spec tuple annotations fixed ([string,string] -> string[]) after the svelte-kit tsconfig
   made tests typechecked (pre-existing looseness surfaced; runtime unaffected).
 - wave22 gate 5/5; 47/47 nextest; tsc clean; dojo proof 5caa7905.
+
+## Publication — DONE (2026-11-23)
+- Repo created public: github.com/liordino/koma (decision 31). main pushed; v0.1.0 tagged
+  per the stored release-tagging preference. README review fixes committed pre-push
+  (Running it / Status / Development sections; Tier-B accuracy; decision-log pointer).
+- Insights from M3 NOT promoted (no explicit consent; remain in findings.md).
