@@ -3,7 +3,7 @@
 
 use koma_server::auth::{hash_token, UserId};
 use koma_server::db;
-use koma_server::library::{Library, LibraryDb};
+use koma_server::library::{LibraryDb, LibraryService};
 use koma_server::pb as pb_types;
 use tonic::Request;
 
@@ -38,7 +38,9 @@ async fn create_category_then_add_manga_into_it() {
         }))
         .await
         .expect("create category")
-        .into_inner();
+        .into_inner()
+        .category
+        .expect("category in response");
     assert!(cat.id > 0);
     assert!(!cat.delete_after_read);
 
@@ -49,7 +51,9 @@ async fn create_category_then_add_manga_into_it() {
         }))
         .await
         .expect("idempotent create")
-        .into_inner();
+        .into_inner()
+        .category
+        .expect("category in response");
     assert_eq!(cat.id, cat2.id);
 
     let cats = lib
@@ -70,7 +74,9 @@ async fn create_category_then_add_manga_into_it() {
         }))
         .await
         .expect("add")
-        .into_inner();
+        .into_inner()
+        .manga
+        .expect("manga in response");
     assert!(added.id > 0);
     assert_eq!(added.source_key, "mangadex");
 
@@ -86,7 +92,9 @@ async fn create_category_then_add_manga_into_it() {
         }))
         .await
         .expect("idempotent add")
-        .into_inner();
+        .into_inner()
+        .manga
+        .expect("manga in response");
     assert_eq!(added.id, again.id);
 
     // By-category view contains it; the all view too.
@@ -107,7 +115,9 @@ async fn create_category_then_add_manga_into_it() {
         .get_manga(Request::new(pb_types::GetMangaRequest { id: added.id }))
         .await
         .expect("get")
-        .into_inner();
+        .into_inner()
+        .manga
+        .expect("manga in response");
     assert_eq!(got.title, "One Piece");
     assert!(lib
         .get_manga(Request::new(pb_types::GetMangaRequest { id: 987654 }))
@@ -194,7 +204,7 @@ async fn router_level_create_category_through_bearer_middleware() {
     // No token → 401 before any RPC work:
     let req = Request::builder()
         .method("POST")
-        .uri("/koma.v1.Library/CreateCategory")
+        .uri("/koma.v1.LibraryService/CreateCategory")
         .header("content-type", "application/grpc-web+proto")
         .body(Body::from(grpc_frame(&bytes)))
         .unwrap();
@@ -204,7 +214,7 @@ async fn router_level_create_category_through_bearer_middleware() {
     // With token → OK, and the row exists in the DB:
     let req = Request::builder()
         .method("POST")
-        .uri("/koma.v1.Library/CreateCategory")
+        .uri("/koma.v1.LibraryService/CreateCategory")
         .header("content-type", "application/grpc-web+proto")
         .header(header::AUTHORIZATION, "Bearer t")
         .body(Body::from(grpc_frame(&bytes)))

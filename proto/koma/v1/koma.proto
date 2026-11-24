@@ -17,16 +17,16 @@ message PingResponse {
 
 // ---- Library (M1) — reads/writes ride the DB rows via unary RPCs --------------------
 
-service Library {
+service LibraryService {
   // Add (upsert) a manga from a source into the library, optionally into a category.
-  rpc AddManga(AddMangaRequest) returns (MangaSummary);
+  rpc AddManga(AddMangaRequest) returns (AddMangaResponse);
   rpc ListLibrary(ListLibraryRequest) returns (ListLibraryResponse);
-  rpc GetManga(GetMangaRequest) returns (MangaSummary);
-  rpc CreateCategory(CreateCategoryRequest) returns (Category);
+  rpc GetManga(GetMangaRequest) returns (GetMangaResponse);
+  rpc CreateCategory(CreateCategoryRequest) returns (CreateCategoryResponse);
   rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse);
-  rpc AddMangaToCategory(AddToCategoryRequest) returns (Empty);
+  rpc AddMangaToCategory(AddMangaToCategoryRequest) returns (AddMangaToCategoryResponse);
   // Page-anchored progress (decision 10) for the calling user (v1 single-user).
-  rpc UpsertProgress(UpsertProgressRequest) returns (Empty);
+  rpc UpsertProgress(UpsertProgressRequest) returns (UpsertProgressResponse);
   // Last remembered position for a chapter; exists=false when nothing stored yet.
   rpc GetProgress(GetProgressRequest) returns (GetProgressResponse);
   // Manual-first update pass (v1): external-ID upserts, idempotent by design.
@@ -34,7 +34,7 @@ service Library {
   // Explicit read tracking: the read predicate is an explicit mark (v1).
   rpc MarkRead(MarkReadRequest) returns (MarkReadResponse);
   // Category config: rename + flip destructive flags (consent handled in the UI layer).
-  rpc UpdateCategory(UpdateCategoryRequest) returns (Category);
+  rpc UpdateCategory(UpdateCategoryRequest) returns (UpdateCategoryResponse);
   // Metadata-only backup export; stamps every category's freshness.
   rpc ExportBackup(ExportBackupRequest) returns (ExportBackupResponse);
   // Per-category purge of trash-consumed chapters. confirm MUST be true;
@@ -126,7 +126,7 @@ message ListCategoriesResponse {
   repeated Category items = 1;
 }
 
-message AddToCategoryRequest {
+message AddMangaToCategoryRequest {
   int64 manga_id = 1;
   int64 category_id = 2;
 }
@@ -137,7 +137,25 @@ message UpsertProgressRequest {
   double scroll_ratio = 3;
 }
 
-message Empty {}
+message AddMangaResponse {
+  MangaSummary manga = 1;
+}
+
+message GetMangaResponse {
+  MangaSummary manga = 1;
+}
+
+message CreateCategoryResponse {
+  Category category = 1;
+}
+
+message UpdateCategoryResponse {
+  Category category = 1;
+}
+
+message AddMangaToCategoryResponse {}
+
+message UpsertProgressResponse {}
 
 message GetProgressRequest {
   int64 chapter_id = 1;

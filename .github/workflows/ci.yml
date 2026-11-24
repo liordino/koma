@@ -18,12 +18,14 @@ jobs:
       - uses: taiki-e/install-action@v2
         with:
           tool: cargo-nextest
+      # koma-desktop (tauri) needs webkit2gtk/glib system libs on Linux; the shell is a
+      # Windows desktop product gated by the local wave-22 launch check, not this job.
       - name: Build
-        run: cargo build --workspace
+        run: cargo build --workspace --exclude koma-desktop
       - name: Clippy
-        run: cargo clippy --all-targets -- -D warnings
+        run: cargo clippy --workspace --exclude koma-desktop --all-targets -- -D warnings
       - name: Tests
-        run: cargo nextest run --workspace
+        run: cargo nextest run --workspace --exclude koma-desktop
       # Compile-time query verification (decision 17). Prepared data lives in .sqlx/
       # once the first sqlx query! macro is used; gated so CI stays
       # green until then.

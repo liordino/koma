@@ -3,7 +3,7 @@
 //! Usage: KOMA_TOKEN=t ./koma-bench-loop [search query]
 
 use koma_server::db;
-use koma_server::library::{Library, LibraryDb};
+use koma_server::library::{LibraryDb, LibraryService};
 use koma_server::pb as pb_types;
 use koma_server::source::mangadex::MangaDexAdapter;
 use tonic::Request;
@@ -47,7 +47,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }))
         .await
         .map_err(|e| format!("add: {e}"))?
-        .into_inner();
+        .into_inner()
+        .manga
+        .unwrap_or_default();
     let add_ms = t1.elapsed().as_millis();
     println!("{{\"event\":\"add\",\"ms\":{add_ms},\"id\":{}}}", summary.id);
 

@@ -38,13 +38,13 @@
 			flagDraft[c.id] = !next; // revert the checkbox — consent denied
 			return;
 		}
-		const updated = await library().updateCategory({ id: c.id, name: nameDraft[String(c.id)], deleteAfterRead: next });
-		cats = cats.map((x) => (x.id === c.id ? updated : x));
+		const updated = (await library().updateCategory({ id: c.id, name: nameDraft[String(c.id)], deleteAfterRead: next })).category;
+		cats = cats.map((x) => (x.id === c.id ? (updated ?? x) : x));
 	}
 
 	async function rename(c: Category) {
-		const updated = await library().updateCategory({ id: c.id, name: nameDraft[String(c.id)], deleteAfterRead: flagDraft[String(c.id)] });
-		cats = cats.map((x) => (x.id === c.id ? updated : x));
+		const updated = (await library().updateCategory({ id: c.id, name: nameDraft[String(c.id)], deleteAfterRead: flagDraft[String(c.id)] })).category;
+		cats = cats.map((x) => (x.id === c.id ? (updated ?? x) : x));
 	}
 
 	async function exportBackup() {

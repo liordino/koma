@@ -1,6 +1,12 @@
+---
 version: v2
 modules:
   - path: proto
+    excludes:
+      # Vendored external schema (Apache-2.0 Mihon backup subset)
+      # kept verbatim to mirror the recorded wire format; lint rules
+      # (naming/version/case) are upstream's, not ours.
+      - proto/mihon
 lint:
   use:
     - STANDARD

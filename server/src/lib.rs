@@ -92,7 +92,7 @@ pub fn build_router(
     // Both tonic services share ONE Routes (one axum fallback) — merging two
     // into_axum_router() outputs panics (each carries its own fallback).
     let grpc_router = tonic::service::Routes::new(pb::koma_service_server::KomaServiceServer::new(KomaTransport))
-        .add_service(pb::library_server::LibraryServer::new(library::LibraryDb {
+        .add_service(pb::library_service_server::LibraryServiceServer::new(library::LibraryDb {
             pool: pool.clone(),
         }))
         .into_axum_router()

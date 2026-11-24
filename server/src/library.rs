@@ -6,7 +6,7 @@ use tonic::{Request, Response, Status};
 
 use crate::auth::UserId;
 use crate::pb as pb_types;
-pub use crate::pb::library_server::Library;
+pub use crate::pb::library_service_server::LibraryService;
 
 type Grpc<T> = Result<Response<T>, Status>;
 
@@ -74,11 +74,11 @@ fn db_err(e: sqlx::Error) -> Status {
 }
 
 #[tonic::async_trait]
-impl Library for LibraryDb {
+impl LibraryService for LibraryDb {
     async fn add_manga(
         &self,
         request: Request<pb_types::AddMangaRequest>,
-    ) -> Grpc<pb_types::MangaSummary> {
+    ) -> Grpc<pb_types::AddMangaResponse> {
         let r = request.into_inner();
         let row = self
             .resolve_manga_row(&r.source_key, &r.external_id, &r.title, &r.cover_url, &r.description)
@@ -94,9 +94,12 @@ impl Library for LibraryDb {
                 .await
                 .map_err(db_err)?;
         }
-        Ok(Response::new(summary_of(
-            row.id, &r.source_key, &r.external_id, &row.title, row.cover.as_ref(), row.description.as_ref(),
-        )))
+        Ok(Response::new(pb_types::AddMangaResponse {
+            manga: Some(summary_of(
+                row.id, &r.source_key, &r.external_id, &row.title, row.cover.as_ref(),
+                row.description.as_ref(),
+            )),
+        }))
     }
 
     async fn list_library(
@@ -137,7 +140,7 @@ impl Library for LibraryDb {
     async fn get_manga(
         &self,
         request: Request<pb_types::GetMangaRequest>,
-    ) -> Grpc<pb_types::MangaSummary> {
+    ) -> Grpc<pb_types::GetMangaResponse> {
         let r = request.into_inner();
         let row: Option<(i64, String, String)> = sqlx::query_as(
             "SELECT m.id, m.title, s.key FROM manga m JOIN source s ON s.id = m.source_id WHERE m.id = ?",
@@ -147,9 +150,11 @@ impl Library for LibraryDb {
         .await
         .map_err(db_err)?;
         match row {
-            Some((id, title, source_key)) => {
-                Ok(Response::new(summary_of(id, &source_key, &source_key, &title, None, None)))
-            }
+            Some((id, title, source_key)) => Ok(Response::new(
+                pb_types::GetMangaResponse {
+                    manga: Some(summary_of(id, &source_key, &source_key, &title, None, None)),
+                },
+            )),
             None => Err(Status::not_found("manga not found")),
         }
     }
@@ -157,7 +162,7 @@ impl Library for LibraryDb {
     async fn create_category(
         &self,
         request: Request<pb_types::CreateCategoryRequest>,
-    ) -> Grpc<pb_types::Category> {
+    ) -> Grpc<pb_types::CreateCategoryResponse> {
         let r = request.into_inner();
         if r.name.trim().is_empty() {
             return Err(Status::invalid_argument("category name required"));
@@ -178,7 +183,9 @@ impl Library for LibraryDb {
         } else {
             id
         };
-        Ok(Response::new(pb_types::Category { id, name: r.name.trim().to_string(), delete_after_read: false }))
+        Ok(Response::new(pb_types::CreateCategoryResponse {
+            category: Some(pb_types::Category { id, name: r.name.trim().to_string(), delete_after_read: false }),
+        }))
     }
 
     async fn list_categories(
@@ -199,8 +206,8 @@ impl Library for LibraryDb {
 
     async fn add_manga_to_category(
         &self,
-        request: Request<pb_types::AddToCategoryRequest>,
-    ) -> Grpc<pb_types::Empty> {
+        request: Request<pb_types::AddMangaToCategoryRequest>,
+    ) -> Grpc<pb_types::AddMangaToCategoryResponse> {
         let r = request.into_inner();
         sqlx::query("INSERT OR IGNORE INTO manga_category (manga_id, category_id) VALUES (?, ?)")
             .bind(r.manga_id)
@@ -208,13 +215,13 @@ impl Library for LibraryDb {
             .execute(&self.pool)
             .await
             .map_err(db_err)?;
-        Ok(Response::new(pb_types::Empty {}))
+        Ok(Response::new(pb_types::AddMangaToCategoryResponse {}))
     }
 
     async fn upsert_progress(
         &self,
         request: Request<pb_types::UpsertProgressRequest>,
-    ) -> Grpc<pb_types::Empty> {
+    ) -> Grpc<pb_types::UpsertProgressResponse> {
         let user = request.extensions().get::<UserId>().copied().unwrap_or(UserId(1));
         let r = request.into_inner();
         let ratio = r.scroll_ratio.clamp(0.0, 1.0);
@@ -229,7 +236,7 @@ impl Library for LibraryDb {
         .execute(&self.pool)
         .await
         .map_err(db_err)?;
-        Ok(Response::new(pb_types::Empty {}))
+        Ok(Response::new(pb_types::UpsertProgressResponse {}))
     }
 
     async fn purge_category(
@@ -250,7 +257,7 @@ impl Library for LibraryDb {
     async fn update_category(
         &self,
         request: Request<pb_types::UpdateCategoryRequest>,
-    ) -> Grpc<pb_types::Category> {
+    ) -> Grpc<pb_types::UpdateCategoryResponse> {
         let r = request.into_inner();
         if r.name.trim().is_empty() {
             return Err(Status::invalid_argument("category name required"));
@@ -262,10 +269,12 @@ impl Library for LibraryDb {
             .execute(&self.pool)
             .await
             .map_err(db_err)?;
-        Ok(Response::new(pb_types::Category {
-            id: r.id,
-            name: r.name.trim().to_string(),
-            delete_after_read: r.delete_after_read,
+        Ok(Response::new(pb_types::UpdateCategoryResponse {
+            category: Some(pb_types::Category {
+                id: r.id,
+                name: r.name.trim().to_string(),
+                delete_after_read: r.delete_after_read,
+            }),
         }))
     }
 

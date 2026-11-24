@@ -23,6 +23,11 @@ allow = [
     "Unicode-3.0",
     "Zlib",
     "BSL-1.0",
+    # Adopted deliberately on first CI license review (2026-11-24): the tauri stack
+    # pulls MPL-2.0 (option-ext) and CDLA-Permissive-1.0 (unicode data). Both are
+    # permissive for dependency use; recorded, not silently allowed.
+    "MPL-2.0",
+    "CDLA-Permissive-1.0",
 ]
 # Mihon/Apache-2.0 imports carry MIT + Apache-2.0 notices; everything allowed above preserves
 # notices. New licenses surface as CI failures for an explicit decision, not silent adoption.
