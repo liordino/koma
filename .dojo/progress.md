@@ -284,3 +284,15 @@
   (shell at BOTH viewports + 26 cards + placeholders + chips), tsc+build. Shell-test
   lesson: mobile-only UI asserts need a mobile viewport context.
 - Full suite green; wave23 gate 8/8.
+
+## Wave 24 — Search + add — DONE (2026-11-24)
+- SearchManga RPC (proto+TS): adapter proxy, limit clamped server-side (1..40), source badge
+  on every hit; LibraryDb grew the injectable mangadex adapter (build_router: KOMA_MANGADEX_API_BASE
+  env for tests; bench-loop/library_rpc constructors updated).
+- /search page: query bar, global add-to-category select, hotlinked source covers
+  (referrerpolicy=no-referrer), per-card add -> in-library state, loading/empty/error states.
+- PRODUCT GAP caught by the gate: fresh installs failed AddManga ("source unknown") — the
+  shipped tier-A adapter now self-registers (source::seed_builtin_sources in main.rs).
+- search_rpc 3/3 (wiremock: badge mapping, upstream failure -> UNAVAILABLE, limit clamp);
+  live Playwright flow: search "one piece" -> >=3 results -> add -> in-library -> library shows it.
+- wave24 gate 8/8; full suite green.

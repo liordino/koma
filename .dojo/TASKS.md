@@ -176,7 +176,7 @@ status: done
   (cards request /covers, chips filter, placeholder fallback); tsc + vite build green.
 
 ## Wave 24 — Search + add flow
-status: pending
+status: done
 - Outcome: SearchManga RPC (adapter proxy, rate-limited, wiremock-testable); /search page
   (results grid, hotlinked source covers, source badges, add-to-category, in-library state).
 - Check: Rust search RPC test (wiremock); Playwright search flow (live MangaDex "one piece"
