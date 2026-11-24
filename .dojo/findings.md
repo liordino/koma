@@ -28,3 +28,11 @@
   recorded to keep the scan history honest.
 - Windows handle note: docker/web (old staging location) is held by a watcher process and
   cannot be deleted this session; it is gitignored and superseded by target/docker-context.
+
+## 2026-11-24 — README visual pass; MD033/MD041 advisories accepted
+- The pretty README is built from GitHub's inline-HTML image idiom (<p align>,
+  <img>, <a> wrap) — MD033 flags exactly that; MD041 wants a leading # heading
+  but the banner+badges hero is the deliberate layout. Both accepted by design.
+- Asset pipeline: logo (manga-page motif, koma = コマ), banner, multi-size shell
+  icon; screenshots captured from a REAL seeded instance (owner's .tachibk titles
+  + device chapter pages); desktop shot = live Tauri window via Win32 capture.

@@ -257,3 +257,15 @@
   least-privilege workflow + redundant cargo-audit dropped (deny covers the same rustsec DB).
 - All three jobs green: test (1m34s), proto, hygiene (gitleaks + cargo-deny).
 - Publication state: github.com/liordino/koma public, v0.1.0 tag, CI green on main.
+
+## README visual identity + screenshots — DONE (2026-11-24)
+- Identity: koma = コマ (manga panel) — logo is a manga-page layout (dark #0b0f1a,
+  amber accent); banner + multi-size shell icon (icon.ico regenerated from the logo).
+- Screenshots are REAL: seeded instance with the owner's actual .tachibk titles
+  (26 manga via new koma-import CLI bin) + real chapter pages pulled from the device;
+  desktop shot captured from the live Tauri window (Win32 handle capture, 1216x839).
+- New: server/src/bin/koma-import.rs (v1 import tooling — no import RPC existed);
+  web/tests/screenshots.spec.ts (regeneration tooling, not a gate).
+- README: hero banner + badges, reader/library/categories/desktop sections, honest
+  content preserved (two-tier, status, running, development, DMCA).
+- 47/47 + clippy + tsc + desktop check green. MD033/MD041 advisories accepted by design.

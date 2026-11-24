@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Koma (コマ) — the manga panel. Identity: a manga page layout, dark-first. -->
+  <rect width="512" height="512" rx="112" fill="#0b0f1a"/>
+  <rect x="64" y="64" width="150" height="384" rx="28" fill="#e7ebf3"/>
+  <rect x="242" y="64" width="206" height="180" rx="28" fill="#f59e0b"/>
+  <rect x="242" y="268" width="206" height="180" rx="28" fill="#e7ebf3"/>
+  <circle cx="334" cy="149" r="26" fill="#0b0f1a"/>
+  <path d="M96 384 C 150 300, 190 260, 182 148" stroke="#0b0f1a" stroke-width="14" fill="none" stroke-linecap="round"/>
+</svg>
