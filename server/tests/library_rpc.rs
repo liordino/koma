@@ -19,7 +19,17 @@ async fn seeded() -> (koma_server::DbPool, LibraryDb) {
         .execute(&pool)
         .await
         .expect("source");
-    (pool.clone(), LibraryDb { pool })
+    // The search adapter points nowhere in these tests: search is not exercised here.
+    (
+        pool.clone(),
+        LibraryDb {
+            pool,
+            mangadex: koma_server::source::mangadex::MangaDexAdapter::with_client(
+                koma_server::fetch::test_client(),
+                "http://127.0.0.1:9"
+            )
+        }
+    )
 }
 
 fn user_req<T>(msg: T) -> Request<T> {

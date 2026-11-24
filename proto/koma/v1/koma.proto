@@ -31,6 +31,8 @@ service LibraryService {
   rpc GetProgress(GetProgressRequest) returns (GetProgressResponse);
   // Manual-first update pass (v1): external-ID upserts, idempotent by design.
   rpc UpdateLibrary(UpdateLibraryRequest) returns (UpdateLibraryResponse);
+  // Source search proxy (tier A: MangaDex) — results carry the source badge.
+  rpc SearchManga(SearchMangaRequest) returns (SearchMangaResponse);
   // Explicit read tracking: the read predicate is an explicit mark (v1).
   rpc MarkRead(MarkReadRequest) returns (MarkReadResponse);
   // Category config: rename + flip destructive flags (consent handled in the UI layer).
@@ -154,6 +156,15 @@ message UpdateCategoryResponse {
 }
 
 message AddMangaToCategoryResponse {}
+
+message SearchMangaRequest {
+  string query = 1;
+  int32 limit = 2;
+}
+
+message SearchMangaResponse {
+  repeated MangaSummary items = 1;
+}
 
 message UpsertProgressResponse {}
 

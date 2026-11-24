@@ -13,6 +13,9 @@ type Grpc<T> = Result<Response<T>, Status>;
 #[derive(Clone)]
 pub struct LibraryDb {
     pub pool: crate::DbPool,
+    /// Tier-A source adapter for the search proxy; base URL injectable for tests
+    /// (KOMA_MANGADEX_API_BASE in build_router; tests pass a wiremock base directly).
+    pub mangadex: crate::source::mangadex::MangaDexAdapter,
 }
 
 fn summary_of(id: i64, source_key: &str, external_id: &str, title: &str, cover: Option<&String>, desc: Option<&String>) -> pb_types::MangaSummary {
@@ -285,6 +288,31 @@ impl LibraryService for LibraryDb {
                 delete_after_read: r.delete_after_read,
             }),
         }))
+    }
+
+    async fn search_manga(
+        &self,
+        request: Request<pb_types::SearchMangaRequest>,
+    ) -> Grpc<pb_types::SearchMangaResponse> {
+        let r = request.into_inner();
+        let limit = r.limit.clamp(1, 40) as u32;
+        let results = self
+            .mangadex
+            .search(&r.query, limit)
+            .await
+            .map_err(|e| Status::unavailable(format!("source search failed: {e}")))?;
+        let items = results
+            .into_iter()
+            .map(|hit| pb_types::MangaSummary {
+                id: 0,
+                source_key: hit.source_key,
+                external_id: hit.external_id,
+                title: hit.title,
+                cover_url: hit.cover_url.unwrap_or_default(),
+                description: hit.description.unwrap_or_default(),
+            })
+            .collect();
+        Ok(Response::new(pb_types::SearchMangaResponse { items }))
     }
 
     async fn export_backup(

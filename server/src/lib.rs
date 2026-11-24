@@ -98,9 +98,15 @@ pub fn build_router(
 
     // Both tonic services share ONE Routes (one axum fallback) — merging two
     // into_axum_router() outputs panics (each carries its own fallback).
+    // Source-adapter base injectable for tests; production default is the real API.
+    let mdx_base =
+        std::env::var("KOMA_MANGADEX_API_BASE").unwrap_or_else(|_| "https://api.mangadex.org".to_string());
+    let mdx = crate::source::mangadex::MangaDexAdapter::with_client(outbound.clone(), &mdx_base);
+
     let grpc_router = tonic::service::Routes::new(pb::koma_service_server::KomaServiceServer::new(KomaTransport))
         .add_service(pb::library_service_server::LibraryServiceServer::new(library::LibraryDb {
             pool: pool.clone(),
+            mangadex: mdx,
         }))
         .into_axum_router()
         .layer(tonic_web::GrpcWebLayer::new());

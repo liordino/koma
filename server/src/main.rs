@@ -20,6 +20,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let pool = db::connect(&db_url).await?;
     db::migrate(&pool).await?;
     auth::seed_owner(&pool, &token).await?;
+    // The shipped tier-A adapter self-registers (the registry is data, but the binary
+    // owns the rows for adapters it compiles in).
+    koma_server::source::seed_builtin_sources(&pool).await?;
 
     // Production outbound: MangaDex API + At-Home covers only (allowlist is the SSRF guard).
     let outbound = std::sync::Arc::new(
