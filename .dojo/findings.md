@@ -47,3 +47,9 @@
   browser, executing the very client methods the LSP claimed were missing. Findings
   recorded as refuted; if the LSP re-reports them on unchanged code, they are known
   stale artifacts, not regressions.
+
+## 2026-11-24 — Shell first-run UX gap (exposed by the desktop shot)
+- The Tauri shell has no token-entry UI; the SPA reads the bearer token from localStorage
+  only — a first-run webview has none, so the shell opens to an auth-error library.
+- The README shot bootstrapped the webview via a one-off helper page (removed; its values
+  were capture-specific). Future work: a first-run token prompt in the shell or SPA.

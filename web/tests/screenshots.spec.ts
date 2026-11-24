@@ -55,3 +55,11 @@ test('categories (desktop)', async ({ page }) => {
 	await page.waitForTimeout(1500);
 	await page.screenshot({ path: `${OUT}/screenshot-categories.png` });
 });
+
+test('manga detail (desktop)', async ({ page }) => {
+	await setup(page);
+	await page.setViewportSize({ width: 1280, height: 800 });
+	await page.goto(`${UI}/manga/1`);
+	await page.waitForTimeout(2500);
+	await page.screenshot({ path: `${OUT}/screenshot-detail.png` });
+});

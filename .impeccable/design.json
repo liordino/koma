@@ -1,0 +1,27 @@
+{
+  "world": "Ink & Amber",
+  "tokens": {
+    "ink": "#0b0f1a",
+    "panel": "#141a2a",
+    "panel2": "#1a2138",
+    "line": "#232c44",
+    "text": "#e7ebf3",
+    "text2": "#8b93a7",
+    "amber": "#f59e0b",
+    "amberDim": "rgba(245,158,11,0.14)",
+    "ok": "#34d399",
+    "queued": "#60a5fa",
+    "danger": "#ef4444",
+    "radius": "14px",
+    "radiusS": "8px",
+    "gutter": "12px",
+    "pad": "16px"
+  },
+  "type": {
+    "display": "Outfit 500/700 (self-hosted woff2)",
+    "body": "system-ui",
+    "tracking": "-0.02em"
+  },
+  "signature": "manga-panel framing: cover grid as page panels; reading position as the amber strip",
+  "source": "written from the built world, M4 wave 27"
+}

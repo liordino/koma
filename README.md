@@ -33,15 +33,23 @@ reload or return on another device and you land exactly where you stopped.
   <em><sub>desktop and phone — rotate freely; spreads fit width in landscape.</sub></em>
 </p>
 
-## Library and categories
+## Library, detail, categories — and search to feed them
+
+Search hits MangaDex directly (tier A) with source-badged results; adding a title stores
+its cover, drops it into a category, and the detail page drives chapter downloads through
+the supervised queue.
 
 <p align="center">
   <a href=".github/assets/screenshot-library.png">
-    <img src=".github/assets/screenshot-library.png" width="380" alt="library — imported from a real .tachibk backup">
+    <img src=".github/assets/screenshot-library.png" width="340" alt="library — a manga page of cover panels">
   </a>
-  &nbsp;&nbsp;
+  &nbsp;
+  <a href=".github/assets/screenshot-detail.png">
+    <img src=".github/assets/screenshot-detail.png" width="340" alt="manga detail — chapter states, download and read actions">
+  </a>
+  &nbsp;
   <a href=".github/assets/screenshot-categories.png">
-    <img src=".github/assets/screenshot-categories.png" width="380" alt="category configuration — destructive flags behind explicit consent">
+    <img src=".github/assets/screenshot-categories.png" width="340" alt="categories — destructive flags behind explicit consent">
   </a>
 </p>
 
@@ -91,9 +99,10 @@ Raspberry Pi Zero 2 W): SSRF-guarded outbound fetch with per-source rate budgets
 MangaDex adapter with At-Home-compliant downloads; a DB-backed download queue; idempotent
 library auto-update; bearer-token auth on every route; path-safe page serving; the windowed
 reader with resumable progress; category config with consent-gated destructive flags and
-backup-gated purge; staged `.tachibk` (Mihon/Tachiyomi) import. SPA pages: library, reader,
-categories. Search and adding titles ride the gRPC API today (the core loop is proven
-end-to-end on-device); a dedicated search page is future UI work.
+backup-gated purge; staged `.tachibk` (Mihon/Tachiyomi) import; the full UI flow — search with
+source badges, add-to-category, detail with chapter states, self-driving downloads, the
+windowed reader, consent-gated categories. SPA pages: library, search, detail, reader,
+categories.
 
 ## Running it
 
