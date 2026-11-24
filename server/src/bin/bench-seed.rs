@@ -35,7 +35,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .execute(&pool)
         .await?;
     sqlx::query(
-        "INSERT OR IGNORE INTO chapter (id, manga_id, source_key, number, storage_dir) VALUES (1, 1, 'bench', '1', 'pages')",
+        "INSERT OR IGNORE INTO chapter (id, manga_id, source_key, number, storage_dir, state, downloaded, pages) VALUES (1, 1, 'bench', '1', 'pages', 'downloaded', 1, 10)",
     )
     .execute(&pool)
     .await?;

@@ -1,0 +1,8 @@
+PASS: migration 0007 adds cover_url + pages
+PASS: covers route is auth-gated and disk-cached
+PASS: design tokens css exists (ink/amber)
+PASS: app shell with nav
+PASS: library is a cover grid
+PASS: covers rust tests pass (fetch once, cache)
+PASS: library grid playwright passes
+PASS: tsc + vite build green

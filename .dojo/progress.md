@@ -269,3 +269,71 @@
 - README: hero banner + badges, reader/library/categories/desktop sections, honest
   content preserved (two-tier, status, running, development, DMCA).
 - 47/47 + clippy + tsc + desktop check green. MD033/MD041 advisories accepted by design.
+
+## Wave 23 — Covers infra + design system + library grid — DONE (2026-11-24)
+- Server: migration 0007 (manga.cover_url, chapter.pages); covers.rs auth-gated route
+  (expectation-free handler: statuses mapped, fetch-once disk cache via from_parts-built
+  outbound client); build_router grew the outbound param (7 test call sites updated);
+  main.rs builds the production allowlisted client; add_manga persists cover_url
+  (insert + refresh upsert); ListLibrary fills /covers/{id}.
+- Web: app.css tokens (ink/amber, Outfit 500/700 self-hosted woff2, browser surfaces:
+  selection/focus/scrollbar); app shell (top bar with panel mark, desktop nav >=768px,
+  mobile bottom tabs with lit amber dot — Svelte 5 snippet API); covers.ts fetch-to-blob
+  cache; library rebuilt as cover-panel grid (chips, cards, placeholder mark, hover lift).
+- Gates: covers_route 2/2 (fetch-once proof via wiremock request count), library spec
+  (shell at BOTH viewports + 26 cards + placeholders + chips), tsc+build. Shell-test
+  lesson: mobile-only UI asserts need a mobile viewport context.
+- Full suite green; wave23 gate 8/8.
+
+## Wave 24 — Search + add — DONE (2026-11-24)
+- SearchManga RPC (proto+TS): adapter proxy, limit clamped server-side (1..40), source badge
+  on every hit; LibraryDb grew the injectable mangadex adapter (build_router: KOMA_MANGADEX_API_BASE
+  env for tests; bench-loop/library_rpc constructors updated).
+- /search page: query bar, global add-to-category select, hotlinked source covers
+  (referrerpolicy=no-referrer), per-card add -> in-library state, loading/empty/error states.
+- PRODUCT GAP caught by the gate: fresh installs failed AddManga ("source unknown") — the
+  shipped tier-A adapter now self-registers (source::seed_builtin_sources in main.rs).
+- search_rpc 3/3 (wiremock: badge mapping, upstream failure -> UNAVAILABLE, limit clamp);
+  live Playwright flow: search "one piece" -> >=3 results -> add -> in-library -> library shows it.
+- wave24 gate 8/8; full suite green.
+
+## Wave 25 — Detail + self-driving downloads — DONE (2026-11-24)
+- ListChapters + DownloadChapter RPCs (ChapterInfo state-as-data; proto+TS synced);
+  RealRunner carries the injectable adapter (wiremock-testable); queue records page
+  counts on completion; main.rs spawns the self-driving worker loop (2s poll) — M2's
+  queue is now LIVE in the binary.
+- /manga/[id]: hero (cover via /covers fetch-to-blob, title, source, chapter count),
+  chapter list with state badges (color + text, never color-alone), download/read
+  actions, 2.5s polling while the queue works. bench-seed made state-coherent
+  (downloaded + pages on its INSERT).
+- detail_rpc 2/2 (enqueue -> worker pass -> downloaded+pages=4; latest-first order);
+  Playwright: real import title, states render, read link lands in the reader
+  (page 1/10), live download enqueues (badge flips to queued).
+- Seed lesson: LIMIT 200 latest-first hides old rows — wire demo states to the newest.
+- Lens false-positive chain documented (findings.md): stale LSP snapshot refuted by
+  tsc + direct probe + runtime pass.
+- wave25 gate 8/8.
+
+## Wave 26 — Categories + reader chrome — DONE (2026-11-24)
+- Categories: card grid (name inline-edit + rename, membership count via listLibrary,
+  consent-gated flag w/ revert-on-denial, per-card purge w/ confirm + backup gating,
+  global export). Spec rewritten: toHaveValue (Svelte bind:value sets the PROPERTY,
+  never the attribute — input[value=] selectors cannot match client-side renders),
+  positive matchers, dialog handlers registered BEFORE clicks (dialogs auto-dismiss
+  without a handler), click() for consent-denial (check() is unsatisfiable when the
+  revert is the designed behavior).
+- Reader: counter pill (strip separator restored — adjacent text nodes concatenate
+  in DOM textContent), amber progress strip (the signature move), pages.ts split
+  (fetch-to-blob module symmetry: koma/covers/pages), bigint chapter ids.
+- Gate-architecture lesson: wave-13/20 runners never owned their servers (the old gates
+  did) — all runners now self-contained (kill, fresh DB, serve, seed, spec, teardown);
+  ports no longer collide across sequential gate runs. Screenshots spec safe-by-default
+  (throwaway dir unless explicitly pointed at README assets).
+- wave26 gate 9/9; reader + categories + shots + tsc + build + suite green.
+
+## Wave 27 — Finish — DONE (2026-11-24, M4 complete)
+- README shots regenerated the honest way: live search+add via bench-loop (real covers,
+  real downloaded pages), demo categories, mobile + desktop + detail + shell captures.
+- impeccable detect: [] on all 8 changed targets. DESIGN.md + design.json from the built
+  world. Shell first-run token gap recorded (findings).
+- 54/54 Rust (covers, search, detail suites added through the waves), all wave gates green.

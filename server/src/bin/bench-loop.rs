@@ -18,7 +18,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let pool = db::connect(&db_url).await?;
     db::migrate(&pool).await?;
     koma_server::auth::seed_owner(&pool, &token).await?;
-    let lib = LibraryDb { pool: pool.clone() };
+    let lib = LibraryDb {
+        pool: pool.clone(),
+        mangadex: MangaDexAdapter::production()?,
+    };
 
     // The source registry is data (behavior in data): the benchmark registers its source.
     sqlx::query("INSERT OR IGNORE INTO source (key, name) VALUES ('mangadex', 'MangaDex')")

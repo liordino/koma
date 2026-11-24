@@ -1,0 +1,8 @@
+PASS: SearchManga RPC in proto (unique response)
+PASS: search RPC implemented server-side
+PASS: /search route exists
+PASS: search adds to a category (picker present)
+PASS: search RPC rust tests pass (wiremock)
+PASS: search playwright passes (live MangaDex flow)
+PASS: tsc + vite build green
+PASS: full rust suite green

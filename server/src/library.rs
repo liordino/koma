@@ -13,6 +13,9 @@ type Grpc<T> = Result<Response<T>, Status>;
 #[derive(Clone)]
 pub struct LibraryDb {
     pub pool: crate::DbPool,
+    /// Tier-A source adapter for the search proxy; base URL injectable for tests
+    /// (KOMA_MANGADEX_API_BASE in build_router; tests pass a wiremock base directly).
+    pub mangadex: crate::source::mangadex::MangaDexAdapter,
 }
 
 fn summary_of(id: i64, source_key: &str, external_id: &str, title: &str, cover: Option<&String>, desc: Option<&String>) -> pb_types::MangaSummary {
@@ -36,10 +39,19 @@ impl LibraryDb {
         desc: &str,
     ) -> Result<MangaRow, Status> {
         // Upsert semantics: the manga row is keyed by (source_id, source_key) UNIQUE.
-        sqlx::query("INSERT OR IGNORE INTO manga (source_id, source_key, title) SELECT id, ?, ? FROM source WHERE key = ?")
+        sqlx::query("INSERT OR IGNORE INTO manga (source_id, source_key, title, cover_url) SELECT id, ?, ?, ? FROM source WHERE key = ?")
             .bind(external_id)
             .bind(title)
+            .bind(if cover.is_empty() { None } else { Some(cover) })
             .bind(source_key)
+            .execute(&self.pool)
+            .await
+            .map_err(db_err)?;
+        // refresh on re-add: title/cover upsert (M4: cover_url is persisted, decision 14 semantics)
+        sqlx::query("UPDATE manga SET title = ?, cover_url = ? WHERE source_key = ?")
+            .bind(title)
+            .bind(if cover.is_empty() { None } else { Some(cover) })
+            .bind(external_id)
             .execute(&self.pool)
             .await
             .map_err(db_err)?;
@@ -130,7 +142,7 @@ impl LibraryService for LibraryDb {
                 title,
                 source_key: skey.unwrap_or_default(),
                 external_id: String::new(),
-                cover_url: String::new(),
+                cover_url: format!("/covers/{id}"),
                 description: String::new(),
             })
             .collect();
@@ -276,6 +288,71 @@ impl LibraryService for LibraryDb {
                 delete_after_read: r.delete_after_read,
             }),
         }))
+    }
+
+    async fn search_manga(
+        &self,
+        request: Request<pb_types::SearchMangaRequest>,
+    ) -> Grpc<pb_types::SearchMangaResponse> {
+        let r = request.into_inner();
+        let limit = r.limit.clamp(1, 40) as u32;
+        let results = self
+            .mangadex
+            .search(&r.query, limit)
+            .await
+            .map_err(|e| Status::unavailable(format!("source search failed: {e}")))?;
+        let items = results
+            .into_iter()
+            .map(|hit| pb_types::MangaSummary {
+                id: 0,
+                source_key: hit.source_key,
+                external_id: hit.external_id,
+                title: hit.title,
+                cover_url: hit.cover_url.unwrap_or_default(),
+                description: hit.description.unwrap_or_default(),
+            })
+            .collect();
+        Ok(Response::new(pb_types::SearchMangaResponse { items }))
+    }
+
+    async fn list_chapters(
+        &self,
+        request: Request<pb_types::ListChaptersRequest>,
+    ) -> Grpc<pb_types::ListChaptersResponse> {
+        let r = request.into_inner();
+        let rows: Vec<(i64, String, String, Option<i64>)> = sqlx::query_as(
+            "SELECT id, number, state, pages FROM chapter WHERE manga_id = ?              ORDER BY id DESC LIMIT 200",
+        )
+        .bind(r.manga_id)
+        .fetch_all(&self.pool)
+        .await
+        .map_err(db_err)?;
+        let items = rows
+            .into_iter()
+            .map(|(id, number, state, pages)| pb_types::ChapterInfo {
+                id,
+                number,
+                state,
+                pages: pages.unwrap_or(0) as i32,
+            })
+            .collect();
+        Ok(Response::new(pb_types::ListChaptersResponse { items }))
+    }
+
+    async fn download_chapter(
+        &self,
+        request: Request<pb_types::DownloadChapterRequest>,
+    ) -> Grpc<pb_types::DownloadChapterResponse> {
+        let r = request.into_inner();
+        crate::download::enqueue(&self.pool, r.chapter_id)
+            .await
+            .map_err(|e| match e {
+                crate::download::DownloadError::Db(db) => db_err(db),
+                other => Status::internal(other.to_string()),
+            })?;
+        // The background worker (spawned in main) picks the queue up within its poll
+        // window; the queue state is visible in ListChapters immediately.
+        Ok(Response::new(pb_types::DownloadChapterResponse {}))
     }
 
     async fn export_backup(

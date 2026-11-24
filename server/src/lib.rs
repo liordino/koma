@@ -6,6 +6,7 @@
 #![allow(clippy::result_large_err)]
 
 pub mod auth;
+pub mod covers;
 pub mod db;
 pub mod download;
 pub mod library;
@@ -71,6 +72,7 @@ pub fn build_router(
     pool: DbPool,
     allowed_origins: &[&str],
     storage_root: std::path::PathBuf,
+    outbound: crate::fetch::SharedClient,
 ) -> Router {
     let cors = CorsLayer::new()
         .allow_origin(
@@ -96,16 +98,28 @@ pub fn build_router(
 
     // Both tonic services share ONE Routes (one axum fallback) — merging two
     // into_axum_router() outputs panics (each carries its own fallback).
+    // Source-adapter base injectable for tests; production default is the real API.
+    let mdx_base =
+        std::env::var("KOMA_MANGADEX_API_BASE").unwrap_or_else(|_| "https://api.mangadex.org".to_string());
+    let mdx = crate::source::mangadex::MangaDexAdapter::with_client(outbound.clone(), &mdx_base);
+
     let grpc_router = tonic::service::Routes::new(pb::koma_service_server::KomaServiceServer::new(KomaTransport))
         .add_service(pb::library_service_server::LibraryServiceServer::new(library::LibraryDb {
             pool: pool.clone(),
+            mangadex: mdx,
         }))
         .into_axum_router()
         .layer(tonic_web::GrpcWebLayer::new());
 
     let pages_state = pages::PagesState {
         pool: pool.clone(),
-        base_dir: storage_root,
+        base_dir: storage_root.clone(),
+    };
+
+    let covers_state = covers::CoversState {
+        pool: pool.clone(),
+        outbound,
+        storage_root,
     };
 
 
@@ -114,6 +128,10 @@ pub fn build_router(
         .route(
             "/pages/{chapter_id}/{page_n}",
             axum::routing::get(pages::get_page).with_state(pages_state),
+        )
+        .route(
+            "/covers/{manga_id}",
+            axum::routing::get(covers::get_cover).with_state(covers_state),
         )
         .layer(middleware::from_fn_with_state(pool.clone(), auth::require_bearer))
         .layer(cors)

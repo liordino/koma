@@ -48,7 +48,7 @@ fn ping_request(token: Option<&str>) -> Request<axum::body::Body> {
 #[tokio::test]
 async fn rpc_without_token_is_401() {
     let pool = seed_pool().await;
-    let router = koma_server::build_router(pool, &["http://localhost:5173"], std::env::temp_dir());
+    let router = koma_server::build_router(pool, &["http://localhost:5173"], std::env::temp_dir(), koma_server::fetch::test_client());
     let res = router.clone().oneshot(ping_request(None)).await.unwrap();
     assert_eq!(
         res.status(),
@@ -60,7 +60,7 @@ async fn rpc_without_token_is_401() {
 #[tokio::test]
 async fn rpc_with_valid_token_answers_unary_grpc_web() {
     let pool = seed_pool().await;
-    let router = koma_server::build_router(pool, &["http://localhost:5173"], std::env::temp_dir());
+    let router = koma_server::build_router(pool, &["http://localhost:5173"], std::env::temp_dir(), koma_server::fetch::test_client());
     let res = router
         .clone()
         .oneshot(ping_request(Some("test-token")))
@@ -83,7 +83,7 @@ async fn rpc_with_valid_token_answers_unary_grpc_web() {
 #[tokio::test]
 async fn wrong_token_is_401() {
     let pool = seed_pool().await;
-    let router = koma_server::build_router(pool, &["http://localhost:5173"], std::env::temp_dir());
+    let router = koma_server::build_router(pool, &["http://localhost:5173"], std::env::temp_dir(), koma_server::fetch::test_client());
     let res = router
         .oneshot(ping_request(Some("wrong-token")))
         .await
@@ -94,7 +94,7 @@ async fn wrong_token_is_401() {
 #[tokio::test]
 async fn cors_preflight_from_allowed_origin_passes() {
     let pool = seed_pool().await;
-    let router = koma_server::build_router(pool, &["http://localhost:5173"], std::env::temp_dir());
+    let router = koma_server::build_router(pool, &["http://localhost:5173"], std::env::temp_dir(), koma_server::fetch::test_client());
     let req = Request::builder()
         .method("OPTIONS")
         .uri("/koma.v1.KomaService/Ping")

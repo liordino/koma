@@ -26,11 +26,3 @@ export function transportClient() {
 	return komaCache;
 }
 
-// fetch-to-blob (decision 26): page images ride the authed fetch, wrapped into object URLs.
-export async function fetchPageBlob(chapterId: number, pageN: number): Promise<string | undefined> {
-	const res = await fetch(`${API_BASE()}/pages/${chapterId}/${pageN}`, {
-		headers: { Authorization: `Bearer ${TOKEN()}` }
-	});
-	if (!res.ok) return undefined;
-	return URL.createObjectURL(await res.blob());
-}

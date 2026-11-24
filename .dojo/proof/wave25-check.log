@@ -1,0 +1,8 @@
+PASS: ListChapters + DownloadChapter RPCs in proto
+PASS: self-driving worker in main (spawned loop)
+PASS: worker records page counts
+PASS: detail route exists
+PASS: detail rust tests pass (download -> downloaded + pages)
+PASS: detail playwright passes (seeded download + read link)
+PASS: tsc + vite build green
+PASS: full rust suite green

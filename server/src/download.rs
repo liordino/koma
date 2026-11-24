@@ -183,11 +183,14 @@ pub async fn run_queue_once<R: QueueRunner>(
             .execute(pool)
             .await?;
         match runner.run(&task).await {
-            Ok(_) => {
-                sqlx::query("UPDATE chapter SET state = 'downloaded', state_error = NULL WHERE id = ?")
-                    .bind(task.chapter_row_id)
-                    .execute(pool)
-                    .await?;
+            Ok(pages) => {
+                sqlx::query(
+                    "UPDATE chapter SET state = 'downloaded', state_error = NULL, pages = ? WHERE id = ?",
+                )
+                .bind(pages as i64)
+                .bind(task.chapter_row_id)
+                .execute(pool)
+                .await?;
                 ok += 1;
             }
             Err(e) => {
@@ -207,6 +210,8 @@ pub async fn run_queue_once<R: QueueRunner>(
 /// block, downloads, and fires the report. Single-writer discipline: exactly one runner per app.
 pub struct RealRunner {
     pub http: SharedClient,
+    /// Adapter with an injectable base URL (tests pass wiremock; main passes production).
+    pub adapter: crate::source::mangadex::MangaDexAdapter,
     pub pool: DbPool,
     pub storage_root: std::path::PathBuf,
 }
@@ -218,8 +223,8 @@ impl QueueRunner for RealRunner {
         if source_key != "mangadex" {
             return Err(DownloadError::Db(sqlx::Error::RowNotFound)); // unknown adapter → failed, contained
         }
-        let adapter = crate::source::mangadex::MangaDexAdapter::production()?;
-        let ath = adapter
+        let ath = self
+            .adapter
             .at_home(&task.external_id)
             .await
             .map_err(DownloadError::Fetch)?;
@@ -231,6 +236,6 @@ impl QueueRunner for RealRunner {
             source_key: &task.source_key,
             report: ath.report.as_ref().map(|(u, b)| (u.as_str(), b)),
         };
-        download_chapter(&self.http, &adapter, &ctx).await
+        download_chapter(&self.http, &self.adapter, &ctx).await
     }
 }

@@ -7,6 +7,8 @@ import { test } from '@playwright/test';
 //   (UPDATE chapter SET storage_dir='pages', downloaded=1) to real page files.
 const TOKEN = 'shots';
 const UI = 'http://localhost:5173';
+// Gate runs redirect captures to a throwaway dir; README assets regenerate deliberately.
+const OUT = process.env.KOMA_SHOTS_DIR ?? '../../target/shots';
 
 async function setup(page: import('@playwright/test').Page) {
 	await page.addInitScript(([api, token]: string[]) => {
@@ -20,7 +22,7 @@ test('library (desktop)', async ({ page }) => {
 	await page.setViewportSize({ width: 1280, height: 800 });
 	await page.goto(`${UI}/`);
 	await page.waitForTimeout(1500);
-	await page.screenshot({ path: '../.github/assets/screenshot-library.png' });
+	await page.screenshot({ path: `${OUT}/screenshot-library.png` });
 });
 
 test('reader (desktop)', async ({ page }) => {
@@ -31,7 +33,7 @@ test('reader (desktop)', async ({ page }) => {
 	// sit a few pages into the chapter so the windowed reader shows loaded pages
 	await page.evaluate(() => window.scrollTo({ top: 2 * 1200 }));
 	await page.waitForTimeout(1500);
-	await page.screenshot({ path: '../.github/assets/screenshot-reader.png' });
+	await page.screenshot({ path: `${OUT}/screenshot-reader.png` });
 });
 
 test('reader (mobile)', async ({ browser }) => {
@@ -42,7 +44,7 @@ test('reader (mobile)', async ({ browser }) => {
 	await page.waitForTimeout(2500);
 	await page.evaluate(() => window.scrollTo({ top: 1200 }));
 	await page.waitForTimeout(1200);
-	await page.screenshot({ path: '../.github/assets/screenshot-reader-mobile.png' });
+	await page.screenshot({ path: `${OUT}/screenshot-reader-mobile.png` });
 	await ctx.close();
 });
 
@@ -51,5 +53,13 @@ test('categories (desktop)', async ({ page }) => {
 	await page.setViewportSize({ width: 1280, height: 800 });
 	await page.goto(`${UI}/categories`);
 	await page.waitForTimeout(1500);
-	await page.screenshot({ path: '../.github/assets/screenshot-categories.png' });
+	await page.screenshot({ path: `${OUT}/screenshot-categories.png` });
+});
+
+test('manga detail (desktop)', async ({ page }) => {
+	await setup(page);
+	await page.setViewportSize({ width: 1280, height: 800 });
+	await page.goto(`${UI}/manga/1`);
+	await page.waitForTimeout(2500);
+	await page.screenshot({ path: `${OUT}/screenshot-detail.png` });
 });

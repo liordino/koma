@@ -163,3 +163,46 @@ status: done
 
 ## Owner gates before repo publication (recorded on answer)
 - Repo public/private? publish posture + README final positioning review (decision 21 gates).
+
+## M4 — UI overhaul (plan branch plan/koma-m4; direction: Ink & Amber, user-pinned)
+
+## Wave 23 — Covers infrastructure + design system + app shell
+status: done
+- Outcome: migration 0007 (manga.cover_url, chapter.pages); /covers/{manga_id} auth-gated
+  route (disk cache, allowlisted outbound fetch, placeholder 404); web design tokens
+  (ink/amber, Outfit 500/700 self-hosted), app shell (top bar + mobile bottom tabs),
+  library rebuilt as cover grid with panel framing.
+- Check: Rust covers test (fetch-once-then-cache via wiremock); Playwright library grid
+  (cards request /covers, chips filter, placeholder fallback); tsc + vite build green.
+
+## Wave 24 — Search + add flow
+status: done
+- Outcome: SearchManga RPC (adapter proxy, rate-limited, wiremock-testable); /search page
+  (results grid, hotlinked source covers, source badges, add-to-category, in-library state).
+- Check: Rust search RPC test (wiremock); Playwright search flow (live MangaDex "one piece"
+  -> results -> add -> appears in library); tsc + build green.
+
+## Wave 25 — Manga detail + chapters + self-driving downloads
+status: done
+- Outcome: ListChapters + DownloadChapter RPCs; background queue worker task in main.rs
+  (the M2 queue becomes self-driving); worker records chapter page counts; /manga/{id}
+  detail page (hero + chapter list with state badges + download/read actions); library
+  cards link to detail.
+- Check: Rust RPC tests (At-Home mock -> enqueue -> worker pass -> downloaded + pages
+  set); Playwright detail spec on seeded data; tsc + build green.
+
+## Wave 26 — Categories + reader chrome + mobile pass
+status: done
+- Outcome: categories page redesign (cards + counts; consent and purge flows preserved),
+  reader chrome polish (page pill, amber progress strip, safe areas), empty states,
+  browser surfaces themed (selection, focus ring, scrollbar), full mobile pass.
+- Check: updated categories spec (consent + backup-gated purge intact), reader spec green,
+  mobile viewport captures verified.
+
+## Wave 27 — Finish: review, DESIGN.md, screenshots, README, merge
+status: done
+- Outcome: batched desktop+mobile captures of every page; impeccable detect on changed
+  targets; degraded finish review + fix batch; DESIGN.md + .impeccable/design.json from
+  the built world; README screenshots regenerated; desktop shell re-verified; M4 merged.
+- Check: review disposition recorded; DESIGN.md tokens match shipped CSS; all gates green;
+  merge to main; CI green.

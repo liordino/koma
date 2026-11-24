@@ -31,6 +31,12 @@ service LibraryService {
   rpc GetProgress(GetProgressRequest) returns (GetProgressResponse);
   // Manual-first update pass (v1): external-ID upserts, idempotent by design.
   rpc UpdateLibrary(UpdateLibraryRequest) returns (UpdateLibraryResponse);
+  // Source search proxy (tier A: MangaDex) — results carry the source badge.
+  rpc SearchManga(SearchMangaRequest) returns (SearchMangaResponse);
+  // Chapter list of a library manga (DB rows — state as data).
+  rpc ListChapters(ListChaptersRequest) returns (ListChaptersResponse);
+  // Enqueue a chapter download; the background worker drives it to completion.
+  rpc DownloadChapter(DownloadChapterRequest) returns (DownloadChapterResponse);
   // Explicit read tracking: the read predicate is an explicit mark (v1).
   rpc MarkRead(MarkReadRequest) returns (MarkReadResponse);
   // Category config: rename + flip destructive flags (consent handled in the UI layer).
@@ -154,6 +160,36 @@ message UpdateCategoryResponse {
 }
 
 message AddMangaToCategoryResponse {}
+
+message SearchMangaRequest {
+  string query = 1;
+  int32 limit = 2;
+}
+
+message SearchMangaResponse {
+  repeated MangaSummary items = 1;
+}
+
+message ListChaptersRequest {
+  int64 manga_id = 1;
+}
+
+message ChapterInfo {
+  int64 id = 1;
+  string number = 2;
+  string state = 3;
+  int32 pages = 4;
+}
+
+message ListChaptersResponse {
+  repeated ChapterInfo items = 1;
+}
+
+message DownloadChapterRequest {
+  int64 chapter_id = 1;
+}
+
+message DownloadChapterResponse {}
 
 message UpsertProgressResponse {}
 

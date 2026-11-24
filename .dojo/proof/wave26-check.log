@@ -1,0 +1,9 @@
+PASS: categories redesigned as cards
+PASS: consent gate survives the redesign
+PASS: reader chrome: progress strip + pill
+PASS: categories spec asserts consent + purge on the new shape
+PASS: categories spec passes
+PASS: reader spec still green
+PASS: mobile + desktop captures render (screenshots spec)
+PASS: tsc + vite build green
+PASS: full rust suite green

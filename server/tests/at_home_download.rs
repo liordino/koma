@@ -130,7 +130,7 @@ async fn end_to_end_download_and_serve() {
     assert_eq!(row.1.as_deref(), Some("mangadex/chapters/ch-ext-1"));
 
     // The /pages route serves the freshly stored bytes (auth + fetch-to-blob path):
-    let router = koma_server::build_router(pool, &["http://localhost:5173"], root.clone());
+    let router = koma_server::build_router(pool, &["http://localhost:5173"], root.clone(), koma_server::fetch::test_client());
     let req = Request::builder()
         .method("GET")
         .uri("/pages/1/0")
