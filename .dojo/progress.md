@@ -313,3 +313,20 @@
 - Lens false-positive chain documented (findings.md): stale LSP snapshot refuted by
   tsc + direct probe + runtime pass.
 - wave25 gate 8/8.
+
+## Wave 26 — Categories + reader chrome — DONE (2026-11-24)
+- Categories: card grid (name inline-edit + rename, membership count via listLibrary,
+  consent-gated flag w/ revert-on-denial, per-card purge w/ confirm + backup gating,
+  global export). Spec rewritten: toHaveValue (Svelte bind:value sets the PROPERTY,
+  never the attribute — input[value=] selectors cannot match client-side renders),
+  positive matchers, dialog handlers registered BEFORE clicks (dialogs auto-dismiss
+  without a handler), click() for consent-denial (check() is unsatisfiable when the
+  revert is the designed behavior).
+- Reader: counter pill (strip separator restored — adjacent text nodes concatenate
+  in DOM textContent), amber progress strip (the signature move), pages.ts split
+  (fetch-to-blob module symmetry: koma/covers/pages), bigint chapter ids.
+- Gate-architecture lesson: wave-13/20 runners never owned their servers (the old gates
+  did) — all runners now self-contained (kill, fresh DB, serve, seed, spec, teardown);
+  ports no longer collide across sequential gate runs. Screenshots spec safe-by-default
+  (throwaway dir unless explicitly pointed at README assets).
+- wave26 gate 9/9; reader + categories + shots + tsc + build + suite green.

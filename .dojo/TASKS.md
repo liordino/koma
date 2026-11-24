@@ -192,7 +192,7 @@ status: done
   set); Playwright detail spec on seeded data; tsc + build green.
 
 ## Wave 26 — Categories + reader chrome + mobile pass
-status: pending
+status: done
 - Outcome: categories page redesign (cards + counts; consent and purge flows preserved),
   reader chrome polish (page pill, amber progress strip, safe areas), empty states,
   browser surfaces themed (selection, focus ring, scrollbar), full mobile pass.
