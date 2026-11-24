@@ -38,6 +38,14 @@ allow = [
 [advisories]
 version = 2
 yanked = "deny"
+ignore = [
+    # RUSTSEC-2026-0459 (SQLite < 3.54 uninitialized page-cache via crafted db+wal
+    # pair). Local attack vector; Koma never opens SQLite files written by a
+    # less-trusted party (single-operator loopback service, .tachibk import is
+    # protobuf, not SQLite). sqlx 0.8 pins libsqlite3-sys ^0.30 so the patched
+    # 3.54 bundle is unreachable until sqlx ships it. Revisit on sqlx updates.
+    "RUSTSEC-2026-0459",
+]
 
 [sources]
 unknown-registry = "deny"
