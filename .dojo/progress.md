@@ -243,3 +243,17 @@
   per the stored release-tagging preference. README review fixes committed pre-push
   (Running it / Status / Development sections; Tier-B accuracy; decision-log pointer).
 - Insights from M3 NOT promoted (no explicit consent; remain in findings.md).
+
+## CI hardening on first public run — DONE (2026-11-24)
+- First-ever CI execution on GitHub runners surfaced (and fixed, in order): missing protoc
+  on runner (apt install); buf STANDARD on later-wave protos (Library -> LibraryService,
+  unique response wrappers, AddMangaToCategoryRequest; mihon vendored schema excluded from
+  lint with rationale); glib/webkit absence for tauri on linux (test job excludes koma-desktop;
+  shell gated by local wave-22 check); unlicensed crates (workspace MIT declared); tauri-tree
+  licenses MPL-2.0 + CDLA-Permissive-1.0 adopted deliberately; result_large_err allow (tonic
+  Status pattern, linux-first firing); unused chrono dropped (unmaintained advisory); url
+  updated (blob-origin overflow); RUSTSEC-2026-0459 ignore recorded with justification (local
+  vector, our db files single-operator; sqlx pins unpatched bundle — revisit on sqlx updates);
+  least-privilege workflow + redundant cargo-audit dropped (deny covers the same rustsec DB).
+- All three jobs green: test (1m34s), proto, hygiene (gitleaks + cargo-deny).
+- Publication state: github.com/liordino/koma public, v0.1.0 tag, CI green on main.
