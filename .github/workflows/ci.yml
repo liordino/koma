@@ -5,6 +5,10 @@ on:
     branches: [main, "plan/**"]
   pull_request:
 
+# Least privilege: every job runs read-only against the repo.
+permissions:
+  contents: read
+
 env:
   CARGO_TERM_COLOR: always
   RUSTFLAGS: "-D warnings"
@@ -51,10 +55,6 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       - name: cargo-deny
         uses: EmbarkStudios/cargo-deny-action@v2
-      - name: cargo-audit
-        uses: rustsec/audit-check@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
   proto:
     runs-on: ubuntu-latest
