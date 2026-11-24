@@ -6,9 +6,10 @@
 	import { page } from '$app/state';
 	import { library } from '$lib/koma';
 	import { coverObjectUrl } from '$lib/covers';
-	import type { ChapterInfo, MangaSummary } from '../../../gen/koma/v1/koma_pb';
+	import type { ChapterInfo, MangaSummary } from '$lib/pb';
 
-	let mangaId = $derived(BigInt(page.params.id ?? '0'));
+	// Route params are a record at runtime; the cast sidesteps narrow per-route typing.
+	let mangaId = $derived(BigInt((page.params as Record<string, string>).id ?? '0'));
 	let manga = $state<MangaSummary | null>(null);
 	let chapters = $state<ChapterInfo[]>([]);
 	let cover = $state<string | null>(null);

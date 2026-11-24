@@ -2,7 +2,7 @@
 	// Search — the core loop's front door: query the tier-A source, add to the library
 	// (optionally into a category), hotlinked source covers until the title is added.
 	import { library } from '$lib/koma';
-	import type { Category, MangaSummary } from '../../gen/koma/v1/koma_pb';
+	import type { Category, MangaSummary } from '$lib/pb';
 
 	let q = $state('');
 	let results = $state<MangaSummary[]>([]);

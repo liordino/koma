@@ -2,7 +2,7 @@
 	// Library — the manga page: covers as panels in a grid (direction contract FIRST VIEWPORT).
 	import { library } from '$lib/koma';
 	import { coverObjectUrl } from '$lib/covers';
-	import type { Category, MangaSummary } from '../gen/koma/v1/koma_pb';
+	import type { Category, MangaSummary } from '$lib/pb';
 
 	let items = $state<MangaSummary[]>([]);
 	let cats = $state<Category[]>([]);

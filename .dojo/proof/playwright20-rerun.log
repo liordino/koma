@@ -108,7 +108,7 @@
       "line": 0,
       "specs": [
         {
-          "title": "category config: create, consent flag, backup+purge flow",
+          "title": "categories: create, rename, consent flag, backup + per-card purge",
           "ok": true,
           "tags": [],
           "tests": [
@@ -123,12 +123,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3495,
+                  "duration": 3428,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-24T16:11:12.988Z",
+                  "startTime": "2026-11-24T23:27:16.540Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -136,9 +136,43 @@
               "status": "expected"
             }
           ],
-          "id": "262c5455b60c16e7a404-b35b2e6b3cf095ae9204",
+          "id": "262c5455b60c16e7a404-4335d1473220028ba43d",
           "file": "categories.spec.ts",
-          "line": 9,
+          "line": 18,
+          "column": 1
+        },
+        {
+          "title": "categories: consent denial reverts the destructive flag",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 937,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-24T23:27:20.235Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "262c5455b60c16e7a404-2d19153461deff684ee0",
+          "file": "categories.spec.ts",
+          "line": 53,
           "column": 1
         }
       ]
@@ -146,9 +180,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-24T16:11:08.498Z",
-    "duration": 8943.180999999999,
-    "expected": 1,
+    "startTime": "2026-11-24T23:27:11.878Z",
+    "duration": 9979.161,
+    "expected": 2,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
