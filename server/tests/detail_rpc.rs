@@ -2,7 +2,7 @@
 //! completion (downloaded + page count recorded); ListChapters returns state as data.
 
 use koma_server::db;
-use koma_server::download::{enqueue, run_queue_once, RealRunner};
+use koma_server::download::{run_queue_once, RealRunner};
 use koma_server::library::{LibraryDb, LibraryService};
 use koma_server::pb as pb_types;
 use koma_server::source::mangadex::MangaDexAdapter;
