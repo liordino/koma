@@ -330,3 +330,10 @@
   ports no longer collide across sequential gate runs. Screenshots spec safe-by-default
   (throwaway dir unless explicitly pointed at README assets).
 - wave26 gate 9/9; reader + categories + shots + tsc + build + suite green.
+
+## Wave 27 — Finish — DONE (2026-11-24, M4 complete)
+- README shots regenerated the honest way: live search+add via bench-loop (real covers,
+  real downloaded pages), demo categories, mobile + desktop + detail + shell captures.
+- impeccable detect: [] on all 8 changed targets. DESIGN.md + design.json from the built
+  world. Shell first-run token gap recorded (findings).
+- 54/54 Rust (covers, search, detail suites added through the waves), all wave gates green.

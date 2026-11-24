@@ -200,7 +200,7 @@ status: done
   mobile viewport captures verified.
 
 ## Wave 27 — Finish: review, DESIGN.md, screenshots, README, merge
-status: pending
+status: done
 - Outcome: batched desktop+mobile captures of every page; impeccable detect on changed
   targets; degraded finish review + fix batch; DESIGN.md + .impeccable/design.json from
   the built world; README screenshots regenerated; desktop shell re-verified; M4 merged.
