@@ -195,7 +195,7 @@ async fn router_level_create_category_through_bearer_middleware() {
     // Token "t" is the seeded owner's; its hash must be what /pages-style auth stores.
     let _ = hash_token("t");
 
-    let router = koma_server::build_router(pool, &["http://localhost:5173"], std::env::temp_dir());
+    let router = koma_server::build_router(pool, &["http://localhost:5173"], std::env::temp_dir(), koma_server::fetch::test_client());
 
     let body = pb_types::CreateCategoryRequest { name: "FromWire".into() };
     let mut bytes = Vec::new();

@@ -6,6 +6,7 @@
 #![allow(clippy::result_large_err)]
 
 pub mod auth;
+pub mod covers;
 pub mod db;
 pub mod download;
 pub mod library;
@@ -71,6 +72,7 @@ pub fn build_router(
     pool: DbPool,
     allowed_origins: &[&str],
     storage_root: std::path::PathBuf,
+    outbound: crate::fetch::SharedClient,
 ) -> Router {
     let cors = CorsLayer::new()
         .allow_origin(
@@ -105,7 +107,13 @@ pub fn build_router(
 
     let pages_state = pages::PagesState {
         pool: pool.clone(),
-        base_dir: storage_root,
+        base_dir: storage_root.clone(),
+    };
+
+    let covers_state = covers::CoversState {
+        pool: pool.clone(),
+        outbound,
+        storage_root,
     };
 
 
@@ -114,6 +122,10 @@ pub fn build_router(
         .route(
             "/pages/{chapter_id}/{page_n}",
             axum::routing::get(pages::get_page).with_state(pages_state),
+        )
+        .route(
+            "/covers/{manga_id}",
+            axum::routing::get(covers::get_cover).with_state(covers_state),
         )
         .layer(middleware::from_fn_with_state(pool.clone(), auth::require_bearer))
         .layer(cors)

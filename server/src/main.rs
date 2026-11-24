@@ -21,8 +21,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     db::migrate(&pool).await?;
     auth::seed_owner(&pool, &token).await?;
 
+    // Production outbound: MangaDex API + At-Home covers only (allowlist is the SSRF guard).
+    let outbound = std::sync::Arc::new(
+        koma_server::fetch::OutboundClient::new(
+            vec!["mangadex.org".to_string(), "mangadex.network".to_string()],
+            5,
+            10,
+            std::time::Duration::from_secs(1),
+        )?,
+    );
+
     let origin_refs: Vec<&str> = allowed_origins.iter().map(String::as_str).collect();
-    let app = build_router(pool, &origin_refs, storage_root);
+    let app = build_router(pool, &origin_refs, storage_root, outbound);
     let listener = tokio::net::TcpListener::bind(&addr).await?;
     println!("koma-server on {addr}");
     axum::serve(listener, app).await?;

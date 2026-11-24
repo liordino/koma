@@ -18,7 +18,7 @@ async fn seed() -> (koma_server::DbPool, std::path::PathBuf, axum::Router) {
     // Every route — /pages included — is behind the bearer middleware (decision 24).
     koma_server::auth::seed_owner(&pool, "t").await.expect("seed owner");
 
-    let router = koma_server::build_router(pool.clone(), &["http://localhost:5173"], root.clone());
+    let router = koma_server::build_router(pool.clone(), &["http://localhost:5173"], root.clone(), koma_server::fetch::test_client());
     (pool, root, router)
 }
 

@@ -36,10 +36,19 @@ impl LibraryDb {
         desc: &str,
     ) -> Result<MangaRow, Status> {
         // Upsert semantics: the manga row is keyed by (source_id, source_key) UNIQUE.
-        sqlx::query("INSERT OR IGNORE INTO manga (source_id, source_key, title) SELECT id, ?, ? FROM source WHERE key = ?")
+        sqlx::query("INSERT OR IGNORE INTO manga (source_id, source_key, title, cover_url) SELECT id, ?, ?, ? FROM source WHERE key = ?")
             .bind(external_id)
             .bind(title)
+            .bind(if cover.is_empty() { None } else { Some(cover) })
             .bind(source_key)
+            .execute(&self.pool)
+            .await
+            .map_err(db_err)?;
+        // refresh on re-add: title/cover upsert (M4: cover_url is persisted, decision 14 semantics)
+        sqlx::query("UPDATE manga SET title = ?, cover_url = ? WHERE source_key = ?")
+            .bind(title)
+            .bind(if cover.is_empty() { None } else { Some(cover) })
+            .bind(external_id)
             .execute(&self.pool)
             .await
             .map_err(db_err)?;
@@ -130,7 +139,7 @@ impl LibraryService for LibraryDb {
                 title,
                 source_key: skey.unwrap_or_default(),
                 external_id: String::new(),
-                cover_url: String::new(),
+                cover_url: format!("/covers/{id}"),
                 description: String::new(),
             })
             .collect();

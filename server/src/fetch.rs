@@ -94,6 +94,24 @@ pub struct OutboundClient {
 }
 
 impl OutboundClient {
+    /// Infallible assembly from a prebuilt HTTP client (tests / dependency injection).
+    pub fn from_parts(
+        allowlist: Vec<String>,
+        api_budget: usize,
+        at_home_budget: usize,
+        window: Duration,
+        http: reqwest::Client,
+    ) -> Self {
+        Self {
+            allowlist,
+            http,
+            limiters: std::sync::Mutex::new([
+                PlaneLimiter::new(api_budget, window),
+                PlaneLimiter::new(at_home_budget, window),
+            ]),
+        }
+    }
+
     /// Budgets are per plane, per window.
     pub fn new(
         allowlist: Vec<String>,
@@ -199,6 +217,21 @@ impl OutboundClient {
 
 /// Shared-handle convenience alias.
 pub type SharedClient = Arc<OutboundClient>;
+
+/// Constructor for integration tests: loopback allowlist, generous plane budgets.
+/// Public because the test binaries are separate crates; never used in production paths.
+#[doc(hidden)]
+pub fn test_client() -> SharedClient {
+    // reqwest::Client::new() panics only on TLS-backend init failure, which is not a
+    // recoverable test condition; assembly itself is infallible via from_parts.
+    Arc::new(OutboundClient::from_parts(
+        vec!["127.0.0.1".to_string()],
+        1000,
+        1000,
+        std::time::Duration::from_secs(1),
+        reqwest::Client::new(),
+    ))
+}
 
 #[cfg(test)]
 mod tests {
