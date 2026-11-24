@@ -315,6 +315,46 @@ impl LibraryService for LibraryDb {
         Ok(Response::new(pb_types::SearchMangaResponse { items }))
     }
 
+    async fn list_chapters(
+        &self,
+        request: Request<pb_types::ListChaptersRequest>,
+    ) -> Grpc<pb_types::ListChaptersResponse> {
+        let r = request.into_inner();
+        let rows: Vec<(i64, String, String, Option<i64>)> = sqlx::query_as(
+            "SELECT id, number, state, pages FROM chapter WHERE manga_id = ?              ORDER BY id DESC LIMIT 200",
+        )
+        .bind(r.manga_id)
+        .fetch_all(&self.pool)
+        .await
+        .map_err(db_err)?;
+        let items = rows
+            .into_iter()
+            .map(|(id, number, state, pages)| pb_types::ChapterInfo {
+                id,
+                number,
+                state,
+                pages: pages.unwrap_or(0) as i32,
+            })
+            .collect();
+        Ok(Response::new(pb_types::ListChaptersResponse { items }))
+    }
+
+    async fn download_chapter(
+        &self,
+        request: Request<pb_types::DownloadChapterRequest>,
+    ) -> Grpc<pb_types::DownloadChapterResponse> {
+        let r = request.into_inner();
+        crate::download::enqueue(&self.pool, r.chapter_id)
+            .await
+            .map_err(|e| match e {
+                crate::download::DownloadError::Db(db) => db_err(db),
+                other => Status::internal(other.to_string()),
+            })?;
+        // The background worker (spawned in main) picks the queue up within its poll
+        // window; the queue state is visible in ListChapters immediately.
+        Ok(Response::new(pb_types::DownloadChapterResponse {}))
+    }
+
     async fn export_backup(
         &self,
         _request: Request<pb_types::ExportBackupRequest>,

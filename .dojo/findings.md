@@ -36,3 +36,14 @@
 - Asset pipeline: logo (manga-page motif, koma = コマ), banner, multi-size shell
   icon; screenshots captured from a REAL seeded instance (owner's .tachibk titles
   + device chapter pages); desktop shot = live Tauri window via Win32 capture.
+
+## 2026-11-24 — pi-lens LSP stale-cache false positives (wave 25, resolved by runtime)
+- The lens LSP held a pre-wave-24 project snapshot: its own error text enumerated a
+  12-method LibraryService client (no searchManga) while disk had 15 — the stale-cache
+  smoking gun. Three active re-probes (incl. refreshRunners) never invalidated it.
+- Ground truth: tsc --noEmit passed post-sync; grep confirmed koma_pb.ts exports;
+  koma_pb.ts probed directly came back clean (only a typos false-positive on a generated
+  hash); vite build green; and the wave-25 Playwright download test PASSED in a real
+  browser, executing the very client methods the LSP claimed were missing. Findings
+  recorded as refuted; if the LSP re-reports them on unchanged code, they are known
+  stale artifacts, not regressions.

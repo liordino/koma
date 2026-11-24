@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file koma/v1/koma.proto.
  */
 export const file_koma_v1_koma: GenFile = /*@__PURE__*/
-  fileDesc("ChJrb21hL3YxL2tvbWEucHJvdG8SB2tvbWEudjEiDQoLUGluZ1JlcXVlc3QiHwoMUGluZ1Jlc3BvbnNlEg8KB21lc3NhZ2UYASABKAkiFgoUVXBkYXRlTGlicmFyeVJlcXVlc3QiLwoVVXBkYXRlTGlicmFyeVJlc3BvbnNlEhYKDmNoYXB0ZXJzX2FkZGVkGAEgASgFIjwKFFB1cmdlQ2F0ZWdvcnlSZXF1ZXN0EhMKC2NhdGVnb3J5X2lkGAEgASgDEg8KB2NvbmZpcm0YAiABKAgiMAoVUHVyZ2VDYXRlZ29yeVJlc3BvbnNlEhcKD2NoYXB0ZXJzX3B1cmdlZBgBIAEoBSJMChVVcGRhdGVDYXRlZ29yeVJlcXVlc3QSCgoCaWQYASABKAMSDAoEbmFtZRgCIAEoCRIZChFkZWxldGVfYWZ0ZXJfcmVhZBgDIAEoCCIVChNFeHBvcnRCYWNrdXBSZXF1ZXN0IiQKFEV4cG9ydEJhY2t1cFJlc3BvbnNlEgwKBHBhdGgYASABKAkiJQoPTWFya1JlYWRSZXF1ZXN0EhIKCmNoYXB0ZXJfaWQYASABKAMiSQoQTWFya1JlYWRSZXNwb25zZRIWCg5tb3ZlZF90b190cmFzaBgBIAEoCBIdChV0cmFzaF9yZXRlbnRpb25fdW50aWwYAiABKAMiegoMTWFuZ2FTdW1tYXJ5EgoKAmlkGAEgASgDEhIKCnNvdXJjZV9rZXkYAiABKAkSEwoLZXh0ZXJuYWxfaWQYAyABKAkSDQoFdGl0bGUYBCABKAkSEQoJY292ZXJfdXJsGAUgASgJEhMKC2Rlc2NyaXB0aW9uGAYgASgJIj8KCENhdGVnb3J5EgoKAmlkGAEgASgDEgwKBG5hbWUYAiABKAkSGQoRZGVsZXRlX2FmdGVyX3JlYWQYAyABKAgihgEKD0FkZE1hbmdhUmVxdWVzdBISCgpzb3VyY2Vfa2V5GAEgASgJEhMKC2V4dGVybmFsX2lkGAIgASgJEg0KBXRpdGxlGAMgASgJEhEKCWNvdmVyX3VybBgEIAEoCRITCgtkZXNjcmlwdGlvbhgFIAEoCRITCgtjYXRlZ29yeV9pZBgGIAEoAyIpChJMaXN0TGlicmFyeVJlcXVlc3QSEwoLY2F0ZWdvcnlfaWQYASABKAMiOwoTTGlzdExpYnJhcnlSZXNwb25zZRIkCgVpdGVtcxgBIAMoCzIVLmtvbWEudjEuTWFuZ2FTdW1tYXJ5Ih0KD0dldE1hbmdhUmVxdWVzdBIKCgJpZBgBIAEoAyIlChVDcmVhdGVDYXRlZ29yeVJlcXVlc3QSDAoEbmFtZRgBIAEoCSIXChVMaXN0Q2F0ZWdvcmllc1JlcXVlc3QiOgoWTGlzdENhdGVnb3JpZXNSZXNwb25zZRIgCgVpdGVtcxgBIAMoCzIRLmtvbWEudjEuQ2F0ZWdvcnkiQgoZQWRkTWFuZ2FUb0NhdGVnb3J5UmVxdWVzdBIQCghtYW5nYV9pZBgBIAEoAxITCgtjYXRlZ29yeV9pZBgCIAEoAyJRChVVcHNlcnRQcm9ncmVzc1JlcXVlc3QSEgoKY2hhcHRlcl9pZBgBIAEoAxIOCgZwYWdlX24YAiABKAUSFAoMc2Nyb2xsX3JhdGlvGAMgASgBIjgKEEFkZE1hbmdhUmVzcG9uc2USJAoFbWFuZ2EYASABKAsyFS5rb21hLnYxLk1hbmdhU3VtbWFyeSI4ChBHZXRNYW5nYVJlc3BvbnNlEiQKBW1hbmdhGAEgASgLMhUua29tYS52MS5NYW5nYVN1bW1hcnkiPQoWQ3JlYXRlQ2F0ZWdvcnlSZXNwb25zZRIjCghjYXRlZ29yeRgBIAEoCzIRLmtvbWEudjEuQ2F0ZWdvcnkiPQoWVXBkYXRlQ2F0ZWdvcnlSZXNwb25zZRIjCghjYXRlZ29yeRgBIAEoCzIRLmtvbWEudjEuQ2F0ZWdvcnkiHAoaQWRkTWFuZ2FUb0NhdGVnb3J5UmVzcG9uc2UiMgoSU2VhcmNoTWFuZ2FSZXF1ZXN0Eg0KBXF1ZXJ5GAEgASgJEg0KBWxpbWl0GAIgASgFIjsKE1NlYXJjaE1hbmdhUmVzcG9uc2USJAoFaXRlbXMYASADKAsyFS5rb21hLnYxLk1hbmdhU3VtbWFyeSIYChZVcHNlcnRQcm9ncmVzc1Jlc3BvbnNlIigKEkdldFByb2dyZXNzUmVxdWVzdBISCgpjaGFwdGVyX2lkGAEgASgDIksKE0dldFByb2dyZXNzUmVzcG9uc2USDgoGZXhpc3RzGAEgASgIEg4KBnBhZ2VfbhgCIAEoBRIUCgxzY3JvbGxfcmF0aW8YAyABKAEyQgoLS29tYVNlcnZpY2USMwoEUGluZxIULmtvbWEudjEuUGluZ1JlcXVlc3QaFS5rb21hLnYxLlBpbmdSZXNwb25zZTLJCAoOTGlicmFyeVNlcnZpY2USPwoIQWRkTWFuZ2ESGC5rb21hLnYxLkFkZE1hbmdhUmVxdWVzdBoZLmtvbWEudjEuQWRkTWFuZ2FSZXNwb25zZRJICgtMaXN0TGlicmFyeRIbLmtvbWEudjEuTGlzdExpYnJhcnlSZXF1ZXN0Ghwua29tYS52MS5MaXN0TGlicmFyeVJlc3BvbnNlEj8KCEdldE1hbmdhEhgua29tYS52MS5HZXRNYW5nYVJlcXVlc3QaGS5rb21hLnYxLkdldE1hbmdhUmVzcG9uc2USUQoOQ3JlYXRlQ2F0ZWdvcnkSHi5rb21hLnYxLkNyZWF0ZUNhdGVnb3J5UmVxdWVzdBofLmtvbWEudjEuQ3JlYXRlQ2F0ZWdvcnlSZXNwb25zZRJRCg5MaXN0Q2F0ZWdvcmllcxIeLmtvbWEudjEuTGlzdENhdGVnb3JpZXNSZXF1ZXN0Gh8ua29tYS52MS5MaXN0Q2F0ZWdvcmllc1Jlc3BvbnNlEl0KEkFkZE1hbmdhVG9DYXRlZ29yeRIiLmtvbWEudjEuQWRkTWFuZ2FUb0NhdGVnb3J5UmVxdWVzdBojLmtvbWEudjEuQWRkTWFuZ2FUb0NhdGVnb3J5UmVzcG9uc2USUQoOVXBzZXJ0UHJvZ3Jlc3MSHi5rb21hLnYxLlVwc2VydFByb2dyZXNzUmVxdWVzdBofLmtvbWEudjEuVXBzZXJ0UHJvZ3Jlc3NSZXNwb25zZRJICgtHZXRQcm9ncmVzcxIbLmtvbWEudjEuR2V0UHJvZ3Jlc3NSZXF1ZXN0Ghwua29tYS52MS5HZXRQcm9ncmVzc1Jlc3BvbnNlEk4KDVVwZGF0ZUxpYnJhcnkSHS5rb21hLnYxLlVwZGF0ZUxpYnJhcnlSZXF1ZXN0Gh4ua29tYS52MS5VcGRhdGVMaWJyYXJ5UmVzcG9uc2USSAoLU2VhcmNoTWFuZ2ESGy5rb21hLnYxLlNlYXJjaE1hbmdhUmVxdWVzdBocLmtvbWEudjEuU2VhcmNoTWFuZ2FSZXNwb25zZRI/CghNYXJrUmVhZBIYLmtvbWEudjEuTWFya1JlYWRSZXF1ZXN0Ghkua29tYS52MS5NYXJrUmVhZFJlc3BvbnNlElEKDlVwZGF0ZUNhdGVnb3J5Eh4ua29tYS52MS5VcGRhdGVDYXRlZ29yeVJlcXVlc3QaHy5rb21hLnYxLlVwZGF0ZUNhdGVnb3J5UmVzcG9uc2USSwoMRXhwb3J0QmFja3VwEhwua29tYS52MS5FeHBvcnRCYWNrdXBSZXF1ZXN0Gh0ua29tYS52MS5FeHBvcnRCYWNrdXBSZXNwb25zZRJOCg1QdXJnZUNhdGVnb3J5Eh0ua29tYS52MS5QdXJnZUNhdGVnb3J5UmVxdWVzdBoeLmtvbWEudjEuUHVyZ2VDYXRlZ29yeVJlc3BvbnNlYgZwcm90bzM");
+  fileDesc("ChJrb21hL3YxL2tvbWEucHJvdG8SB2tvbWEudjEiDQoLUGluZ1JlcXVlc3QiHwoMUGluZ1Jlc3BvbnNlEg8KB21lc3NhZ2UYASABKAkiFgoUVXBkYXRlTGlicmFyeVJlcXVlc3QiLwoVVXBkYXRlTGlicmFyeVJlc3BvbnNlEhYKDmNoYXB0ZXJzX2FkZGVkGAEgASgFIjwKFFB1cmdlQ2F0ZWdvcnlSZXF1ZXN0EhMKC2NhdGVnb3J5X2lkGAEgASgDEg8KB2NvbmZpcm0YAiABKAgiMAoVUHVyZ2VDYXRlZ29yeVJlc3BvbnNlEhcKD2NoYXB0ZXJzX3B1cmdlZBgBIAEoBSJMChVVcGRhdGVDYXRlZ29yeVJlcXVlc3QSCgoCaWQYASABKAMSDAoEbmFtZRgCIAEoCRIZChFkZWxldGVfYWZ0ZXJfcmVhZBgDIAEoCCIVChNFeHBvcnRCYWNrdXBSZXF1ZXN0IiQKFEV4cG9ydEJhY2t1cFJlc3BvbnNlEgwKBHBhdGgYASABKAkiJQoPTWFya1JlYWRSZXF1ZXN0EhIKCmNoYXB0ZXJfaWQYASABKAMiSQoQTWFya1JlYWRSZXNwb25zZRIWCg5tb3ZlZF90b190cmFzaBgBIAEoCBIdChV0cmFzaF9yZXRlbnRpb25fdW50aWwYAiABKAMiegoMTWFuZ2FTdW1tYXJ5EgoKAmlkGAEgASgDEhIKCnNvdXJjZV9rZXkYAiABKAkSEwoLZXh0ZXJuYWxfaWQYAyABKAkSDQoFdGl0bGUYBCABKAkSEQoJY292ZXJfdXJsGAUgASgJEhMKC2Rlc2NyaXB0aW9uGAYgASgJIj8KCENhdGVnb3J5EgoKAmlkGAEgASgDEgwKBG5hbWUYAiABKAkSGQoRZGVsZXRlX2FmdGVyX3JlYWQYAyABKAgihgEKD0FkZE1hbmdhUmVxdWVzdBISCgpzb3VyY2Vfa2V5GAEgASgJEhMKC2V4dGVybmFsX2lkGAIgASgJEg0KBXRpdGxlGAMgASgJEhEKCWNvdmVyX3VybBgEIAEoCRITCgtkZXNjcmlwdGlvbhgFIAEoCRITCgtjYXRlZ29yeV9pZBgGIAEoAyIpChJMaXN0TGlicmFyeVJlcXVlc3QSEwoLY2F0ZWdvcnlfaWQYASABKAMiOwoTTGlzdExpYnJhcnlSZXNwb25zZRIkCgVpdGVtcxgBIAMoCzIVLmtvbWEudjEuTWFuZ2FTdW1tYXJ5Ih0KD0dldE1hbmdhUmVxdWVzdBIKCgJpZBgBIAEoAyIlChVDcmVhdGVDYXRlZ29yeVJlcXVlc3QSDAoEbmFtZRgBIAEoCSIXChVMaXN0Q2F0ZWdvcmllc1JlcXVlc3QiOgoWTGlzdENhdGVnb3JpZXNSZXNwb25zZRIgCgVpdGVtcxgBIAMoCzIRLmtvbWEudjEuQ2F0ZWdvcnkiQgoZQWRkTWFuZ2FUb0NhdGVnb3J5UmVxdWVzdBIQCghtYW5nYV9pZBgBIAEoAxITCgtjYXRlZ29yeV9pZBgCIAEoAyJRChVVcHNlcnRQcm9ncmVzc1JlcXVlc3QSEgoKY2hhcHRlcl9pZBgBIAEoAxIOCgZwYWdlX24YAiABKAUSFAoMc2Nyb2xsX3JhdGlvGAMgASgBIjgKEEFkZE1hbmdhUmVzcG9uc2USJAoFbWFuZ2EYASABKAsyFS5rb21hLnYxLk1hbmdhU3VtbWFyeSI4ChBHZXRNYW5nYVJlc3BvbnNlEiQKBW1hbmdhGAEgASgLMhUua29tYS52MS5NYW5nYVN1bW1hcnkiPQoWQ3JlYXRlQ2F0ZWdvcnlSZXNwb25zZRIjCghjYXRlZ29yeRgBIAEoCzIRLmtvbWEudjEuQ2F0ZWdvcnkiPQoWVXBkYXRlQ2F0ZWdvcnlSZXNwb25zZRIjCghjYXRlZ29yeRgBIAEoCzIRLmtvbWEudjEuQ2F0ZWdvcnkiHAoaQWRkTWFuZ2FUb0NhdGVnb3J5UmVzcG9uc2UiMgoSU2VhcmNoTWFuZ2FSZXF1ZXN0Eg0KBXF1ZXJ5GAEgASgJEg0KBWxpbWl0GAIgASgFIjsKE1NlYXJjaE1hbmdhUmVzcG9uc2USJAoFaXRlbXMYASADKAsyFS5rb21hLnYxLk1hbmdhU3VtbWFyeSInChNMaXN0Q2hhcHRlcnNSZXF1ZXN0EhAKCG1hbmdhX2lkGAEgASgDIkcKC0NoYXB0ZXJJbmZvEgoKAmlkGAEgASgDEg4KBm51bWJlchgCIAEoCRINCgVzdGF0ZRgDIAEoCRINCgVwYWdlcxgEIAEoBSI7ChRMaXN0Q2hhcHRlcnNSZXNwb25zZRIjCgVpdGVtcxgBIAMoCzIULmtvbWEudjEuQ2hhcHRlckluZm8iLAoWRG93bmxvYWRDaGFwdGVyUmVxdWVzdBISCgpjaGFwdGVyX2lkGAEgASgDIhkKF0Rvd25sb2FkQ2hhcHRlclJlc3BvbnNlIhgKFlVwc2VydFByb2dyZXNzUmVzcG9uc2UiKAoSR2V0UHJvZ3Jlc3NSZXF1ZXN0EhIKCmNoYXB0ZXJfaWQYASABKAMiSwoTR2V0UHJvZ3Jlc3NSZXNwb25zZRIOCgZleGlzdHMYASABKAgSDgoGcGFnZV9uGAIgASgFEhQKDHNjcm9sbF9yYXRpbxgDIAEoATJCCgtLb21hU2VydmljZRIzCgRQaW5nEhQua29tYS52MS5QaW5nUmVxdWVzdBoVLmtvbWEudjEuUGluZ1Jlc3BvbnNlMuwJCg5MaWJyYXJ5U2VydmljZRI/CghBZGRNYW5nYRIYLmtvbWEudjEuQWRkTWFuZ2FSZXF1ZXN0Ghkua29tYS52MS5BZGRNYW5nYVJlc3BvbnNlEkgKC0xpc3RMaWJyYXJ5Ehsua29tYS52MS5MaXN0TGlicmFyeVJlcXVlc3QaHC5rb21hLnYxLkxpc3RMaWJyYXJ5UmVzcG9uc2USPwoIR2V0TWFuZ2ESGC5rb21hLnYxLkdldE1hbmdhUmVxdWVzdBoZLmtvbWEudjEuR2V0TWFuZ2FSZXNwb25zZRJRCg5DcmVhdGVDYXRlZ29yeRIeLmtvbWEudjEuQ3JlYXRlQ2F0ZWdvcnlSZXF1ZXN0Gh8ua29tYS52MS5DcmVhdGVDYXRlZ29yeVJlc3BvbnNlElEKDkxpc3RDYXRlZ29yaWVzEh4ua29tYS52MS5MaXN0Q2F0ZWdvcmllc1JlcXVlc3QaHy5rb21hLnYxLkxpc3RDYXRlZ29yaWVzUmVzcG9uc2USXQoSQWRkTWFuZ2FUb0NhdGVnb3J5EiIua29tYS52MS5BZGRNYW5nYVRvQ2F0ZWdvcnlSZXF1ZXN0GiMua29tYS52MS5BZGRNYW5nYVRvQ2F0ZWdvcnlSZXNwb25zZRJRCg5VcHNlcnRQcm9ncmVzcxIeLmtvbWEudjEuVXBzZXJ0UHJvZ3Jlc3NSZXF1ZXN0Gh8ua29tYS52MS5VcHNlcnRQcm9ncmVzc1Jlc3BvbnNlEkgKC0dldFByb2dyZXNzEhsua29tYS52MS5HZXRQcm9ncmVzc1JlcXVlc3QaHC5rb21hLnYxLkdldFByb2dyZXNzUmVzcG9uc2USTgoNVXBkYXRlTGlicmFyeRIdLmtvbWEudjEuVXBkYXRlTGlicmFyeVJlcXVlc3QaHi5rb21hLnYxLlVwZGF0ZUxpYnJhcnlSZXNwb25zZRJICgtTZWFyY2hNYW5nYRIbLmtvbWEudjEuU2VhcmNoTWFuZ2FSZXF1ZXN0Ghwua29tYS52MS5TZWFyY2hNYW5nYVJlc3BvbnNlEksKDExpc3RDaGFwdGVycxIcLmtvbWEudjEuTGlzdENoYXB0ZXJzUmVxdWVzdBodLmtvbWEudjEuTGlzdENoYXB0ZXJzUmVzcG9uc2USVAoPRG93bmxvYWRDaGFwdGVyEh8ua29tYS52MS5Eb3dubG9hZENoYXB0ZXJSZXF1ZXN0GiAua29tYS52MS5Eb3dubG9hZENoYXB0ZXJSZXNwb25zZRI/CghNYXJrUmVhZBIYLmtvbWEudjEuTWFya1JlYWRSZXF1ZXN0Ghkua29tYS52MS5NYXJrUmVhZFJlc3BvbnNlElEKDlVwZGF0ZUNhdGVnb3J5Eh4ua29tYS52MS5VcGRhdGVDYXRlZ29yeVJlcXVlc3QaHy5rb21hLnYxLlVwZGF0ZUNhdGVnb3J5UmVzcG9uc2USSwoMRXhwb3J0QmFja3VwEhwua29tYS52MS5FeHBvcnRCYWNrdXBSZXF1ZXN0Gh0ua29tYS52MS5FeHBvcnRCYWNrdXBSZXNwb25zZRJOCg1QdXJnZUNhdGVnb3J5Eh0ua29tYS52MS5QdXJnZUNhdGVnb3J5UmVxdWVzdBoeLmtvbWEudjEuUHVyZ2VDYXRlZ29yeVJlc3BvbnNlYgZwcm90bzM");
 
 /**
  * @generated from message koma.v1.PingRequest
@@ -592,6 +592,102 @@ export const SearchMangaResponseSchema: GenMessage<SearchMangaResponse> = /*@__P
   messageDesc(file_koma_v1_koma, 28);
 
 /**
+ * @generated from message koma.v1.ListChaptersRequest
+ */
+export type ListChaptersRequest = Message<"koma.v1.ListChaptersRequest"> & {
+  /**
+   * @generated from field: int64 manga_id = 1;
+   */
+  mangaId: bigint;
+};
+
+/**
+ * Describes the message koma.v1.ListChaptersRequest.
+ * Use `create(ListChaptersRequestSchema)` to create a new message.
+ */
+export const ListChaptersRequestSchema: GenMessage<ListChaptersRequest> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 29);
+
+/**
+ * @generated from message koma.v1.ChapterInfo
+ */
+export type ChapterInfo = Message<"koma.v1.ChapterInfo"> & {
+  /**
+   * @generated from field: int64 id = 1;
+   */
+  id: bigint;
+
+  /**
+   * @generated from field: string number = 2;
+   */
+  number: string;
+
+  /**
+   * @generated from field: string state = 3;
+   */
+  state: string;
+
+  /**
+   * @generated from field: int32 pages = 4;
+   */
+  pages: number;
+};
+
+/**
+ * Describes the message koma.v1.ChapterInfo.
+ * Use `create(ChapterInfoSchema)` to create a new message.
+ */
+export const ChapterInfoSchema: GenMessage<ChapterInfo> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 30);
+
+/**
+ * @generated from message koma.v1.ListChaptersResponse
+ */
+export type ListChaptersResponse = Message<"koma.v1.ListChaptersResponse"> & {
+  /**
+   * @generated from field: repeated koma.v1.ChapterInfo items = 1;
+   */
+  items: ChapterInfo[];
+};
+
+/**
+ * Describes the message koma.v1.ListChaptersResponse.
+ * Use `create(ListChaptersResponseSchema)` to create a new message.
+ */
+export const ListChaptersResponseSchema: GenMessage<ListChaptersResponse> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 31);
+
+/**
+ * @generated from message koma.v1.DownloadChapterRequest
+ */
+export type DownloadChapterRequest = Message<"koma.v1.DownloadChapterRequest"> & {
+  /**
+   * @generated from field: int64 chapter_id = 1;
+   */
+  chapterId: bigint;
+};
+
+/**
+ * Describes the message koma.v1.DownloadChapterRequest.
+ * Use `create(DownloadChapterRequestSchema)` to create a new message.
+ */
+export const DownloadChapterRequestSchema: GenMessage<DownloadChapterRequest> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 32);
+
+/**
+ * @generated from message koma.v1.DownloadChapterResponse
+ */
+export type DownloadChapterResponse = Message<"koma.v1.DownloadChapterResponse"> & {
+};
+
+/**
+ * Describes the message koma.v1.DownloadChapterResponse.
+ * Use `create(DownloadChapterResponseSchema)` to create a new message.
+ */
+export const DownloadChapterResponseSchema: GenMessage<DownloadChapterResponse> = /*@__PURE__*/
+  messageDesc(file_koma_v1_koma, 33);
+
+/**
  * @generated from message koma.v1.UpsertProgressResponse
  */
 export type UpsertProgressResponse = Message<"koma.v1.UpsertProgressResponse"> & {
@@ -602,7 +698,7 @@ export type UpsertProgressResponse = Message<"koma.v1.UpsertProgressResponse"> &
  * Use `create(UpsertProgressResponseSchema)` to create a new message.
  */
 export const UpsertProgressResponseSchema: GenMessage<UpsertProgressResponse> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 29);
+  messageDesc(file_koma_v1_koma, 34);
 
 /**
  * @generated from message koma.v1.GetProgressRequest
@@ -619,7 +715,7 @@ export type GetProgressRequest = Message<"koma.v1.GetProgressRequest"> & {
  * Use `create(GetProgressRequestSchema)` to create a new message.
  */
 export const GetProgressRequestSchema: GenMessage<GetProgressRequest> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 30);
+  messageDesc(file_koma_v1_koma, 35);
 
 /**
  * @generated from message koma.v1.GetProgressResponse
@@ -646,7 +742,7 @@ export type GetProgressResponse = Message<"koma.v1.GetProgressResponse"> & {
  * Use `create(GetProgressResponseSchema)` to create a new message.
  */
 export const GetProgressResponseSchema: GenMessage<GetProgressResponse> = /*@__PURE__*/
-  messageDesc(file_koma_v1_koma, 31);
+  messageDesc(file_koma_v1_koma, 36);
 
 /**
  * Koma's single cross-repo source of truth (decision: separate origins — buf keeps this file
@@ -761,6 +857,26 @@ export const LibraryService: GenService<{
     methodKind: "unary";
     input: typeof SearchMangaRequestSchema;
     output: typeof SearchMangaResponseSchema;
+  },
+  /**
+   * Chapter list of a library manga (DB rows — state as data).
+   *
+   * @generated from rpc koma.v1.LibraryService.ListChapters
+   */
+  listChapters: {
+    methodKind: "unary";
+    input: typeof ListChaptersRequestSchema;
+    output: typeof ListChaptersResponseSchema;
+  },
+  /**
+   * Enqueue a chapter download; the background worker drives it to completion.
+   *
+   * @generated from rpc koma.v1.LibraryService.DownloadChapter
+   */
+  downloadChapter: {
+    methodKind: "unary";
+    input: typeof DownloadChapterRequestSchema;
+    output: typeof DownloadChapterResponseSchema;
   },
   /**
    * Explicit read tracking: the read predicate is an explicit mark (v1).
